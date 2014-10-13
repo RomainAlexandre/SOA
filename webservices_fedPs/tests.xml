@@ -1,0 +1,974 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="FedPs" resourceRoot="" soapui-version="5.0.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.actions.iface.tools.soapui.TestRunnerAction@values-local"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="Environment" value="Default"/>
+  <con:entry key="Global Properties" value=""/>
+  <con:entry key="TestSuite" value="FedPSCustomerPrivate TestSuite"/>
+  <con:entry key="Password" value=""/>
+  <con:entry key="TestRunner Path" value=""/>
+  <con:entry key="Tool Args" value=""/>
+  <con:entry key="Ignore Errors" value="false"/>
+  <con:entry key="Host:Port" value=""/>
+  <con:entry key="user-settings.xml Password" value=""/>
+  <con:entry key="WSS Password Type" value=""/>
+  <con:entry key="Save Project" value="false"/>
+  <con:entry key="Enable UI" value="false"/>
+  <con:entry key="System Properties" value=""/>
+  <con:entry key="Domain" value=""/>
+  <con:entry key="Coverage Report" value="false"/>
+  <con:entry key="Export JUnit Results" value="false"/>
+  <con:entry key="Open Report" value="false"/>
+  <con:entry key="Project Properties" value=""/>
+  <con:entry key="Export All" value="false"/>
+  <con:entry key="Project Password" value=""/>
+  <con:entry key="Report Format(s)" value=""/>
+  <con:entry key="TestCase" value="&lt;all>"/>
+  <con:entry key="Print Report" value="false"/>
+  <con:entry key="Username" value=""/>
+  <con:entry key="Root Folder" value=""/>
+  <con:entry key="Save After" value="false"/>
+  <con:entry key="Add Settings" value="false"/>
+  <con:entry key="Endpoint" value=""/>
+  <con:entry key="Select Report Type" value=""/>
+</xml-fragment>]]></con:setting></con:settings><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="FedPSCustomerPrivateServiceSoapBinding" type="wsdl" bindingName="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer}FedPSCustomerPrivateServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/webservices/FedPSCustomerPrivate?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/webservices/FedPSCustomerPrivate?wsdl"><con:part><con:url>http://localhost:8080/webservices/FedPSCustomerPrivate?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="FedPSCustomerPrivateService" targetNamespace="http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:ns1="http://informatique.polytech.unice.fr/soa1/romain/fedps/customer">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="create_quote" type="tns:create_quote"/>
+      <xs:element name="create_quoteResponse" type="tns:create_quoteResponse"/>
+      <xs:element name="order_quote" type="tns:order_quote"/>
+      <xs:element name="order_quoteResponse" type="tns:order_quoteResponse"/>
+      <xs:element name="parcel" type="tns:parcel"/>
+      <xs:element name="quote" type="tns:quote"/>
+      <xs:element name="update_quote" type="tns:update_quote"/>
+      <xs:element name="update_quoteResponse" type="tns:update_quoteResponse"/>
+      <xs:complexType name="update_quote">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="quote_id" type="xs:string"/>
+          <xs:element name="pickup_date_timestamp" type="xs:long"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="update_quoteResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" ref="tns:quote"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="quote">
+        <xs:sequence>
+          <xs:element name="cost" type="xs:double"/>
+          <xs:element name="eta" type="xs:string"/>
+          <xs:element minOccurs="0" ref="tns:parcel"/>
+          <xs:element name="quote_id" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="parcel">
+        <xs:sequence>
+          <xs:element name="depth" type="xs:int"/>
+          <xs:element name="height" type="xs:int"/>
+          <xs:element minOccurs="0" name="parcel_id" type="xs:string"/>
+          <xs:element name="pickup_date" type="xs:string"/>
+          <xs:element name="receiver" type="tns:address"/>
+          <xs:element name="sender_name" type="xs:string"/>
+          <xs:element name="sender" type="tns:address"/>
+          <xs:element name="receiver_name" type="xs:string"/>
+          <xs:element name="parcel_status" type="tns:parcelStatus"/>
+          <xs:element name="weight" type="xs:int"/>
+          <xs:element name="width" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="address">
+        <xs:sequence>
+          <xs:element name="city_name" type="xs:string"/>
+          <xs:element name="country_id" type="xs:string"/>
+          <xs:element name="street_name" type="xs:string"/>
+          <xs:element name="zip_code" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="create_quote">
+        <xs:sequence>
+          <xs:element name="parcel_width" type="xs:int"/>
+          <xs:element name="parcel_height" type="xs:int"/>
+          <xs:element name="parcel_depth" type="xs:int"/>
+          <xs:element name="parcel_weight" type="xs:int"/>
+          <xs:element minOccurs="0" name="sender_name" type="xs:string"/>
+          <xs:element minOccurs="0" name="sender" type="tns:address"/>
+          <xs:element minOccurs="0" name="receiver_name" type="xs:string"/>
+          <xs:element minOccurs="0" name="receiver" type="tns:address"/>
+          <xs:element name="pickup_date_timestamp" type="xs:long"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="create_quoteResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" ref="tns:quote"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="order_quote">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="quote_id" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="order_quoteResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="order" type="tns:quote"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:simpleType name="parcelStatus">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="ARRIVAL_SCAN"/>
+          <xs:enumeration value="DELIVERED"/>
+          <xs:enumeration value="STORAGE"/>
+          <xs:enumeration value="CUSTOMS"/>
+          <xs:enumeration value="IN_TRANSIT"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:schema>
+    <xsd:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://informatique.polytech.unice.fr/soa1/romain/fedps/customer" xmlns:tns="http://informatique.polytech.unice.fr/soa1/romain/fedps/customer">
+      <xsd:element name="UnknownQuote" type="tns:UnknownQuote"/>
+      <xsd:complexType name="UnknownQuote">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="message" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="UnknownCustomer" type="tns:UnknownCustomer"/>
+      <xsd:complexType name="UnknownCustomer">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="message" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="BadQuote" type="tns:BadQuote"/>
+      <xsd:complexType name="BadQuote">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="message" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="UnknownQuoteFault">
+    <wsdl:part element="ns1:UnknownQuote" name="UnknownQuoteFault"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="create_quoteResponse">
+    <wsdl:part element="tns:create_quoteResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="order_quote">
+    <wsdl:part element="tns:order_quote" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="BadQuoteFault">
+    <wsdl:part element="ns1:BadQuote" name="BadQuoteFault"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="update_quoteResponse">
+    <wsdl:part element="tns:update_quoteResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UnknownCustomerFault">
+    <wsdl:part element="ns1:UnknownCustomer" name="UnknownCustomerFault"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="update_quote">
+    <wsdl:part element="tns:update_quote" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="create_quote">
+    <wsdl:part element="tns:create_quote" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="order_quoteResponse">
+    <wsdl:part element="tns:order_quoteResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="CustomerPrivateWs">
+    <wsdl:operation name="update_quote">
+      <wsdl:input message="tns:update_quote" name="update_quote"></wsdl:input>
+      <wsdl:output message="tns:update_quoteResponse" name="update_quoteResponse"></wsdl:output>
+      <wsdl:fault message="tns:UnknownQuoteFault" name="UnknownQuoteFault"></wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="create_quote">
+      <wsdl:input message="tns:create_quote" name="create_quote"></wsdl:input>
+      <wsdl:output message="tns:create_quoteResponse" name="create_quoteResponse"></wsdl:output>
+      <wsdl:fault message="tns:UnknownCustomerFault" name="UnknownCustomerFault"></wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="order_quote">
+      <wsdl:input message="tns:order_quote" name="order_quote"></wsdl:input>
+      <wsdl:output message="tns:order_quoteResponse" name="order_quoteResponse"></wsdl:output>
+      <wsdl:fault message="tns:UnknownQuoteFault" name="UnknownQuoteFault"></wsdl:fault>
+      <wsdl:fault message="tns:BadQuoteFault" name="BadQuoteFault"></wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="FedPSCustomerPrivateServiceSoapBinding" type="tns:CustomerPrivateWs">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="update_quote">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="update_quote">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="update_quoteResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnknownQuoteFault">
+        <soap:fault name="UnknownQuoteFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="create_quote">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="create_quote">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="create_quoteResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnknownCustomerFault">
+        <soap:fault name="UnknownCustomerFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="order_quote">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="order_quote">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="order_quoteResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnknownQuoteFault">
+        <soap:fault name="UnknownQuoteFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="BadQuoteFault">
+        <soap:fault name="BadQuoteFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="FedPSCustomerPrivateService">
+    <wsdl:port binding="tns:FedPSCustomerPrivateServiceSoapBinding" name="FedPSCustomerPrivatePort">
+      <soap:address location="http://localhost:8080/webservices/FedPSCustomerPrivate"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/webservices/FedPSCustomerPrivate</con:endpoint></con:endpoints><con:operation isOneWay="false" action="" name="create_quote" bindingOperationName="create_quote" type="Request-Response" outputName="create_quoteResponse" inputName="create_quote" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/FedPSCustomerPrivate</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cus="http://informatique.polytech.unice.fr/soa1/romain/fedps/customer">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cus1:create_quote xmlns:cus1="http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer">
+         <parcel_width>?</parcel_width>
+         <parcel_height>?</parcel_height>
+         <parcel_depth>?</parcel_depth>
+         <parcel_weight>?</parcel_weight>
+         <!--Optional:-->
+         <sender_name>?</sender_name>
+         <!--Optional:-->
+         <sender>
+            <city_name>?</city_name>
+            <country_id>?</country_id>
+            <street_name>?</street_name>
+            <zip_code>?</zip_code>
+         </sender>
+         <!--Optional:-->
+         <receiver_name>?</receiver_name>
+         <!--Optional:-->
+         <receiver>
+            <city_name>?</city_name>
+            <country_id>?</country_id>
+            <street_name>?</street_name>
+            <zip_code>?</zip_code>
+         </receiver>
+         <pickup_date_timestamp>?</pickup_date_timestamp>
+      </cus1:create_quote>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/romain/fedps/customer/Customer/ask_quote"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="order_quote" bindingOperationName="order_quote" type="Request-Response" outputName="order_quoteResponse" inputName="order_quote" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/FedPSCustomerPrivate</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cus="http://informatique.polytech.unice.fr/soa1/romain/fedps/customer">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cus1:order_quote xmlns:cus1="http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer">
+         <!--Optional:-->
+         <quote_id>?</quote_id>
+      </cus1:order_quote>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/romain/fedps/customer/Customer/order_quote"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="update_quote" bindingOperationName="update_quote" type="Request-Response" outputName="update_quoteResponse" inputName="update_quote" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/FedPSCustomerPrivate</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cus="http://informatique.polytech.unice.fr/soa1/romain/fedps/customer">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cus1:update_quote xmlns:cus1="http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer">
+         <!--Optional:-->
+         <quote_id>?</quote_id>
+         <pickup_date_timestamp>?</pickup_date_timestamp>
+      </cus1:update_quote>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/romain/fedps/customer/CustomerWs/update_quote"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="FedPSDriverServiceSoapBinding" type="wsdl" bindingName="{http://informatique.polytech.unice.fr/soa1/romain/fedps/driver}FedPSDriverServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/webservices/FedPSDriver?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/webservices/FedPSDriver?wsdl"><con:part><con:url>http://localhost:8080/webservices/FedPSDriver?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="FedPSDriverService" targetNamespace="http://informatique.polytech.unice.fr/soa1/romain/fedps/driver" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://informatique.polytech.unice.fr/soa1/romain/fedps/driver" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+  <wsdl:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://informatique.polytech.unice.fr/soa1/romain/fedps/driver" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="get_round" type="tns:get_round"/>
+      <xs:element name="get_roundResponse" type="tns:get_roundResponse"/>
+      <xs:element name="round" type="tns:round"/>
+      <xs:element name="set_parcel_status" type="tns:set_parcel_status"/>
+      <xs:element name="set_parcel_statusResponse" type="tns:set_parcel_statusResponse"/>
+      <xs:complexType name="get_round">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="get_roundResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" ref="tns:round"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="round">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="round">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" name="step" type="tns:roundStep"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="roundStep">
+        <xs:sequence>
+          <xs:element name="pickup_date" type="xs:string"/>
+          <xs:element name="receiver" type="tns:address"/>
+          <xs:element name="sender" type="tns:address"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="address">
+        <xs:sequence>
+          <xs:element name="city_name" type="xs:string"/>
+          <xs:element name="country_id" type="xs:string"/>
+          <xs:element name="street_name" type="xs:string"/>
+          <xs:element name="zip_code" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="set_parcel_status">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="parcel_ref" type="xs:string"/>
+          <xs:element minOccurs="0" name="new_status" type="tns:parcelStatus"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="set_parcel_statusResponse">
+        <xs:sequence>
+          <xs:element name="success" type="xs:boolean"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:simpleType name="parcelStatus">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="ARRIVAL_SCAN"/>
+          <xs:enumeration value="DELIVERED"/>
+          <xs:enumeration value="STORAGE"/>
+          <xs:enumeration value="CUSTOMS"/>
+          <xs:enumeration value="IN_TRANSIT"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="UnknownParcel" type="tns:UnknownParcel"/>
+      <xs:complexType name="UnknownParcel">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="message" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="get_round">
+    <wsdl:part element="tns:get_round" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="get_roundResponse">
+    <wsdl:part element="tns:get_roundResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="set_parcel_status">
+    <wsdl:part element="tns:set_parcel_status" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UnknownParcelFault">
+    <wsdl:part element="tns:UnknownParcel" name="UnknownParcelFault"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="set_parcel_statusResponse">
+    <wsdl:part element="tns:set_parcel_statusResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="DriverWs">
+    <wsdl:operation name="get_round">
+      <wsdl:input message="tns:get_round" name="get_round"></wsdl:input>
+      <wsdl:output message="tns:get_roundResponse" name="get_roundResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="set_parcel_status">
+      <wsdl:input message="tns:set_parcel_status" name="set_parcel_status"></wsdl:input>
+      <wsdl:output message="tns:set_parcel_statusResponse" name="set_parcel_statusResponse"></wsdl:output>
+      <wsdl:fault message="tns:UnknownParcelFault" name="UnknownParcelFault"></wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="FedPSDriverServiceSoapBinding" type="tns:DriverWs">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="get_round">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="get_round">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="get_roundResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="set_parcel_status">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="set_parcel_status">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="set_parcel_statusResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnknownParcelFault">
+        <soap:fault name="UnknownParcelFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="FedPSDriverService">
+    <wsdl:port binding="tns:FedPSDriverServiceSoapBinding" name="FedPSDriverPort">
+      <soap:address location="http://localhost:8080/webservices/FedPSDriver"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/webservices/FedPSDriver</con:endpoint></con:endpoints><con:operation isOneWay="false" action="" name="get_round" bindingOperationName="get_round" type="Request-Response" outputName="get_roundResponse" inputName="get_round" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/FedPSDriver</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:driv="http://informatique.polytech.unice.fr/soa1/romain/fedps/driver">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <driv:get_round/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/romain/fedps/driver/DriverWs/get_round"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="set_parcel_status" bindingOperationName="set_parcel_status" type="Request-Response" outputName="set_parcel_statusResponse" inputName="set_parcel_status" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/FedPSDriver</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:driv="http://informatique.polytech.unice.fr/soa1/romain/fedps/driver">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <driv:set_parcel_status>
+         <!--Optional:-->
+         <parcel_ref>#3377A1Y934XJQ660270</parcel_ref>
+         <!--Optional:-->
+         <new_status>IN_TRANSIT</new_status>
+      </driv:set_parcel_status>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/romain/fedps/driver/DriverWs/set_parcel_status"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="FedPSManagerServiceSoapBinding" type="wsdl" bindingName="{http://informatique.polytech.unice.fr/soa1/romain/fedps/manager}FedPSManagerServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/webservices/FedPSManager?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/webservices/FedPSManager?wsdl"><con:part><con:url>http://localhost:8080/webservices/FedPSManager?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="FedPSManagerService" targetNamespace="http://informatique.polytech.unice.fr/soa1/romain/fedps/manager" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://informatique.polytech.unice.fr/soa1/romain/fedps/manager" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:ns1="http://informatique.polytech.unice.fr/soa1/romain/fedps/customer">
+  <wsdl:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://informatique.polytech.unice.fr/soa1/romain/fedps/manager" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="parcel" type="tns:parcel"/>
+      <xs:element name="submit" type="tns:submit"/>
+      <xs:element name="submitResponse" type="tns:submitResponse"/>
+      <xs:complexType name="submit">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="jobs" type="tns:manager_input"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="manager_input">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="jobs">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" name="job" type="tns:manager_query"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="manager_query">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="customer_name" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="discount" nillable="true" type="xs:int"/>
+          <xs:element minOccurs="0" name="parcel_status" nillable="true" type="tns:parcelStatus"/>
+        </xs:sequence>
+        <xs:attribute name="kind" type="tns:managerJobKind" use="required"/>
+      </xs:complexType>
+      <xs:complexType name="submitResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="result" type="tns:manager_output"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="manager_output">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="results">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="item" type="tns:jobResult"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType abstract="true" name="jobResult">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="customer_result">
+        <xs:complexContent>
+          <xs:extension base="tns:jobResult">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="customer" type="tns:customer"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="customer">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="customer_address" type="tns:address"/>
+          <xs:element name="name" type="xs:string"/>
+          <xs:element name="permanent_discount" type="xs:int"/>
+          <xs:element name="temporary_discount" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="address">
+        <xs:sequence>
+          <xs:element name="city_name" type="xs:string"/>
+          <xs:element name="country_id" type="xs:string"/>
+          <xs:element name="street_name" type="xs:string"/>
+          <xs:element name="zip_code" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="list_of_customer">
+        <xs:complexContent>
+          <xs:extension base="tns:jobResult">
+            <xs:sequence>
+              <xs:element minOccurs="0" name="data">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="tns:parcel"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:complexType name="parcel">
+        <xs:sequence>
+          <xs:element name="depth" type="xs:int"/>
+          <xs:element name="height" type="xs:int"/>
+          <xs:element minOccurs="0" name="parcel_id" type="xs:string"/>
+          <xs:element name="pickup_date" type="xs:string"/>
+          <xs:element name="receiver" type="tns:address"/>
+          <xs:element name="sender_name" type="xs:string"/>
+          <xs:element name="sender" type="tns:address"/>
+          <xs:element name="receiver_name" type="xs:string"/>
+          <xs:element name="parcel_status" type="tns:parcelStatus"/>
+          <xs:element name="weight" type="xs:int"/>
+          <xs:element name="width" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="nb_parcel">
+        <xs:complexContent>
+          <xs:extension base="tns:jobResult">
+            <xs:sequence>
+              <xs:element name="nb_parcel" type="xs:int"/>
+              <xs:element name="status" type="tns:parcelStatus"/>
+            </xs:sequence>
+          </xs:extension>
+        </xs:complexContent>
+      </xs:complexType>
+      <xs:simpleType name="managerJobKind">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="GET_NB_PARCEL"/>
+          <xs:enumeration value="GET_PARCEL"/>
+          <xs:enumeration value="ADD_DISCOUNT"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="parcelStatus">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="ARRIVAL_SCAN"/>
+          <xs:enumeration value="DELIVERED"/>
+          <xs:enumeration value="STORAGE"/>
+          <xs:enumeration value="CUSTOMS"/>
+          <xs:enumeration value="IN_TRANSIT"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="BadJobFault" type="tns:BadJobFault"/>
+      <xs:complexType name="BadJobFault">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="message" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xsd:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://informatique.polytech.unice.fr/soa1/romain/fedps/customer" xmlns:tns="http://informatique.polytech.unice.fr/soa1/romain/fedps/customer">
+      <xsd:element name="UnknownCustomer" type="tns:UnknownCustomer"/>
+      <xsd:complexType name="UnknownCustomer">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="message" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="UnknownCustomerFault">
+    <wsdl:part element="ns1:UnknownCustomer" name="UnknownCustomerFault"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="BadJobFault">
+    <wsdl:part element="tns:BadJobFault" name="BadJobFault"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="submit">
+    <wsdl:part element="tns:submit" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="submitResponse">
+    <wsdl:part element="tns:submitResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ManagerWs">
+    <wsdl:operation name="submit">
+      <wsdl:input message="tns:submit" name="submit"></wsdl:input>
+      <wsdl:output message="tns:submitResponse" name="submitResponse"></wsdl:output>
+      <wsdl:fault message="tns:BadJobFault" name="BadJobFault"></wsdl:fault>
+      <wsdl:fault message="tns:UnknownCustomerFault" name="UnknownCustomerFault"></wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="FedPSManagerServiceSoapBinding" type="tns:ManagerWs">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="submit">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="submit">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="submitResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="BadJobFault">
+        <soap:fault name="BadJobFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="UnknownCustomerFault">
+        <soap:fault name="UnknownCustomerFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="FedPSManagerService">
+    <wsdl:port binding="tns:FedPSManagerServiceSoapBinding" name="FedPSManagerPort">
+      <soap:address location="http://localhost:8080/webservices/FedPSManager"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/webservices/FedPSManager</con:endpoint></con:endpoints><con:operation isOneWay="false" action="" name="submit" bindingOperationName="submit" type="Request-Response" outputName="submitResponse" inputName="submit" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/FedPSManager</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:man="http://informatique.polytech.unice.fr/soa1/romain/fedps/manager">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <man:submit>
+         <!--Optional:-->
+         <jobs>
+            <!--Optional:-->
+            <jobs>
+               <!--1 or more repetitions:-->
+               <job kind="GET_NB_PARCEL">
+                  <!--Optional:-->
+                  <parcel_status>IN_TRANSIT</parcel_status>
+               </job>
+            </jobs>
+         </jobs>
+      </man:submit>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/romain/fedps/manager/ManagerWs/submit"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="FedPSCustomerPublicServiceSoapBinding" type="wsdl" bindingName="{http://informatique.polytech.unice.fr/soa1/romain/fedps/public/customer}FedPSCustomerPublicServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080//webservices/FedPSCustomerPublic?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080//webservices/FedPSCustomerPublic?wsdl"><con:part><con:url>http://localhost:8080//webservices/FedPSCustomerPublic?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="FedPSCustomerPublicService" targetNamespace="http://informatique.polytech.unice.fr/soa1/romain/fedps/public/customer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://informatique.polytech.unice.fr/soa1/romain/fedps/public/customer" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://informatique.polytech.unice.fr/soa1/romain/fedps/public/customer" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="get_status_by_parcel_reference" type="tns:get_status_by_parcel_reference"/>
+      <xs:element name="get_status_by_parcel_referenceResponse" type="tns:get_status_by_parcel_referenceResponse"/>
+      <xs:complexType name="get_status_by_parcel_reference">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="parcelRef" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="get_status_by_parcel_referenceResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ParcelStatus" type="tns:parcelStatus"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:simpleType name="parcelStatus">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="ARRIVAL_SCAN"/>
+          <xs:enumeration value="DELIVERED"/>
+          <xs:enumeration value="STORAGE"/>
+          <xs:enumeration value="CUSTOMS"/>
+          <xs:enumeration value="IN_TRANSIT"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="get_status_by_parcel_referenceResponse">
+    <wsdl:part element="tns:get_status_by_parcel_referenceResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="get_status_by_parcel_reference">
+    <wsdl:part element="tns:get_status_by_parcel_reference" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="CustomerPublicWs">
+    <wsdl:operation name="get_status_by_parcel_reference">
+      <wsdl:input message="tns:get_status_by_parcel_reference" name="get_status_by_parcel_reference"></wsdl:input>
+      <wsdl:output message="tns:get_status_by_parcel_referenceResponse" name="get_status_by_parcel_referenceResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="FedPSCustomerPublicServiceSoapBinding" type="tns:CustomerPublicWs">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="get_status_by_parcel_reference">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="get_status_by_parcel_reference">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="get_status_by_parcel_referenceResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="FedPSCustomerPublicService">
+    <wsdl:port binding="tns:FedPSCustomerPublicServiceSoapBinding" name="FedPSCustomerPublicPort">
+      <soap:address location="http://localhost:8080/webservices/FedPSCustomerPublic"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/webservices/FedPSCustomerPublic</con:endpoint></con:endpoints><con:operation isOneWay="false" action="" name="get_status_by_parcel_reference" bindingOperationName="get_status_by_parcel_reference" type="Request-Response" outputName="get_status_by_parcel_referenceResponse" inputName="get_status_by_parcel_reference" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/FedPSCustomerPublic</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cus="http://informatique.polytech.unice.fr/soa1/romain/fedps/public/customer">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cus:get_status_by_parcel_reference>
+         <!--Optional:-->
+         <parcelRef>?</parcelRef>
+      </cus:get_status_by_parcel_reference>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/romain/fedps/public/customer/CustomerPublicWs/get_status_by_parcel_reference"/></con:call></con:operation></con:interface><con:testSuite name="FedPSDriver TestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Driver Scenario" searchProperties="true"><con:settings/><con:testStep type="request" name="get_round"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>FedPSDriverServiceSoapBinding</con:interface><con:operation>get_round</con:operation><con:request name="get_round"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/FedPSDriver</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:driv="http://informatique.polytech.unice.fr/soa1/romain/fedps/driver">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <driv:get_round/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="get_status"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>FedPSCustomerPublicServiceSoapBinding</con:interface><con:operation>get_status_by_parcel_reference</con:operation><con:request name="get_status"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/FedPSCustomerPublic</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cus="http://informatique.polytech.unice.fr/soa1/romain/fedps/public/customer">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cus:get_status_by_parcel_reference><!--Optional:-->
+         <parcelRef>#3377A1Y934XJQ660270</parcelRef>
+      </cus:get_status_by_parcel_reference>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="transfer" name="save status"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" useXQuery="false" entitize="false" transferChildNodes="false"><con:name>status</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>get_status</con:sourceStep><con:sourcePath>//ParcelStatus</con:sourcePath><con:targetType>status_init</con:targetType><con:targetStep>#TestCase#</con:targetStep></con:transfers></con:config></con:testStep><con:testStep type="request" name="update_status"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>FedPSDriverServiceSoapBinding</con:interface><con:operation>set_parcel_status</con:operation><con:request name="update_status"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/FedPSDriver</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:driv="http://informatique.polytech.unice.fr/soa1/romain/fedps/driver">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <driv:set_parcel_status><!--Optional:-->
+         <parcel_ref>#3377A1Y934XJQ660270</parcel_ref>
+         <!--Optional:-->
+         <new_status>IN_TRANSIT</new_status>
+      </driv:set_parcel_status>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="get_new_status"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>FedPSCustomerPublicServiceSoapBinding</con:interface><con:operation>get_status_by_parcel_reference</con:operation><con:request name="get_new_status"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/FedPSCustomerPublic</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cus="http://informatique.polytech.unice.fr/soa1/romain/fedps/public/customer">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cus:get_status_by_parcel_reference><!--Optional:-->
+         <parcelRef>#3377A1Y934XJQ660270</parcelRef>
+      </cus:get_status_by_parcel_reference>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="transfer" name="save status after"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" useXQuery="false" entitize="false" transferChildNodes="false"><con:name>status after</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>get_new_status</con:sourceStep><con:sourcePath>//ParcelStatus</con:sourcePath><con:targetType>status_after</con:targetType><con:targetStep>#TestCase#</con:targetStep></con:transfers></con:config></con:testStep><con:testStep type="groovy" name="check status"><con:settings/><con:config><script>def before = testRunner.testCase.getPropertyValue("status_init");
+def after  = testRunner.testCase.getPropertyValue("status_after");  
+return before != after;</script></con:config></con:testStep><con:properties><con:property><con:name>status_init</con:name><con:value>STORAGE</con:value></con:property><con:property><con:name>status_after</con:name><con:value>IN_TRANSIT</con:value></con:property></con:properties></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="UnknownParcel" searchProperties="true"><con:settings/><con:testStep type="request" name="send wrong parcel id"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>FedPSDriverServiceSoapBinding</con:interface><con:operation>set_parcel_status</con:operation><con:request name="send wrong parcel id"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/FedPSDriver</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:driv="http://informatique.polytech.unice.fr/soa1/romain/fedps/driver">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <driv:set_parcel_status><!--Optional:-->
+         <parcel_ref>wrong_id</parcel_ref>
+         <!--Optional:-->
+         <new_status>IN_TRANSIT</new_status>
+      </driv:set_parcel_status>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:assertion type="Not SOAP Fault Assertion" name="SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:testSuite name="FedPSManager TestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Manager Scenario" searchProperties="true"><con:settings/><con:testStep type="request" name="get_performance_network"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>FedPSManagerServiceSoapBinding</con:interface><con:operation>submit</con:operation><con:request name="get_performance_network"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/FedPSManager</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:man="http://informatique.polytech.unice.fr/soa1/romain/fedps/manager">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <man:submit><!--Optional:-->
+         <jobs>
+            <!--Optional:-->
+            <jobs>
+               <!--1 or more repetitions:-->
+               <job kind="GET_NB_PARCEL">
+                  <!--Optional:-->
+                  <parcel_status>STORAGE</parcel_status>
+               </job>
+               <job kind="GET_NB_PARCEL">
+                  <!--Optional:-->
+                  <parcel_status>IN_TRANSIT</parcel_status>
+               </job>
+               <job kind="GET_NB_PARCEL">
+                  <!--Optional:-->
+                  <parcel_status>DELIVERED</parcel_status>
+               </job>
+            </jobs>
+         </jobs>
+      </man:submit>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="get_in_transit_order"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>FedPSManagerServiceSoapBinding</con:interface><con:operation>submit</con:operation><con:request name="get_in_transit_order"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/FedPSManager</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:man="http://informatique.polytech.unice.fr/soa1/romain/fedps/manager">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <man:submit><!--Optional:-->
+         <jobs>
+            <!--Optional:-->
+            <jobs>
+               <!--1 or more repetitions:-->
+               <job kind="GET_ORDER">
+                  <!--Optional:-->
+                  <parcel_status>IN_TRANSIT</parcel_status>
+               </job>
+            </jobs>
+         </jobs>
+      </man:submit>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="give_discount"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>FedPSManagerServiceSoapBinding</con:interface><con:operation>submit</con:operation><con:request name="give_discount"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/FedPSManager</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:man="http://informatique.polytech.unice.fr/soa1/romain/fedps/manager">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <man:submit><!--Optional:-->
+         <jobs>
+            <!--Optional:-->
+            <jobs>
+               <!--1 or more repetitions:-->
+               <job kind="ADD_DISCOUNT">
+                  <!--Optional:-->
+                  <customer_name>Quincy Whitehead</customer_name>
+                  <!--Optional:-->
+                  <discount>10</discount>
+               </job>
+               <job kind="ADD_DISCOUNT">
+                  <!--Optional:-->
+                  <customer_name>Ima Sosa</customer_name>
+                  <!--Optional:-->
+                  <discount>10</discount>
+               </job>
+               <job kind="ADD_DISCOUNT">
+                  <!--Optional:-->
+                  <customer_name>Natalie Trujillo</customer_name>
+                  <!--Optional:-->
+                  <discount>10</discount>
+               </job>
+               <job kind="ADD_DISCOUNT">
+                  <!--Optional:-->
+                  <customer_name>Keith Pickett</customer_name>
+                  <!--Optional:-->
+                  <discount>10</discount>
+               </job>
+            </jobs>
+         </jobs>
+      </man:submit>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="transfer" name="get temporary discount"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" useXQuery="false" entitize="false" transferChildNodes="false"><con:name>discount</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>give_discount</con:sourceStep><con:sourcePath>//results/item[1]/customer/temporary_discount</con:sourcePath><con:targetType>temporary_discount</con:targetType><con:targetStep>#TestCase#</con:targetStep></con:transfers></con:config></con:testStep><con:testStep type="groovy" name="check temporary discount"><con:settings/><con:config><script>def temporaryDiscount = testRunner.testCase.getPropertyValue("temporary_discount");
+return temporaryDiscount == 10;</script></con:config></con:testStep><con:properties><con:property><con:name>temporary_discount</con:name><con:value>10</con:value></con:property></con:properties></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="UnknownUser" searchProperties="true"><con:settings/><con:testStep type="request" name="send wrong customer name"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>FedPSManagerServiceSoapBinding</con:interface><con:operation>submit</con:operation><con:request name="send wrong customer name"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/FedPSManager</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:man="http://informatique.polytech.unice.fr/soa1/romain/fedps/manager">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <man:submit><!--Optional:-->
+         <jobs>
+            <!--Optional:-->
+            <jobs>
+               <!--1 or more repetitions:-->
+               <job kind="ADD_DISCOUNT">
+                  <!--Optional:-->
+                  <customer_name>wrong name</customer_name>
+                  <!--Optional:-->
+                  <discount>20</discount>
+               </job>
+            </jobs>
+         </jobs>
+      </man:submit>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:assertion type="Not SOAP Fault Assertion" name="SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:testSuite name="FedPSCustomerPublic TestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="UnknownParcel" searchProperties="true"><con:settings/><con:testStep type="request" name="send wrong parcel id"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>FedPSCustomerPublicServiceSoapBinding</con:interface><con:operation>get_status_by_parcel_reference</con:operation><con:request name="send wrong parcel id"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/FedPSCustomerPublic</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cus="http://informatique.polytech.unice.fr/soa1/romain/fedps/public/customer">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cus:get_status_by_parcel_reference><!--Optional:-->
+         <parcelRef>wrong_id</parcelRef>
+      </cus:get_status_by_parcel_reference>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:assertion type="Not SOAP Fault Assertion" name="SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Follow order status" searchProperties="true"><con:settings/><con:testStep type="request" name="get_status"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>FedPSCustomerPublicServiceSoapBinding</con:interface><con:operation>get_status_by_parcel_reference</con:operation><con:request name="get_status"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/FedPSCustomerPublic</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cus="http://informatique.polytech.unice.fr/soa1/romain/fedps/public/customer">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cus:get_status_by_parcel_reference><!--Optional:-->
+         <parcelRef>#7474K6H409NQY372580</parcelRef>
+      </cus:get_status_by_parcel_reference>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:testSuite name="FedPSCustomerPrivate TestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Customer Scenario without discount" searchProperties="true"><con:settings/><con:testStep type="request" name="create quote"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>FedPSCustomerPrivateServiceSoapBinding</con:interface><con:operation>create_quote</con:operation><con:request name="create quote"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/FedPSCustomerPrivate</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cus="http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cus:create_quote>
+         <parcel_width>10</parcel_width>
+         <parcel_height>20</parcel_height>
+         <parcel_depth>15</parcel_depth>
+         <parcel_weight>10</parcel_weight>
+         <!--Optional:-->
+         <sender_name>Kelly Crane</sender_name>
+         <!--Optional:-->
+         <sender>
+            <city_name>Antibes</city_name>
+            <country_id>Fr</country_id>
+            <street_name>235 bd andre breton</street_name>
+            <zip_code>06600</zip_code>
+         </sender>
+         <!--Optional:-->
+         <receiver_name>Raya Bray</receiver_name>
+         <!--Optional:-->
+         <receiver>
+            <city_name>Cagnes-sur-mer</city_name>
+            <country_id>Fr</country_id>
+            <street_name>rue du general de Gaulle</street_name>
+            <zip_code>06345</zip_code>
+         </receiver>
+         <pickup_date_timestamp>11111111111</pickup_date_timestamp>
+      </cus:create_quote>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="transfer" name="save price"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" useXQuery="false" entitize="false" transferChildNodes="false"><con:name>price</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>create quote</con:sourceStep><con:sourcePath>//cost</con:sourcePath><con:targetType>price</con:targetType><con:targetStep>#TestCase#</con:targetStep></con:transfers></con:config></con:testStep><con:testStep type="groovy" name="check price"><con:settings/><con:config><script>def temporaryDiscount = testRunner.testCase.getPropertyValue("price");
+return temporaryDiscount == 50;</script></con:config></con:testStep><con:testStep type="request" name="order past quote"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>FedPSCustomerPrivateServiceSoapBinding</con:interface><con:operation>order_quote</con:operation><con:request name="order past quote"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/FedPSCustomerPrivate</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cus="http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cus:order_quote><!--Optional:-->
+         <quote_id>Q1W2E3R4T5YID</quote_id>
+      </cus:order_quote>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:assertion type="Not SOAP Fault Assertion" name="SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="Update quote"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>FedPSCustomerPrivateServiceSoapBinding</con:interface><con:operation>update_quote</con:operation><con:request name="Update quote"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/FedPSCustomerPrivate</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cus="http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cus:update_quote>
+         <!--Optional:-->
+         <quote_id>Q1W2E3R4T5YID</quote_id>
+         <pickup_date_timestamp>1511111111111</pickup_date_timestamp>
+      </cus:update_quote>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="Order quote"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>FedPSCustomerPrivateServiceSoapBinding</con:interface><con:operation>order_quote</con:operation><con:request name="Order quote"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/FedPSCustomerPrivate</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cus="http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cus:order_quote><!--Optional:-->
+         <quote_id>Q1W2E3R4T5YID</quote_id>
+      </cus:order_quote>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties><con:property><con:name>price</con:name><con:value>50.0</con:value></con:property></con:properties></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Customer Scenario with discount" searchProperties="true"><con:settings/><con:testStep type="request" name="create quote"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>FedPSCustomerPrivateServiceSoapBinding</con:interface><con:operation>create_quote</con:operation><con:request name="create quote"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/FedPSCustomerPrivate</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cus="http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cus:create_quote>
+         <parcel_width>10</parcel_width>
+         <parcel_height>20</parcel_height>
+         <parcel_depth>15</parcel_depth>
+         <parcel_weight>10</parcel_weight>
+         <!--Optional:-->
+         <sender_name>Raya Bray</sender_name>
+         <!--Optional:-->
+         <sender>
+            <city_name>Antibes</city_name>
+            <country_id>Fr</country_id>
+            <street_name>235 bd andre breton</street_name>
+            <zip_code>06600</zip_code>
+         </sender>
+         <!--Optional:-->
+         <receiver_name>Kelly Crane</receiver_name>
+         <!--Optional:-->
+         <receiver>
+            <city_name>Cagnes-sur-mer</city_name>
+            <country_id>Fr</country_id>
+            <street_name>rue du general de Gaulle</street_name>
+            <zip_code>06345</zip_code>
+         </receiver>
+         <pickup_date_timestamp>1511111111111</pickup_date_timestamp>
+      </cus:create_quote>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="transfer" name="save price"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" useXQuery="false" entitize="false" transferChildNodes="false"><con:name>price</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>create quote</con:sourceStep><con:sourcePath>//cost</con:sourcePath><con:targetType>price</con:targetType><con:targetStep>#TestCase#</con:targetStep></con:transfers></con:config></con:testStep><con:testStep type="groovy" name="check price"><con:settings/><con:config><script>def temporaryDiscount = testRunner.testCase.getPropertyValue("price");
+return temporaryDiscount == 46.5;</script></con:config></con:testStep><con:testStep type="request" name="Order quote"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>FedPSCustomerPrivateServiceSoapBinding</con:interface><con:operation>order_quote</con:operation><con:request name="Order quote"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/FedPSCustomerPrivate</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cus="http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cus:order_quote><!--Optional:-->
+         <quote_id>Q1W2E3R4T5YID</quote_id>
+      </cus:order_quote>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties><con:property><con:name>price</con:name><con:value>46.5</con:value></con:property></con:properties></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="UnknownQuote" searchProperties="true"><con:settings/><con:testStep type="request" name="send wrong quote id update"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>FedPSCustomerPrivateServiceSoapBinding</con:interface><con:operation>update_quote</con:operation><con:request name="send wrong quote id update"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/FedPSCustomerPrivate</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cus="http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cus:update_quote>
+         <!--Optional:-->
+         <quote_id>wrong id</quote_id>
+         <pickup_date_timestamp>12</pickup_date_timestamp>
+      </cus:update_quote>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:assertion type="Not SOAP Fault Assertion" name="SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="send wrong quote id order"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>FedPSCustomerPrivateServiceSoapBinding</con:interface><con:operation>order_quote</con:operation><con:request name="send wrong quote id order"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/FedPSCustomerPrivate</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cus="http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cus:order_quote><!--Optional:-->
+         <quote_id>wrong id</quote_id>
+      </cus:order_quote>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="UnknownCustomer" searchProperties="true"><con:settings/><con:testStep type="request" name="send wrong customer name"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>FedPSCustomerPrivateServiceSoapBinding</con:interface><con:operation>create_quote</con:operation><con:request name="send wrong customer name"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/FedPSCustomerPrivate</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cus="http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cus:create_quote>
+         <parcel_width>10</parcel_width>
+         <parcel_height>20</parcel_height>
+         <parcel_depth>15</parcel_depth>
+         <parcel_weight>10</parcel_weight>
+         <!--Optional:-->
+         <sender_name>wrong name</sender_name>
+         <!--Optional:-->
+         <sender>
+            <city_name>Antibes</city_name>
+            <country_id>Fr</country_id>
+            <street_name>235 bd andre breton</street_name>
+            <zip_code>06600</zip_code>
+         </sender>
+         <!--Optional:-->
+         <receiver_name>Kelly Crane</receiver_name>
+         <!--Optional:-->
+         <receiver>
+            <city_name>Cagnes-sur-mer</city_name>
+            <country_id>Fr</country_id>
+            <street_name>rue du general de Gaulle</street_name>
+            <zip_code>06345</zip_code>
+         </receiver>
+         <pickup_date_timestamp>1511111111111</pickup_date_timestamp>
+      </cus:create_quote>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:assertion type="Not SOAP Fault Assertion" name="SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
