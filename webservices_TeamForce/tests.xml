@@ -1,0 +1,1098 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="Service API Design Lab - TeamForce" resourceRoot="" soapui-version="5.0.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="TeamForceRPCCustomerServiceSoapBinding" type="wsdl" bindingName="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer}TeamForceRPCCustomerServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="file:/C:/Users/BENATHMANE/Desktop/SOA/TeamForce-Customer-RPC.xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:\C:\Users\BENATHMANE\Desktop\SOA\TeamForce-Customer-RPC.xml"><con:part><con:url>file:\C:\Users\BENATHMANE\Desktop\SOA\TeamForce-Customer-RPC.xml</con:url><con:content><![CDATA[<wsdl:definitions name="TeamForceRPCCustomerService" targetNamespace="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:ns1="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="Addresse" type="tns:addresse"/>
+      <xs:element name="Custumer" type="tns:custumer"/>
+      <xs:element name="add_event_to_order" type="tns:add_event_to_order"/>
+      <xs:element name="add_event_to_orderResponse" type="tns:add_event_to_orderResponse"/>
+      <xs:element name="assign_addresses_to_customer" type="tns:assign_addresses_to_customer"/>
+      <xs:element name="assign_addresses_to_customerResponse" type="tns:assign_addresses_to_customerResponse"/>
+      <xs:element name="create_account" type="tns:create_account"/>
+      <xs:element name="create_accountResponse" type="tns:create_accountResponse"/>
+      <xs:element name="create_order" type="tns:create_order"/>
+      <xs:element name="create_orderResponse" type="tns:create_orderResponse"/>
+      <xs:complexType name="create_order">
+        <xs:sequence>
+          <xs:element name="quantity" type="xs:int"/>
+          <xs:element minOccurs="0" name="amount" type="xs:string"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="products" type="xs:string"/>
+          <xs:element minOccurs="0" name="custumer" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="create_orderResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="orders" type="tns:order"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="order">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="custumer" type="xs:IDREF"/>
+          <xs:element minOccurs="0" name="date_commande" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="events">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="events" type="tns:event"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="prducts">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="product" type="tns:product"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="order_statut" type="tns:statut"/>
+          <xs:element minOccurs="0" name="order_steps" type="tns:steps"/>
+        </xs:sequence>
+        <xs:attribute name="amount" type="xs:string"/>
+        <xs:attribute name="orderid" type="xs:ID"/>
+        <xs:attribute name="quantity" type="xs:int" use="required"/>
+      </xs:complexType>
+      <xs:complexType name="custumer">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="addresses">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="addresse" type="tns:addresse"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="email" type="xs:string"/>
+          <xs:element minOccurs="0" name="firstname" type="xs:string"/>
+          <xs:element minOccurs="0" name="lastname" type="xs:string"/>
+          <xs:element minOccurs="0" name="orders">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="order" type="tns:order"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="phone" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:ID"/>
+      </xs:complexType>
+      <xs:complexType name="addresse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="city" type="xs:string"/>
+          <xs:element minOccurs="0" ref="tns:Custumer"/>
+          <xs:element minOccurs="0" name="kind" type="xs:string"/>
+          <xs:element minOccurs="0" name="line1" type="xs:string"/>
+          <xs:element minOccurs="0" name="line2" type="xs:string"/>
+          <xs:element minOccurs="0" name="zip" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="event">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="order" type="xs:IDREF"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:ID"/>
+        <xs:attribute name="text" type="xs:string"/>
+      </xs:complexType>
+      <xs:complexType name="product">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="catalogue" type="xs:IDREF"/>
+          <xs:element minOccurs="0" name="categorie" type="tns:categorie"/>
+          <xs:element minOccurs="0" name="order" type="xs:IDREF"/>
+          <xs:element minOccurs="0" name="Price" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:ID"/>
+        <xs:attribute name="name" type="xs:string"/>
+      </xs:complexType>
+      <xs:complexType name="catalogue">
+        <xs:sequence/>
+        <xs:attribute name="id" type="xs:ID"/>
+        <xs:attribute name="name" type="xs:string"/>
+      </xs:complexType>
+      <xs:complexType name="create_account">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="firstname" type="xs:string"/>
+          <xs:element minOccurs="0" name="lastname" type="xs:string"/>
+          <xs:element minOccurs="0" name="email" type="xs:string"/>
+          <xs:element minOccurs="0" name="phone" type="xs:string"/>
+          <xs:element minOccurs="0" name="line1_addresse_facturation" type="xs:string"/>
+          <xs:element minOccurs="0" name="line2_addresse_facturation" type="xs:string"/>
+          <xs:element minOccurs="0" name="zip_addresse_facturation" type="xs:string"/>
+          <xs:element minOccurs="0" name="city_addresse_facturation" type="xs:string"/>
+          <xs:element minOccurs="0" name="kind_addresse_facturation" type="xs:string"/>
+          <xs:element minOccurs="0" name="line1_addresse_livraison" type="xs:string"/>
+          <xs:element minOccurs="0" name="line2_addresse_livraisonn" type="xs:string"/>
+          <xs:element minOccurs="0" name="zip_addresse_livraison" type="xs:string"/>
+          <xs:element minOccurs="0" name="city_addresse_livraison" type="xs:string"/>
+          <xs:element minOccurs="0" name="kind_addresse_livraison" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="create_accountResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="account" type="tns:custumer"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="add_event_to_order">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="text" type="xs:string"/>
+          <xs:element minOccurs="0" name="order" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="add_event_to_orderResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="orders" type="tns:order"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="assign_addresses_to_customer">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="line1_addresse_facturation" type="xs:string"/>
+          <xs:element minOccurs="0" name="line2_addresse_facturation" type="xs:string"/>
+          <xs:element minOccurs="0" name="zip_addresse_facturation" type="xs:string"/>
+          <xs:element minOccurs="0" name="city_addresse_facturation" type="xs:string"/>
+          <xs:element minOccurs="0" name="kind_addresse_facturation" type="xs:string"/>
+          <xs:element minOccurs="0" name="line1_addresse_livraison" type="xs:string"/>
+          <xs:element minOccurs="0" name="line2_addresse_livraisonn" type="xs:string"/>
+          <xs:element minOccurs="0" name="zip_addresse_livraison" type="xs:string"/>
+          <xs:element minOccurs="0" name="city_addresse_livraison" type="xs:string"/>
+          <xs:element minOccurs="0" name="kind_addresse_livraison" type="xs:string"/>
+          <xs:element minOccurs="0" name="custumer" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="assign_addresses_to_customerResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="addresses_customer" type="tns:custumer"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:simpleType name="categorie">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Livres"/>
+          <xs:enumeration value="Bijoux"/>
+          <xs:enumeration value="Telephonie"/>
+          <xs:enumeration value="Vetement"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="statut">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Processing"/>
+          <xs:enumeration value="Approved"/>
+          <xs:enumeration value="Declined"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="steps">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Ordered"/>
+          <xs:enumeration value="Payed"/>
+          <xs:enumeration value="Prepared"/>
+          <xs:enumeration value="Send"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:schema>
+    <xsd:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc" xmlns:tns="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc">
+      <xsd:element name="Unknown" type="tns:Unknown"/>
+      <xsd:complexType name="Unknown">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="message" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="UnknownCustomerFault">
+    <wsdl:part element="ns1:Unknown" name="UnknownCustomerFault"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="add_event_to_orderResponse">
+    <wsdl:part element="tns:add_event_to_orderResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="create_account">
+    <wsdl:part element="tns:create_account" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="create_accountResponse">
+    <wsdl:part element="tns:create_accountResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="create_order">
+    <wsdl:part element="tns:create_order" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="assign_addresses_to_customerResponse">
+    <wsdl:part element="tns:assign_addresses_to_customerResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="add_event_to_order">
+    <wsdl:part element="tns:add_event_to_order" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UnknownOrderFault">
+    <wsdl:part element="ns1:Unknown" name="UnknownOrderFault"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="assign_addresses_to_customer">
+    <wsdl:part element="tns:assign_addresses_to_customer" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="create_orderResponse">
+    <wsdl:part element="tns:create_orderResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="CustomerRPC">
+    <wsdl:operation name="create_order">
+      <wsdl:input message="tns:create_order" name="create_order"></wsdl:input>
+      <wsdl:output message="tns:create_orderResponse" name="create_orderResponse"></wsdl:output>
+      <wsdl:fault message="tns:UnknownCustomerFault" name="UnknownCustomerFault"></wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="create_account">
+      <wsdl:input message="tns:create_account" name="create_account"></wsdl:input>
+      <wsdl:output message="tns:create_accountResponse" name="create_accountResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="add_event_to_order">
+      <wsdl:input message="tns:add_event_to_order" name="add_event_to_order"></wsdl:input>
+      <wsdl:output message="tns:add_event_to_orderResponse" name="add_event_to_orderResponse"></wsdl:output>
+      <wsdl:fault message="tns:UnknownOrderFault" name="UnknownOrderFault"></wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="assign_addresses_to_customer">
+      <wsdl:input message="tns:assign_addresses_to_customer" name="assign_addresses_to_customer"></wsdl:input>
+      <wsdl:output message="tns:assign_addresses_to_customerResponse" name="assign_addresses_to_customerResponse"></wsdl:output>
+      <wsdl:fault message="tns:UnknownCustomerFault" name="UnknownCustomerFault"></wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TeamForceRPCCustomerServiceSoapBinding" type="tns:CustomerRPC">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="create_order">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="create_order">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="create_orderResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnknownCustomerFault">
+        <soap:fault name="UnknownCustomerFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="create_account">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="create_account">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="create_accountResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="add_event_to_order">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="add_event_to_order">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="add_event_to_orderResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnknownOrderFault">
+        <soap:fault name="UnknownOrderFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="assign_addresses_to_customer">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="assign_addresses_to_customer">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="assign_addresses_to_customerResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnknownCustomerFault">
+        <soap:fault name="UnknownCustomerFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TeamForceRPCCustomerService">
+    <wsdl:port binding="tns:TeamForceRPCCustomerServiceSoapBinding" name="TeamForceRPCCustomerPort">
+      <soap:address location="http://localhost:8080/webservices/TeamForce-Customer-RPC"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/webservices/TeamForce-Customer-RPC</con:endpoint></con:endpoints><con:operation isOneWay="false" action="" name="add_event_to_order" bindingOperationName="add_event_to_order" type="Request-Response" outputName="add_event_to_orderResponse" inputName="add_event_to_order" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/TeamForce-Customer-RPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cus="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cus:add_event_to_order>
+         <!--Optional:-->
+         <text>Je n'ai rien reçu :/</text>
+         <!--Optional:-->
+         <order>${#order}</order>
+      </cus:add_event_to_order>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer/CustomerRPC/add_event_to_order"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="assign_addresses_to_customer" bindingOperationName="assign_addresses_to_customer" type="Request-Response" outputName="assign_addresses_to_customerResponse" inputName="assign_addresses_to_customer" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/TeamForce-Customer-RPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cus="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cus:assign_addresses_to_customer>
+         <!--Optional:-->
+         <line1_addresse_facturation>?</line1_addresse_facturation>
+         <!--Optional:-->
+         <line2_addresse_facturation>?</line2_addresse_facturation>
+         <!--Optional:-->
+         <zip_addresse_facturation>?</zip_addresse_facturation>
+         <!--Optional:-->
+         <city_addresse_facturation>?</city_addresse_facturation>
+         <!--Optional:-->
+         <kind_addresse_facturation>?</kind_addresse_facturation>
+         <!--Optional:-->
+         <line1_addresse_livraison>?</line1_addresse_livraison>
+         <!--Optional:-->
+         <line2_addresse_livraisonn>?</line2_addresse_livraisonn>
+         <!--Optional:-->
+         <zip_addresse_livraison>?</zip_addresse_livraison>
+         <!--Optional:-->
+         <city_addresse_livraison>?</city_addresse_livraison>
+         <!--Optional:-->
+         <kind_addresse_livraison>?</kind_addresse_livraison>
+         <!--Optional:-->
+         <custumer>?</custumer>
+      </cus:assign_addresses_to_customer>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer/CustomerRPC/assign_addresses_to_customer"/></con:call></con:operation><con:operation isOneWay="false" action="" name="create_account" bindingOperationName="create_account" type="Request-Response" outputName="create_accountResponse" inputName="create_account" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/TeamForce-Customer-RPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cus="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cus:create_account>
+         <!--Optional:-->
+         <firstname>Patricia</firstname>
+         <!--Optional:-->
+         <lastname>ptrc</lastname>
+         <!--Optional:-->
+         <email>patricia.ptrc@gmail.com</email>
+         <!--Optional:-->
+         <phone>0655785454</phone>
+         <!--Optional:-->
+         <line1_addresse_facturation>N° 2 Bloc 62</line1_addresse_facturation>
+         <!--Optional:-->
+         <line2_addresse_facturation>Rue charles de gaulle</line2_addresse_facturation>
+         <!--Optional:-->
+         <zip_addresse_facturation>75452</zip_addresse_facturation>
+         <!--Optional:-->
+         <city_addresse_facturation>Paris</city_addresse_facturation>
+         <!--Optional:-->
+         <kind_addresse_facturation>France</kind_addresse_facturation>
+         <!--Optional:-->
+         <line1_addresse_livraison>Chambre 2457 Pavillon Bastide</line1_addresse_livraison>
+         <!--Optional:-->
+         <line2_addresse_livraisonn>rue frederic mistral</line2_addresse_livraisonn>
+         <!--Optional:-->
+         <zip_addresse_livraison>06560</zip_addresse_livraison>
+         <!--Optional:-->
+         <city_addresse_livraison>Valbonne</city_addresse_livraison>
+         <!--Optional:-->
+         <kind_addresse_livraison>France</kind_addresse_livraison>
+      </cus:create_account>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer/CustomerRPC/create_account"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="create_order" bindingOperationName="create_order" type="Request-Response" outputName="create_orderResponse" inputName="create_order" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/TeamForce-Customer-RPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cus="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cus:create_order>
+         <quantity>5</quantity>
+         <!--Optional:-->
+         <amount>170</amount>
+         <!--Zero or more repetitions:-->
+         <products>4, 5</products>
+         <!--Optional:-->
+         <custumer>${#id}</custumer>
+      </cus:create_order>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer/CustomerRPC/create_order"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="TeamForceRPCEmployeeServiceSoapBinding" type="wsdl" bindingName="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Employee}TeamForceRPCEmployeeServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="file:/C:/Users/BENATHMANE/Desktop/SOA/TeamForce-Employee-RPC.xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/C:/Users/BENATHMANE/Desktop/SOA/TeamForce-Employee-RPC.xml"><con:part><con:url>file:/C:/Users/BENATHMANE/Desktop/SOA/TeamForce-Employee-RPC.xml</con:url><con:content><![CDATA[<wsdl:definitions name="TeamForceRPCEmployeeService" targetNamespace="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Employee" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Employee" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:ns1="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Employee" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="Addresse" type="tns:addresse"/>
+      <xs:element name="Custumer" type="tns:custumer"/>
+      <xs:element name="get_addresses_for_custumer" type="tns:get_addresses_for_custumer"/>
+      <xs:element name="get_addresses_for_custumerResponse" type="tns:get_addresses_for_custumerResponse"/>
+      <xs:element name="get_all_custumer" type="tns:get_all_custumer"/>
+      <xs:element name="get_all_custumerResponse" type="tns:get_all_custumerResponse"/>
+      <xs:element name="get_all_orders" type="tns:get_all_orders"/>
+      <xs:element name="get_all_ordersResponse" type="tns:get_all_ordersResponse"/>
+      <xs:element name="get_customer_by_phone" type="tns:get_customer_by_phone"/>
+      <xs:element name="get_customer_by_phoneResponse" type="tns:get_customer_by_phoneResponse"/>
+      <xs:element name="modify_statut" type="tns:modify_statut"/>
+      <xs:element name="modify_statutResponse" type="tns:modify_statutResponse"/>
+      <xs:element name="modify_steps" type="tns:modify_steps"/>
+      <xs:element name="modify_stepsResponse" type="tns:modify_stepsResponse"/>
+      <xs:complexType name="get_customer_by_phone">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="phone" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="get_customer_by_phoneResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="custumers" type="tns:custumer"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="custumer">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="addresses">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="addresse" type="tns:addresse"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="email" type="xs:string"/>
+          <xs:element minOccurs="0" name="firstname" type="xs:string"/>
+          <xs:element minOccurs="0" name="lastname" type="xs:string"/>
+          <xs:element minOccurs="0" name="orders">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="order" type="tns:order"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="phone" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:ID"/>
+      </xs:complexType>
+      <xs:complexType name="addresse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="city" type="xs:string"/>
+          <xs:element minOccurs="0" ref="tns:Custumer"/>
+          <xs:element minOccurs="0" name="kind" type="xs:string"/>
+          <xs:element minOccurs="0" name="line1" type="xs:string"/>
+          <xs:element minOccurs="0" name="line2" type="xs:string"/>
+          <xs:element minOccurs="0" name="zip" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="order">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="custumer" type="xs:IDREF"/>
+          <xs:element minOccurs="0" name="date_commande" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="events">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="events" type="tns:event"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="prducts">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="product" type="tns:product"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="order_statut" type="tns:statut"/>
+          <xs:element minOccurs="0" name="order_steps" type="tns:steps"/>
+        </xs:sequence>
+        <xs:attribute name="amount" type="xs:string"/>
+        <xs:attribute name="orderid" type="xs:ID"/>
+        <xs:attribute name="quantity" type="xs:int" use="required"/>
+      </xs:complexType>
+      <xs:complexType name="event">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="order" type="xs:IDREF"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:ID"/>
+        <xs:attribute name="text" type="xs:string"/>
+      </xs:complexType>
+      <xs:complexType name="product">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="catalogue" type="xs:IDREF"/>
+          <xs:element minOccurs="0" name="categorie" type="tns:categorie"/>
+          <xs:element minOccurs="0" name="order" type="xs:IDREF"/>
+          <xs:element minOccurs="0" name="Price" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:ID"/>
+        <xs:attribute name="name" type="xs:string"/>
+      </xs:complexType>
+      <xs:complexType name="catalogue">
+        <xs:sequence/>
+        <xs:attribute name="id" type="xs:ID"/>
+        <xs:attribute name="name" type="xs:string"/>
+      </xs:complexType>
+      <xs:complexType name="get_addresses_for_custumer">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="id" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="get_addresses_for_custumerResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="custumers" type="tns:addresse"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="get_all_orders">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="id" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="get_all_ordersResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="orders" type="tns:order"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="modify_statut">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="idOrder" type="xs:string"/>
+          <xs:element minOccurs="0" name="statut" type="tns:statut"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="modify_statutResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="order" type="tns:order"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="modify_steps">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="idOrder" type="xs:string"/>
+          <xs:element minOccurs="0" name="steps" type="tns:steps"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="modify_stepsResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="order" type="tns:order"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="get_all_custumer">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="get_all_custumerResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="custumers" type="tns:custumer"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:simpleType name="categorie">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Livres"/>
+          <xs:enumeration value="Bijoux"/>
+          <xs:enumeration value="Telephonie"/>
+          <xs:enumeration value="Vetement"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="statut">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Processing"/>
+          <xs:enumeration value="Approved"/>
+          <xs:enumeration value="Declined"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="steps">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Ordered"/>
+          <xs:enumeration value="Payed"/>
+          <xs:enumeration value="Prepared"/>
+          <xs:enumeration value="Send"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:schema>
+    <xsd:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc" xmlns:tns="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc">
+      <xsd:element name="Unknown" type="tns:Unknown"/>
+      <xsd:complexType name="Unknown">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="message" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="get_customer_by_phone">
+    <wsdl:part element="tns:get_customer_by_phone" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="get_addresses_for_custumer">
+    <wsdl:part element="tns:get_addresses_for_custumer" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="modify_stepsResponse">
+    <wsdl:part element="tns:modify_stepsResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="get_all_custumerResponse">
+    <wsdl:part element="tns:get_all_custumerResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="modify_steps">
+    <wsdl:part element="tns:modify_steps" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UnknownCustomerFault">
+    <wsdl:part element="ns1:Unknown" name="UnknownCustomerFault"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UnknownOrderFault">
+    <wsdl:part element="ns1:Unknown" name="UnknownOrderFault"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="get_all_orders">
+    <wsdl:part element="tns:get_all_orders" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="get_addresses_for_custumerResponse">
+    <wsdl:part element="tns:get_addresses_for_custumerResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="get_customer_by_phoneResponse">
+    <wsdl:part element="tns:get_customer_by_phoneResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="modify_statutResponse">
+    <wsdl:part element="tns:modify_statutResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="modify_statut">
+    <wsdl:part element="tns:modify_statut" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="get_all_ordersResponse">
+    <wsdl:part element="tns:get_all_ordersResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="get_all_custumer">
+    <wsdl:part element="tns:get_all_custumer" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="EmployeeRPC">
+    <wsdl:operation name="get_customer_by_phone">
+      <wsdl:input message="tns:get_customer_by_phone" name="get_customer_by_phone"></wsdl:input>
+      <wsdl:output message="tns:get_customer_by_phoneResponse" name="get_customer_by_phoneResponse"></wsdl:output>
+      <wsdl:fault message="tns:UnknownCustomerFault" name="UnknownCustomerFault"></wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="get_addresses_for_custumer">
+      <wsdl:input message="tns:get_addresses_for_custumer" name="get_addresses_for_custumer"></wsdl:input>
+      <wsdl:output message="tns:get_addresses_for_custumerResponse" name="get_addresses_for_custumerResponse"></wsdl:output>
+      <wsdl:fault message="tns:UnknownCustomerFault" name="UnknownCustomerFault"></wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="get_all_orders">
+      <wsdl:input message="tns:get_all_orders" name="get_all_orders"></wsdl:input>
+      <wsdl:output message="tns:get_all_ordersResponse" name="get_all_ordersResponse"></wsdl:output>
+      <wsdl:fault message="tns:UnknownCustomerFault" name="UnknownCustomerFault"></wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="modify_statut">
+      <wsdl:input message="tns:modify_statut" name="modify_statut"></wsdl:input>
+      <wsdl:output message="tns:modify_statutResponse" name="modify_statutResponse"></wsdl:output>
+      <wsdl:fault message="tns:UnknownOrderFault" name="UnknownOrderFault"></wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="modify_steps">
+      <wsdl:input message="tns:modify_steps" name="modify_steps"></wsdl:input>
+      <wsdl:output message="tns:modify_stepsResponse" name="modify_stepsResponse"></wsdl:output>
+      <wsdl:fault message="tns:UnknownOrderFault" name="UnknownOrderFault"></wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="get_all_custumer">
+      <wsdl:input message="tns:get_all_custumer" name="get_all_custumer"></wsdl:input>
+      <wsdl:output message="tns:get_all_custumerResponse" name="get_all_custumerResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TeamForceRPCEmployeeServiceSoapBinding" type="tns:EmployeeRPC">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="get_customer_by_phone">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="get_customer_by_phone">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="get_customer_by_phoneResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnknownCustomerFault">
+        <soap:fault name="UnknownCustomerFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="get_all_orders">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="get_all_orders">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="get_all_ordersResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnknownCustomerFault">
+        <soap:fault name="UnknownCustomerFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="get_addresses_for_custumer">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="get_addresses_for_custumer">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="get_addresses_for_custumerResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnknownCustomerFault">
+        <soap:fault name="UnknownCustomerFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="modify_statut">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="modify_statut">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="modify_statutResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnknownOrderFault">
+        <soap:fault name="UnknownOrderFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="modify_steps">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="modify_steps">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="modify_stepsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnknownOrderFault">
+        <soap:fault name="UnknownOrderFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="get_all_custumer">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="get_all_custumer">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="get_all_custumerResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TeamForceRPCEmployeeService">
+    <wsdl:port binding="tns:TeamForceRPCEmployeeServiceSoapBinding" name="TeamForceRPCEmployeePort">
+      <soap:address location="http://localhost:8080/webservices/TeamForce-Employee-RPC"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/webservices/TeamForce-Employee-RPC</con:endpoint></con:endpoints><con:operation isOneWay="false" action="" name="get_addresses_for_custumer" bindingOperationName="get_addresses_for_custumer" type="Request-Response" outputName="get_addresses_for_custumerResponse" inputName="get_addresses_for_custumer" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/TeamForce-Employee-RPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:emp="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Employee">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <emp:get_addresses_for_custumer>
+         <!--Optional:-->
+         <id>C1</id>
+      </emp:get_addresses_for_custumer>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Employee/EmployeeRPC/get_addresses_for_custumer"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="get_all_custumer" bindingOperationName="get_all_custumer" type="Request-Response" outputName="get_all_custumerResponse" inputName="get_all_custumer" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/TeamForce-Employee-RPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:emp="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Employee">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <emp:get_all_custumer/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Employee/EmployeeRPC/get_all_custumer"/></con:call></con:operation><con:operation isOneWay="false" action="" name="get_all_orders" bindingOperationName="get_all_orders" type="Request-Response" outputName="get_all_ordersResponse" inputName="get_all_orders" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/TeamForce-Employee-RPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:emp="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Employee">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <emp:get_all_orders>
+         <!--Optional:-->
+         <id>C1</id>
+      </emp:get_all_orders>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Employee/EmployeeRPC/get_all_orders"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="get_customer_by_phone" bindingOperationName="get_customer_by_phone" type="Request-Response" outputName="get_customer_by_phoneResponse" inputName="get_customer_by_phone" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/TeamForce-Employee-RPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:emp="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Employee">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <emp:get_customer_by_phone>
+         <!--Optional:-->
+         <phone>0800 155 4601</phone>
+      </emp:get_customer_by_phone>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Employee/EmployeeRPC/get_customer_by_phone"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="modify_statut" bindingOperationName="modify_statut" type="Request-Response" outputName="modify_statutResponse" inputName="modify_statut" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/TeamForce-Employee-RPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:emp="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Employee">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <emp:modify_statut>
+         <!--Optional:-->
+         <idOrder>?</idOrder>
+         <!--Optional:-->
+         <statut>?</statut>
+      </emp:modify_statut>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Employee/EmployeeRPC/modify_statut"/></con:call></con:operation><con:operation isOneWay="false" action="" name="modify_steps" bindingOperationName="modify_steps" type="Request-Response" outputName="modify_stepsResponse" inputName="modify_steps" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/TeamForce-Employee-RPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:emp="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Employee">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <emp:modify_steps>
+         <!--Optional:-->
+         <idOrder>?</idOrder>
+         <!--Optional:-->
+         <steps>?</steps>
+      </emp:modify_steps>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Employee/EmployeeRPC/modify_steps"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="TeamForceRPCManagerServiceSoapBinding" type="wsdl" bindingName="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Manager}TeamForceRPCManagerServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="file:/C:/Users/BENATHMANE/Desktop/SOA/TeamForce-Manager-RPC.xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/C:/Users/BENATHMANE/Desktop/SOA/TeamForce-Manager-RPC.xml"><con:part><con:url>file:/C:/Users/BENATHMANE/Desktop/SOA/TeamForce-Manager-RPC.xml</con:url><con:content><![CDATA[<wsdl:definitions name="TeamForceRPCManagerService" targetNamespace="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Manager" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Manager" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Manager" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="assign_product_to_catalogue" type="tns:assign_product_to_catalogue"/>
+      <xs:element name="assign_product_to_catalogueResponse" type="tns:assign_product_to_catalogueResponse"/>
+      <xs:element name="assign_product_to_categorie" type="tns:assign_product_to_categorie"/>
+      <xs:element name="assign_product_to_categorieResponse" type="tns:assign_product_to_categorieResponse"/>
+      <xs:element name="create_catalogue" type="tns:create_catalogue"/>
+      <xs:element name="create_catalogueResponse" type="tns:create_catalogueResponse"/>
+      <xs:element name="create_product" type="tns:create_product"/>
+      <xs:element name="create_productResponse" type="tns:create_productResponse"/>
+      <xs:complexType name="assign_product_to_categorie">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="products" type="xs:string"/>
+          <xs:element minOccurs="0" name="categorie" type="tns:categorie"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="assign_product_to_categorieResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="product_to_categorie" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="assign_product_to_catalogue">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="products" type="xs:string"/>
+          <xs:element minOccurs="0" name="catalogue" type="tns:catalogue"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="catalogue">
+        <xs:sequence/>
+        <xs:attribute name="id" type="xs:ID"/>
+        <xs:attribute name="name" type="xs:string"/>
+      </xs:complexType>
+      <xs:complexType name="assign_product_to_catalogueResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="product_to_catalogue" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="create_product">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="name" type="xs:string"/>
+          <xs:element minOccurs="0" name="price" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="create_productResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="product" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="create_catalogue">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="name" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="create_catalogueResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="catalogue" type="tns:catalogue"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:simpleType name="categorie">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Livres"/>
+          <xs:enumeration value="Bijoux"/>
+          <xs:enumeration value="Telephonie"/>
+          <xs:enumeration value="Vetement"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="assign_product_to_categorie">
+    <wsdl:part element="tns:assign_product_to_categorie" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="assign_product_to_categorieResponse">
+    <wsdl:part element="tns:assign_product_to_categorieResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="assign_product_to_catalogueResponse">
+    <wsdl:part element="tns:assign_product_to_catalogueResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="create_catalogue">
+    <wsdl:part element="tns:create_catalogue" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="create_catalogueResponse">
+    <wsdl:part element="tns:create_catalogueResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="assign_product_to_catalogue">
+    <wsdl:part element="tns:assign_product_to_catalogue" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="create_product">
+    <wsdl:part element="tns:create_product" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="create_productResponse">
+    <wsdl:part element="tns:create_productResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ManagerRPC">
+    <wsdl:operation name="assign_product_to_categorie">
+      <wsdl:input message="tns:assign_product_to_categorie" name="assign_product_to_categorie"></wsdl:input>
+      <wsdl:output message="tns:assign_product_to_categorieResponse" name="assign_product_to_categorieResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="assign_product_to_catalogue">
+      <wsdl:input message="tns:assign_product_to_catalogue" name="assign_product_to_catalogue"></wsdl:input>
+      <wsdl:output message="tns:assign_product_to_catalogueResponse" name="assign_product_to_catalogueResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="create_product">
+      <wsdl:input message="tns:create_product" name="create_product"></wsdl:input>
+      <wsdl:output message="tns:create_productResponse" name="create_productResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="create_catalogue">
+      <wsdl:input message="tns:create_catalogue" name="create_catalogue"></wsdl:input>
+      <wsdl:output message="tns:create_catalogueResponse" name="create_catalogueResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TeamForceRPCManagerServiceSoapBinding" type="tns:ManagerRPC">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="assign_product_to_categorie">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="assign_product_to_categorie">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="assign_product_to_categorieResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="assign_product_to_catalogue">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="assign_product_to_catalogue">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="assign_product_to_catalogueResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="create_product">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="create_product">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="create_productResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="create_catalogue">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="create_catalogue">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="create_catalogueResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TeamForceRPCManagerService">
+    <wsdl:port binding="tns:TeamForceRPCManagerServiceSoapBinding" name="TeamForceRPCManagerPort">
+      <soap:address location="http://localhost:8080/webservices/TeamForce-Manager-RPC"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/webservices/TeamForce-Manager-RPC</con:endpoint></con:endpoints><con:operation isOneWay="false" action="" name="assign_product_to_catalogue" bindingOperationName="assign_product_to_catalogue" type="Request-Response" outputName="assign_product_to_catalogueResponse" inputName="assign_product_to_catalogue" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/TeamForce-Manager-RPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:man="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Manager">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <man:assign_product_to_catalogue>
+         <!--Zero or more repetitions:-->
+         <products>?</products>
+         <!--Optional:-->
+         <catalogue id="?" name="?"/>
+      </man:assign_product_to_catalogue>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Manager/ManagerRPC/assign_product_to_catalogue"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="assign_product_to_categorie" bindingOperationName="assign_product_to_categorie" type="Request-Response" outputName="assign_product_to_categorieResponse" inputName="assign_product_to_categorie" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/TeamForce-Manager-RPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:man="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Manager">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <man:assign_product_to_categorie>
+         <!--Zero or more repetitions:-->
+         <products>?</products>
+         <!--Optional:-->
+         <categorie>?</categorie>
+      </man:assign_product_to_categorie>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Manager/ManagerRPC/assign_product_to_categorie"/></con:call></con:operation><con:operation isOneWay="false" action="" name="create_catalogue" bindingOperationName="create_catalogue" type="Request-Response" outputName="create_catalogueResponse" inputName="create_catalogue" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/TeamForce-Manager-RPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:man="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Manager">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <man:create_catalogue>
+         <!--Optional:-->
+         <name>?</name>
+      </man:create_catalogue>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Manager/ManagerRPC/create_catalogue"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="create_product" bindingOperationName="create_product" type="Request-Response" outputName="create_productResponse" inputName="create_product" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/TeamForce-Manager-RPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:man="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Manager">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <man:create_product>
+         <!--Optional:-->
+         <name>?</name>
+         <!--Optional:-->
+         <price>?</price>
+      </man:create_product>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Manager/ManagerRPC/create_product"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite name="Scenarios"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Scenario 1" searchProperties="true" id="9dc0364d-af16-4a79-be8a-b6f9ef4b1814"><con:settings/><con:testStep type="properties" name="id"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>id</con:name><con:value>a3d14578-1158-4640-bf79-d08b827cd72b</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="properties" name="orderid"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>orderid</con:name><con:value>4d282554-00cc-48b8-9412-08e85283ee32</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="request" name="create_account - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>TeamForceRPCCustomerServiceSoapBinding</con:interface><con:operation>create_account</con:operation><con:request name="create_account - Request 1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/TeamForce-Customer-RPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cus="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cus:create_account>
+         <!--Optional:-->
+         <firstname>Patricia</firstname>
+         <!--Optional:-->
+         <lastname>ptrc</lastname>
+         <!--Optional:-->
+         <email>patricia.ptrc@gmail.com</email>
+         <!--Optional:-->
+         <phone>0655785454</phone>
+         <!--Optional:-->
+         <line1_addresse_facturation>N° 2 Bloc 62</line1_addresse_facturation>
+         <!--Optional:-->
+         <line2_addresse_facturation>Rue charles de gaulle</line2_addresse_facturation>
+         <!--Optional:-->
+         <zip_addresse_facturation>75452</zip_addresse_facturation>
+         <!--Optional:-->
+         <city_addresse_facturation>Paris</city_addresse_facturation>
+         <!--Optional:-->
+         <kind_addresse_facturation>France</kind_addresse_facturation>
+         <!--Optional:-->
+         <line1_addresse_livraison>Chambre 2457 Pavillon Bastide</line1_addresse_livraison>
+         <!--Optional:-->
+         <line2_addresse_livraisonn>rue frederic mistral</line2_addresse_livraisonn>
+         <!--Optional:-->
+         <zip_addresse_livraison>06560</zip_addresse_livraison>
+         <!--Optional:-->
+         <city_addresse_livraison>Valbonne</city_addresse_livraison>
+         <!--Optional:-->
+         <kind_addresse_livraison>France</kind_addresse_livraison>
+      </cus:create_account>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer/CustomerRPC/create_account"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="transfer" name="Transfer id customer"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" useXQuery="false" entitize="false" transferChildNodes="false"><con:name>id</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>create_account - Request 1</con:sourceStep><con:sourcePath>declare namespace ns2="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer";
+string(//ns2:create_accountResponse/account/@id)</con:sourcePath><con:targetType>id</con:targetType><con:targetStep>id</con:targetStep></con:transfers></con:config></con:testStep><con:testStep type="request" name="create_order - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>TeamForceRPCCustomerServiceSoapBinding</con:interface><con:operation>create_order</con:operation><con:request name="create_order - Request 1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/TeamForce-Customer-RPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cus="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cus:create_order>
+         <quantity>5</quantity>
+         <!--Optional:-->
+         <amount>170</amount>
+         <!--Zero or more repetitions:-->
+         <products>4</products>
+         <!--Optional:-->
+         <custumer>${#id}</custumer>
+      </cus:create_order>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer/CustomerRPC/create_order"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="transfer" name="transfer orderid for test add_event"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" useXQuery="false" entitize="false" transferChildNodes="false"><con:name>orderid</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>create_order - Request 1</con:sourceStep><con:sourcePath>declare namespace ns2="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer";
+string(//ns2:create_orderResponse/orders/@orderid)
+</con:sourcePath><con:targetType>orderid</con:targetType><con:targetStep>orderid</con:targetStep></con:transfers></con:config></con:testStep><con:testStep type="request" name="add_event_to_order - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>TeamForceRPCCustomerServiceSoapBinding</con:interface><con:operation>add_event_to_order</con:operation><con:request name="add_event_to_order - Request 1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/TeamForce-Customer-RPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cus="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cus:add_event_to_order>
+         <!--Optional:-->
+         <text>Je n'ai rien reçu :/</text>
+         <!--Optional:-->
+         <order>${#orderid}</order>
+      </cus:add_event_to_order>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer/CustomerRPC/add_event_to_order"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Scenario 2" searchProperties="true" id="10796676-c427-4fbd-a41f-a3819fc1cf44"><con:settings/><con:testStep type="properties" name="id"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>id</con:name><con:value>C1</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="request" name="get_customer_by_phone - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>TeamForceRPCEmployeeServiceSoapBinding</con:interface><con:operation>get_customer_by_phone</con:operation><con:request name="get_customer_by_phone - Request 1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/TeamForce-Employee-RPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:emp="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Employee">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <emp:get_customer_by_phone>
+         <!--Optional:-->
+         <phone>0800 155 4601</phone>
+      </emp:get_customer_by_phone>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Employee/EmployeeRPC/get_customer_by_phone"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="transfer" name="transfer id_customer"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" useXQuery="false" entitize="false" transferChildNodes="false"><con:name>id</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>get_customer_by_phone - Request 1</con:sourceStep><con:sourcePath>declare namespace ns2="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Employee";
+string(//ns2:get_customer_by_phoneResponse/custumers/@id)
+
+</con:sourcePath><con:targetType>id</con:targetType><con:targetStep>id</con:targetStep></con:transfers></con:config></con:testStep><con:testStep type="request" name="get_addresses_for_custumer - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>TeamForceRPCEmployeeServiceSoapBinding</con:interface><con:operation>get_addresses_for_custumer</con:operation><con:request name="get_addresses_for_custumer - Request 1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/TeamForce-Employee-RPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:emp="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Employee">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <emp:get_addresses_for_custumer>
+         <!--Optional:-->
+         <id>${#id}</id>
+      </emp:get_addresses_for_custumer>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Employee/EmployeeRPC/get_addresses_for_custumer"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Scenario 3" searchProperties="true" id="6ea3fb41-e9b1-4334-9080-1658f81dd704"><con:settings/><con:testStep type="properties" name="id_product"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>id_product</con:name><con:value>38e8ce6c-8a58-47fb-9389-83c0caaf1fb2</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="properties" name="id_catalogue"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>id_catalogue</con:name><con:value>81bf8763-a73a-4a25-8db7-82f1569f3536</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="properties" name="name_catalogue"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>name_catalogue</con:name><con:value>Automne 2015</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="request" name="create_product - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>TeamForceRPCManagerServiceSoapBinding</con:interface><con:operation>create_product</con:operation><con:request name="create_product - Request 1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/TeamForce-Manager-RPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:man="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Manager">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <man:create_product>
+         <!--Optional:-->
+         <name>Livre</name>
+         <!--Optional:-->
+         <price>20€</price>
+      </man:create_product>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Manager/ManagerRPC/create_product"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="transfer" name="transfer_id_product"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" useXQuery="false" entitize="false" transferChildNodes="false"><con:name>id_product</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>create_product - Request 1</con:sourceStep><con:sourcePath>declare namespace ns2="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Manager";
+string(//ns2:create_productResponse/product)</con:sourcePath><con:targetType>id_product</con:targetType><con:targetStep>id_product</con:targetStep></con:transfers></con:config></con:testStep><con:testStep type="request" name="create_catalogue - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>TeamForceRPCManagerServiceSoapBinding</con:interface><con:operation>create_catalogue</con:operation><con:request name="create_catalogue - Request 1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/TeamForce-Manager-RPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:man="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Manager">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <man:create_catalogue>
+         <!--Optional:-->
+         <name>Automne 2015</name>
+      </man:create_catalogue>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Manager/ManagerRPC/create_catalogue"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="transfer" name="transfer_catalogue"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" useXQuery="false" entitize="false" transferChildNodes="false"><con:name>id_catalogue</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>create_catalogue - Request 1</con:sourceStep><con:sourcePath>declare namespace ns2="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Manager";
+string(//ns2:create_catalogueResponse/catalogue/@id)</con:sourcePath><con:targetType>id_catalogue</con:targetType><con:targetStep>id_catalogue</con:targetStep></con:transfers><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true"><con:name>name_catalogue</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>create_catalogue - Request 1</con:sourceStep><con:sourcePath>declare namespace ns2="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Manager";
+string(//ns2:create_catalogueResponse/catalogue/@name)</con:sourcePath><con:targetType>name_catalogue</con:targetType><con:targetStep>name_catalogue</con:targetStep></con:transfers></con:config></con:testStep><con:testStep type="request" name="assign_product_to_catalogue - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>TeamForceRPCManagerServiceSoapBinding</con:interface><con:operation>assign_product_to_catalogue</con:operation><con:request name="assign_product_to_catalogue - Request 1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/TeamForce-Manager-RPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:man="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Manager">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <man:assign_product_to_catalogue>
+         <!--Zero or more repetitions:-->
+         <products>${#id_product}</products>
+         <!--Optional:-->
+         <catalogue id="${#id_catalogue}" name="${#name_catalogue}"/>
+      </man:assign_product_to_catalogue>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Manager/ManagerRPC/assign_product_to_catalogue"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Scenario 4" searchProperties="true" id="a29d2cbc-1da2-473e-bbd2-a1626cf9e624"><con:settings/><con:testStep type="properties" name="id"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>id</con:name><con:value>C1</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="request" name="get_all_orders - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>TeamForceRPCEmployeeServiceSoapBinding</con:interface><con:operation>get_all_orders</con:operation><con:request name="get_all_orders - Request 1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType=""><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/TeamForce-Employee-RPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:emp="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Employee">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <emp:get_all_orders>
+         <!--Optional:-->
+         <id>C1</id>
+      </emp:get_all_orders>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Employee/EmployeeRPC/get_all_orders"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="transfer" name="transfer_id_customer"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" useXQuery="false" entitize="false" transferChildNodes="false"><con:name>id</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>get_all_orders - Request 1</con:sourceStep><con:sourcePath>declare namespace ns2="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Employee";
+string(//ns2:get_all_ordersResponse /orders/custumer)</con:sourcePath><con:targetType>id</con:targetType><con:targetStep>id</con:targetStep></con:transfers></con:config></con:testStep><con:testStep type="request" name="create_order - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>TeamForceRPCCustomerServiceSoapBinding</con:interface><con:operation>create_order</con:operation><con:request name="create_order - Request 1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType=""><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/TeamForce-Customer-RPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cus="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <cus:create_order>
+         <quantity>5</quantity>
+         <!--Optional:-->
+         <amount>170</amount>
+         <!--Zero or more repetitions:-->
+         <products>4, 5</products>
+         <!--Optional:-->
+         <custumer>${#id}</custumer>
+      </cus:create_order>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer/CustomerRPC/create_order"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
