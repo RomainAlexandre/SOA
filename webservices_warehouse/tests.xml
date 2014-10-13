@@ -1,0 +1,654 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="Warehouse" resourceRoot="" soapui-version="5.0.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="WarehouseLeaderServiceSoapBinding" type="wsdl" bindingName="{http://informatique.polytech.unice.fr/soa1/rpc/leader}WarehouseLeaderServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080//webservices/LeaderRPC?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080//webservices/LeaderRPC?wsdl"><con:part><con:url>http://localhost:8080//webservices/LeaderRPC?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="WarehouseLeaderService" targetNamespace="http://informatique.polytech.unice.fr/soa1/rpc/leader" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://informatique.polytech.unice.fr/soa1/rpc/leader" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://informatique.polytech.unice.fr/soa1/rpc/leader" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="assignEvent" type="tns:assignEvent"/>
+      <xs:element name="assignEventResponse" type="tns:assignEventResponse"/>
+      <xs:element name="checkNewEvent" type="tns:checkNewEvent"/>
+      <xs:element name="checkNewEventResponse" type="tns:checkNewEventResponse"/>
+      <xs:element name="event" type="tns:event"/>
+      <xs:element name="product" type="tns:product"/>
+      <xs:complexType name="checkNewEvent">
+        <xs:sequence/>
+      </xs:complexType>
+      <xs:complexType name="checkNewEventResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="checkEvent" type="tns:event"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="event">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="action" type="tns:kindAction"/>
+          <xs:element name="consulted" type="xs:boolean"/>
+          <xs:element name="done" type="xs:boolean"/>
+          <xs:element name="hour" type="xs:int"/>
+          <xs:element minOccurs="0" name="id" type="xs:ID"/>
+          <xs:element name="min" type="xs:int"/>
+          <xs:element name="quantity" type="xs:int"/>
+          <xs:element minOccurs="0" name="content" type="xs:IDREF"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="product">
+        <xs:sequence>
+          <xs:element name="depth" type="xs:int"/>
+          <xs:element name="height" type="xs:int"/>
+          <xs:element minOccurs="0" name="id" type="xs:ID"/>
+          <xs:element name="width" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="assignEvent">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="event" type="xs:string"/>
+          <xs:element minOccurs="0" name="employee" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="assignEventResponse">
+        <xs:sequence>
+          <xs:element name="assignEvent" type="xs:boolean"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:simpleType name="kindAction">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="PICKUP"/>
+          <xs:enumeration value="DELIVERY"/>
+          <xs:enumeration value="UNKNOWN"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="checkNewEvent">
+    <wsdl:part element="tns:checkNewEvent" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="checkNewEventResponse">
+    <wsdl:part element="tns:checkNewEventResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="assignEvent">
+    <wsdl:part element="tns:assignEvent" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="assignEventResponse">
+    <wsdl:part element="tns:assignEventResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="LeaderServices">
+    <wsdl:operation name="checkNewEvent">
+      <wsdl:input message="tns:checkNewEvent" name="checkNewEvent"></wsdl:input>
+      <wsdl:output message="tns:checkNewEventResponse" name="checkNewEventResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="assignEvent">
+      <wsdl:input message="tns:assignEvent" name="assignEvent"></wsdl:input>
+      <wsdl:output message="tns:assignEventResponse" name="assignEventResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WarehouseLeaderServiceSoapBinding" type="tns:LeaderServices">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="checkNewEvent">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="checkNewEvent">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="checkNewEventResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="assignEvent">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="assignEvent">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="assignEventResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WarehouseLeaderService">
+    <wsdl:port binding="tns:WarehouseLeaderServiceSoapBinding" name="WarehouseLeaderPort">
+      <soap:address location="http://localhost:8080/webservices/LeaderRPC"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/webservices/LeaderRPC</con:endpoint></con:endpoints><con:operation isOneWay="false" action="" name="assignEvent" bindingOperationName="assignEvent" type="Request-Response" outputName="assignEventResponse" inputName="assignEvent" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/LeaderRPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:lead="http://informatique.polytech.unice.fr/soa1/rpc/leader" xmlns:war="http://informatique.polytech.unice.fr/soa1/warehouse">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <lead:assignEvent>
+         <!--Optional:-->
+         <event>?</event>
+         <!--Optional:-->
+         <employee>?</employee>
+      </lead:assignEvent>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/warehouse/LeaderServices/assignEvent"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="checkNewEvent" bindingOperationName="checkNewEvent" type="Request-Response" outputName="checkNewEventResponse" inputName="checkNewEvent" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/LeaderRPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:lead="http://informatique.polytech.unice.fr/soa1/rpc/leader" xmlns:war="http://informatique.polytech.unice.fr/soa1/warehouse">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <lead:checkNewEvent/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/warehouse/LeaderServices/checkNewEvent"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="WarehouseEmployeeServiceSoapBinding" type="wsdl" bindingName="{http://informatique.polytech.unice.fr/soa1/rpc/employe}WarehouseEmployeeServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080//webservices/EmployeeRPC?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080//webservices/EmployeeRPC?wsdl"><con:part><con:url>http://localhost:8080//webservices/EmployeeRPC?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="WarehouseEmployeeService" targetNamespace="http://informatique.polytech.unice.fr/soa1/rpc/employe" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://informatique.polytech.unice.fr/soa1/rpc/employe" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://informatique.polytech.unice.fr/soa1/rpc/employe" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="boxOccupacy" type="tns:boxOccupacy"/>
+      <xs:element name="boxOccupacyResponse" type="tns:boxOccupacyResponse"/>
+      <xs:element name="checkNewEvent" type="tns:checkNewEvent"/>
+      <xs:element name="checkNewEventResponse" type="tns:checkNewEventResponse"/>
+      <xs:element name="doOrder" type="tns:doOrder"/>
+      <xs:element name="doOrderResponse" type="tns:doOrderResponse"/>
+      <xs:element name="event" type="tns:event"/>
+      <xs:element name="getBoxByCoor" type="tns:getBoxByCoor"/>
+      <xs:element name="getBoxByCoorResponse" type="tns:getBoxByCoorResponse"/>
+      <xs:element name="getBoxByproduct" type="tns:getBoxByproduct"/>
+      <xs:element name="getBoxByproductResponse" type="tns:getBoxByproductResponse"/>
+      <xs:element name="product" type="tns:product"/>
+      <xs:complexType name="boxOccupacy">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="coor" type="tns:coordinate"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="coordinate">
+        <xs:sequence>
+          <xs:element name="corridor" type="xs:int"/>
+          <xs:element name="floor" type="xs:int"/>
+          <xs:element name="rack" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="boxOccupacyResponse">
+        <xs:sequence>
+          <xs:element name="boxOccupacy" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getBoxByproduct">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="idProduct" type="xs:string"/>
+          <xs:element minOccurs="0" name="idWarehouse" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getBoxByproductResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="box_product" type="tns:box"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="box">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="content" type="xs:IDREF"/>
+          <xs:element minOccurs="0" name="place" type="tns:coordinate"/>
+          <xs:element name="quantity" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="product">
+        <xs:sequence>
+          <xs:element name="depth" type="xs:int"/>
+          <xs:element name="height" type="xs:int"/>
+          <xs:element minOccurs="0" name="id" type="xs:ID"/>
+          <xs:element name="width" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="checkNewEvent">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="idEmploye" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="checkNewEventResponse">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="checkNewEvent" type="tns:event"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="event">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="action" type="tns:kindAction"/>
+          <xs:element name="consulted" type="xs:boolean"/>
+          <xs:element name="done" type="xs:boolean"/>
+          <xs:element name="hour" type="xs:int"/>
+          <xs:element minOccurs="0" name="id" type="xs:ID"/>
+          <xs:element name="min" type="xs:int"/>
+          <xs:element name="quantity" type="xs:int"/>
+          <xs:element minOccurs="0" name="content" type="xs:IDREF"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="doOrder">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="idEvent" type="xs:string"/>
+          <xs:element minOccurs="0" name="idEmploye" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="doOrderResponse">
+        <xs:sequence>
+          <xs:element name="doOrder" type="xs:boolean"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getBoxByCoor">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="coor" type="tns:coordinate"/>
+          <xs:element minOccurs="0" name="idWarehouse" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getBoxByCoorResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="box_coor" type="tns:box"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:simpleType name="kindAction">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="PICKUP"/>
+          <xs:enumeration value="DELIVERY"/>
+          <xs:enumeration value="UNKNOWN"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getBoxByproductResponse">
+    <wsdl:part element="tns:getBoxByproductResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="checkNewEventResponse">
+    <wsdl:part element="tns:checkNewEventResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="doOrderResponse">
+    <wsdl:part element="tns:doOrderResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getBoxByCoorResponse">
+    <wsdl:part element="tns:getBoxByCoorResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="boxOccupacyResponse">
+    <wsdl:part element="tns:boxOccupacyResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="checkNewEvent">
+    <wsdl:part element="tns:checkNewEvent" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="doOrder">
+    <wsdl:part element="tns:doOrder" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="boxOccupacy">
+    <wsdl:part element="tns:boxOccupacy" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getBoxByproduct">
+    <wsdl:part element="tns:getBoxByproduct" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getBoxByCoor">
+    <wsdl:part element="tns:getBoxByCoor" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="EmployeeServices">
+    <wsdl:operation name="boxOccupacy">
+      <wsdl:input message="tns:boxOccupacy" name="boxOccupacy"></wsdl:input>
+      <wsdl:output message="tns:boxOccupacyResponse" name="boxOccupacyResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getBoxByproduct">
+      <wsdl:input message="tns:getBoxByproduct" name="getBoxByproduct"></wsdl:input>
+      <wsdl:output message="tns:getBoxByproductResponse" name="getBoxByproductResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkNewEvent">
+      <wsdl:input message="tns:checkNewEvent" name="checkNewEvent"></wsdl:input>
+      <wsdl:output message="tns:checkNewEventResponse" name="checkNewEventResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="doOrder">
+      <wsdl:input message="tns:doOrder" name="doOrder"></wsdl:input>
+      <wsdl:output message="tns:doOrderResponse" name="doOrderResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getBoxByCoor">
+      <wsdl:input message="tns:getBoxByCoor" name="getBoxByCoor"></wsdl:input>
+      <wsdl:output message="tns:getBoxByCoorResponse" name="getBoxByCoorResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WarehouseEmployeeServiceSoapBinding" type="tns:EmployeeServices">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="boxOccupacy">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="boxOccupacy">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="boxOccupacyResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getBoxByproduct">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getBoxByproduct">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getBoxByproductResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkNewEvent">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="checkNewEvent">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="checkNewEventResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="doOrder">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="doOrder">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="doOrderResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getBoxByCoor">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getBoxByCoor">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getBoxByCoorResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WarehouseEmployeeService">
+    <wsdl:port binding="tns:WarehouseEmployeeServiceSoapBinding" name="WarehouseEmployeePort">
+      <soap:address location="http://localhost:8080/webservices/EmployeeRPC"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/webservices/EmployeeRPC</con:endpoint></con:endpoints><con:operation isOneWay="false" action="" name="boxOccupacy" bindingOperationName="boxOccupacy" type="Request-Response" outputName="boxOccupacyResponse" inputName="boxOccupacy" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/EmployeeRPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:emp="http://informatique.polytech.unice.fr/soa1/rpc/employe" xmlns:war="http://informatique.polytech.unice.fr/soa1/warehouse">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <emp:boxOccupacy>
+         <!--Optional:-->
+         <coor>
+            <corridor>?</corridor>
+            <floor>?</floor>
+            <rack>?</rack>
+         </coor>
+      </emp:boxOccupacy>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/warehouse/EmployeeServices/boxOccupacy"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="checkNewEvent" bindingOperationName="checkNewEvent" type="Request-Response" outputName="checkNewEventResponse" inputName="checkNewEvent" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/EmployeeRPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:emp="http://informatique.polytech.unice.fr/soa1/rpc/employe" xmlns:war="http://informatique.polytech.unice.fr/soa1/warehouse">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <emp:checkNewEvent>
+         <!--Optional:-->
+         <idEmploye>?</idEmploye>
+      </emp:checkNewEvent>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/warehouse/EmployeeServices/checkNewEvent"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="getBoxByCoor" bindingOperationName="getBoxByCoor" type="Request-Response" outputName="getBoxByCoorResponse" inputName="getBoxByCoor" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/EmployeeRPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:emp="http://informatique.polytech.unice.fr/soa1/rpc/employe" xmlns:war="http://informatique.polytech.unice.fr/soa1/warehouse">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <emp:getBoxByCoor>
+         <!--Optional:-->
+         <coor>
+            <corridor>?</corridor>
+            <floor>?</floor>
+            <rack>?</rack>
+         </coor>
+         <!--Optional:-->
+         <idWarehouse>?</idWarehouse>
+      </emp:getBoxByCoor>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/warehouse/EmployeeServices/getBoxByCoor"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="getBoxByproduct" bindingOperationName="getBoxByproduct" type="Request-Response" outputName="getBoxByproductResponse" inputName="getBoxByproduct" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/EmployeeRPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:emp="http://informatique.polytech.unice.fr/soa1/rpc/employe" xmlns:war="http://informatique.polytech.unice.fr/soa1/warehouse">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <emp:getBoxByproduct>
+         <!--Optional:-->
+         <idProduct>?</idProduct>
+         <!--Optional:-->
+         <idWarehouse>?</idWarehouse>
+      </emp:getBoxByproduct>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/warehouse/EmployeeServices/getBoxByproduct"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="doOrder" bindingOperationName="doOrder" type="Request-Response" outputName="doOrderResponse" inputName="doOrder" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/EmployeeRPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:emp="http://informatique.polytech.unice.fr/soa1/rpc/employe">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <emp:doOrder>
+         <!--Optional:-->
+         <idEvent>?</idEvent>
+         <!--Optional:-->
+         <idEmploye>?</idEmploye>
+      </emp:doOrder>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/rpc/employe/EmployeeServices/doOrder"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="WarehouseExternalServiceSoapBinding" type="wsdl" bindingName="{http://informatique.polytech.unice.fr/soa1/warehouse}WarehouseExternalServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080//webservices/WarehouseExternalDOC?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080//webservices/WarehouseExternalDOC?wsdl"><con:part><con:url>http://localhost:8080//webservices/WarehouseExternalDOC?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="WarehouseExternalService" targetNamespace="http://informatique.polytech.unice.fr/soa1/warehouse" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://informatique.polytech.unice.fr/soa1/warehouse" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:ns1="http://informatique.polytech.unice.fr/soa1/warehouse/doc">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://informatique.polytech.unice.fr/soa1/warehouse" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="event" type="tns:event"/>
+      <xs:element name="execute" type="tns:execute"/>
+      <xs:element name="executeResponse" type="tns:executeResponse"/>
+      <xs:element name="product" type="tns:product"/>
+      <xs:complexType name="execute">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="job" type="tns:externalInput"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="externalInput">
+        <xs:sequence>
+          <xs:element name="hour" type="xs:int"/>
+          <xs:element name="min" type="xs:int"/>
+          <xs:element name="content" type="tns:product"/>
+          <xs:element name="quantity" type="xs:int"/>
+          <xs:element name="type" type="tns:kindofTransaction"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="product">
+        <xs:sequence>
+          <xs:element name="depth" type="xs:int"/>
+          <xs:element name="height" type="xs:int"/>
+          <xs:element minOccurs="0" name="id" type="xs:ID"/>
+          <xs:element name="width" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="executeResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="processed" type="tns:externalOutput"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="externalOutput">
+        <xs:sequence>
+          <xs:element name="event_out" type="tns:event"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="event">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="action" type="tns:kindAction"/>
+          <xs:element name="consulted" type="xs:boolean"/>
+          <xs:element name="done" type="xs:boolean"/>
+          <xs:element name="hour" type="xs:int"/>
+          <xs:element minOccurs="0" name="id" type="xs:ID"/>
+          <xs:element name="min" type="xs:int"/>
+          <xs:element name="quantity" type="xs:int"/>
+          <xs:element minOccurs="0" name="content" type="xs:IDREF"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:simpleType name="kindofTransaction">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="PICK"/>
+          <xs:enumeration value="DELIVERY"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="kindAction">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="PICKUP"/>
+          <xs:enumeration value="DELIVERY"/>
+          <xs:enumeration value="UNKNOWN"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:schema>
+    <xsd:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://informatique.polytech.unice.fr/soa1/warehouse/doc" xmlns:tns="http://informatique.polytech.unice.fr/soa1/warehouse/doc">
+      <xsd:element name="UnknownOperation" type="tns:UnknownOperation"/>
+      <xsd:complexType name="UnknownOperation">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="message" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ArgumentException">
+    <wsdl:part element="ns1:UnknownOperation" name="ArgumentException"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="executeResponse">
+    <wsdl:part element="tns:executeResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="execute">
+    <wsdl:part element="tns:execute" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ExternalDoc">
+    <wsdl:operation name="execute">
+      <wsdl:input message="tns:execute" name="execute"></wsdl:input>
+      <wsdl:output message="tns:executeResponse" name="executeResponse"></wsdl:output>
+      <wsdl:fault message="tns:ArgumentException" name="ArgumentException"></wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WarehouseExternalServiceSoapBinding" type="tns:ExternalDoc">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="execute">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="execute">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="executeResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ArgumentException">
+        <soap:fault name="ArgumentException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WarehouseExternalService">
+    <wsdl:port binding="tns:WarehouseExternalServiceSoapBinding" name="WarehouseExternalPort">
+      <soap:address location="http://localhost:8080/webservices/WarehouseExternalDOC"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/webservices/WarehouseExternalDOC</con:endpoint></con:endpoints><con:operation isOneWay="false" action="" name="execute" bindingOperationName="execute" type="Request-Response" outputName="executeResponse" inputName="execute" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/WarehouseExternalDOC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:war="http://informatique.polytech.unice.fr/soa1/warehouse">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <war:execute>
+         <!--Optional:-->
+         <job>
+            <hour>2</hour>
+            <min>4</min>
+            <content>
+               <depth>6</depth>
+               <height>7</height>
+               <!--Optional:-->
+               <id>T67YHHGT6778</id>
+               <width>0</width>
+            </content>
+            <quantity>9</quantity>
+            <type>PICK</type>
+         </job>
+      </war:execute>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/warehouse/ExternalDoc/execute"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite name="Warehause TestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Scenario 1" searchProperties="true" id="1611249e-6ab3-4a69-82ea-8e51102ad8c1"><con:settings/><con:testStep type="request" name="Consult the event"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>WarehouseLeaderServiceSoapBinding</con:interface><con:operation>checkNewEvent</con:operation><con:request name="Consult the event"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/LeaderRPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:lead="http://informatique.polytech.unice.fr/soa1/rpc/leader">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <lead:checkNewEvent/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:assertion type="Schema Compliance"><con:configuration/></con:assertion><con:assertion type="SOAP Fault Assertion"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="transfer" name="Check todo event of a employe"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" useXQuery="false" entitize="false" transferChildNodes="false"><con:name>count</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>Consult the event</con:sourceStep><con:sourcePath>count(//link)</con:sourcePath><con:targetType>counter_event_before</con:targetType><con:targetStep>#TestCase#</con:targetStep></con:transfers></con:config></con:testStep><con:testStep type="request" name="assign event to an employee"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>WarehouseLeaderServiceSoapBinding</con:interface><con:operation>assignEvent</con:operation><con:request name="assign event to an employee"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/LeaderRPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:lead="http://informatique.polytech.unice.fr/soa1/rpc/leader">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <lead:assignEvent>
+         <!--Optional:-->
+         <event>?</event>
+         <!--Optional:-->
+         <employee>?</employee>
+      </lead:assignEvent>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:assertion type="Schema Compliance"><con:configuration/></con:assertion><con:assertion type="SOAP Fault Assertion"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="Consult the events after"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>WarehouseLeaderServiceSoapBinding</con:interface><con:operation>checkNewEvent</con:operation><con:request name="Consult the events after"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/LeaderRPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:lead="http://informatique.polytech.unice.fr/soa1/rpc/leader">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <lead:checkNewEvent/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:assertion type="Schema Compliance"><con:configuration/></con:assertion><con:assertion type="SOAP Fault Assertion"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="transfer" name="Check to do event after"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" useXQuery="false" entitize="false" transferChildNodes="false"><con:name>counter</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>Consult the events after</con:sourceStep><con:sourcePath>count(//item)</con:sourcePath><con:targetType>counter_event after</con:targetType><con:targetStep>#TestCase#</con:targetStep></con:transfers></con:config></con:testStep><con:testStep type="groovy" name="check counter"><con:settings/><con:config><script>def before = testRunner.testCase.getPropertyValue("counter_event_before");
+def after  = testRunner.testCase.getPropertyValue("counter_event_after");  
+return after &lt; before;</script></con:config></con:testStep><con:properties><con:property><con:name>counter_event_before</con:name><con:value>0</con:value></con:property><con:property><con:name>counter_event after</con:name><con:value>0</con:value></con:property></con:properties></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Scenario 2" searchProperties="true" id="3664a5f1-377d-4253-b6b3-57afdc8c89e7"><con:settings/><con:testStep type="request" name="Employe check todo"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>WarehouseEmployeeServiceSoapBinding</con:interface><con:operation>checkNewEvent</con:operation><con:request name="Employe check todo"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/EmployeeRPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:emp="http://informatique.polytech.unice.fr/soa1/rpc/employe">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <emp:checkNewEvent>
+         <!--Optional:-->
+         <idEmploye>EP99</idEmploye>
+      </emp:checkNewEvent>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:assertion type="Schema Compliance"><con:configuration/></con:assertion><con:assertion type="SOAP Fault Assertion"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="transfer" name="How many to do ?"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" useXQuery="false" entitize="false" transferChildNodes="false"><con:name>count</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>Employe check todo</con:sourceStep><con:sourcePath>count(//link)</con:sourcePath><con:targetType>count_before</con:targetType><con:targetStep>#TestCase#</con:targetStep></con:transfers></con:config></con:testStep><con:testStep type="request" name="do pickup"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>WarehouseEmployeeServiceSoapBinding</con:interface><con:operation>doOrder</con:operation><con:request name="do pickup"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/EmployeeRPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:emp="http://informatique.polytech.unice.fr/soa1/rpc/employe">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <emp:doOrder>
+         <!--Optional:-->
+         <idEvent>_2825740066</idEvent>
+         <!--Optional:-->
+         <idEmploye>EP99</idEmploye>
+      </emp:doOrder>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:assertion type="Schema Compliance"><con:configuration/></con:assertion><con:assertion type="SOAP Fault Assertion"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="Employe check todo after"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>WarehouseEmployeeServiceSoapBinding</con:interface><con:operation>checkNewEvent</con:operation><con:request name="Employe check todo after"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/EmployeeRPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:emp="http://informatique.polytech.unice.fr/soa1/rpc/employe">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <emp:checkNewEvent>
+         <!--Optional:-->
+         <idEmploye>EP99</idEmploye>
+      </emp:checkNewEvent>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:assertion type="Schema Compliance"><con:configuration/></con:assertion><con:assertion type="SOAP Fault Assertion"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="transfer" name="How many to do after ?"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" useXQuery="false" entitize="false" transferChildNodes="false"><con:name>count</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>Employe check todo after</con:sourceStep><con:sourcePath>count(//link)</con:sourcePath><con:targetType>count_after</con:targetType><con:targetStep>#TestCase#</con:targetStep></con:transfers></con:config></con:testStep><con:testStep type="groovy" name="check counter"><con:settings/><con:config><script>def before = testRunner.testCase.getPropertyValue("counter_before");
+def after  = testRunner.testCase.getPropertyValue("counter_after");  
+return after &lt; before;</script></con:config></con:testStep><con:properties><con:property><con:name>count_before</con:name><con:value>0</con:value></con:property><con:property><con:name>count_after</con:name><con:value>0</con:value></con:property></con:properties></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Scenario 3" searchProperties="true" id="9eb80e3d-5056-423f-8f3a-9267b94b0271"><con:settings/><con:testStep type="request" name="Check his new event"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>WarehouseEmployeeServiceSoapBinding</con:interface><con:operation>checkNewEvent</con:operation><con:request name="Check his new event"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/EmployeeRPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:emp="http://informatique.polytech.unice.fr/soa1/rpc/employe">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <emp:checkNewEvent>
+         <!--Optional:-->
+         <idEmploye>EP100</idEmploye>
+      </emp:checkNewEvent>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:assertion type="Schema Compliance"><con:configuration/></con:assertion><con:assertion type="SOAP Fault Assertion"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="Look for a place to the product"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>WarehouseEmployeeServiceSoapBinding</con:interface><con:operation>getBoxByproduct</con:operation><con:request name="Look for a place to the product"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/EmployeeRPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:emp="http://informatique.polytech.unice.fr/soa1/rpc/employe">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <emp:getBoxByproduct>
+         <!--Optional:-->
+         <idProduct>O5T2PR6JM18QK2T</idProduct>
+         <!--Optional:-->
+         <idWarehouse>WH33</idWarehouse>
+      </emp:getBoxByproduct>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:assertion type="Schema Compliance"><con:configuration/></con:assertion><con:assertion type="SOAP Fault Assertion"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="Do order"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>WarehouseEmployeeServiceSoapBinding</con:interface><con:operation>doOrder</con:operation><con:request name="Do order"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/EmployeeRPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:emp="http://informatique.polytech.unice.fr/soa1/rpc/employe">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <emp:doOrder>
+         <!--Optional:-->
+         <idEvent>_9535291466</idEvent>
+         <!--Optional:-->
+         <idEmploye>EP100</idEmploye>
+      </emp:doOrder>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:assertion type="Schema Compliance"><con:configuration/></con:assertion><con:assertion type="SOAP Fault Assertion"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="transfer" name="How many order ?"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" useXQuery="false" entitize="false" transferChildNodes="false"><con:name>count</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>Do order</con:sourceStep><con:sourcePath>count(//link)</con:sourcePath><con:targetType>counter_order</con:targetType><con:targetStep>#TestCase#</con:targetStep></con:transfers></con:config></con:testStep><con:testStep type="groovy" name="Check all finished"><con:settings/><con:config><script>def order = testRunner.testCase.getPropertyValue("counter_order");
+return order = 0;</script></con:config></con:testStep><con:properties><con:property><con:name>counter_order</con:name><con:value>0</con:value></con:property></con:properties></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Scenario 4" searchProperties="true" id="7cb9a1fc-4b63-42ba-b4d0-1c96db37526d"><con:settings/><con:testStep type="request" name="Check new event"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>WarehouseLeaderServiceSoapBinding</con:interface><con:operation>checkNewEvent</con:operation><con:request name="Check new event"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/LeaderRPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:lead="http://informatique.polytech.unice.fr/soa1/rpc/leader">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <lead:checkNewEvent/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:assertion type="Schema Compliance"><con:configuration/></con:assertion><con:assertion type="SOAP Fault Assertion"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="transfer" name="counter event"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" useXQuery="false" entitize="false" transferChildNodes="false"><con:name>counter</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>Check new event</con:sourceStep><con:sourcePath>count(//link)</con:sourcePath><con:targetType>counter_befor</con:targetType><con:targetStep>#TestCase#</con:targetStep></con:transfers></con:config></con:testStep><con:testStep type="request" name="External creation event"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>WarehouseExternalServiceSoapBinding</con:interface><con:operation>execute</con:operation><con:request name="External creation event"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/WarehouseExternalDOC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:war="http://informatique.polytech.unice.fr/soa1/warehouse">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <war:execute>
+         <!--Optional:-->
+         <job>
+            <hour>7</hour>
+            <min>45</min>
+            <content>
+               <depth>4</depth>
+               <height>23</height>
+               <!--Optional:-->
+               <id>_589743</id>
+               <width>12</width>
+            </content>
+            <quantity>67</quantity>
+            <type>DELIVERY</type>
+         </job>
+      </war:execute>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:assertion type="Schema Compliance"><con:configuration/></con:assertion><con:assertion type="SOAP Fault Assertion"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="External creation event 2"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>WarehouseExternalServiceSoapBinding</con:interface><con:operation>execute</con:operation><con:request name="External creation event 2"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/WarehouseExternalDOC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:war="http://informatique.polytech.unice.fr/soa1/warehouse">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <war:execute>
+         <!--Optional:-->
+         <job>
+            <hour>9</hour>
+            <min>5</min>
+            <content>
+               <depth>43</depth>
+               <height>3</height>
+               <!--Optional:-->
+               <id>_58456743</id>
+               <width>11</width>
+            </content>
+            <quantity>23</quantity>
+            <type>PICK</type>
+
+         </job>
+      </war:execute>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:assertion type="Schema Compliance"><con:configuration/></con:assertion><con:assertion type="SOAP Fault Assertion"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="Check new event after"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>WarehouseLeaderServiceSoapBinding</con:interface><con:operation>checkNewEvent</con:operation><con:request name="Check new event after"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/LeaderRPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:lead="http://informatique.polytech.unice.fr/soa1/rpc/leader">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <lead:checkNewEvent/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:assertion type="Schema Compliance"><con:configuration/></con:assertion><con:assertion type="SOAP Fault Assertion"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="transfer" name="counter event after"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" useXQuery="false" entitize="false" transferChildNodes="false"><con:name>count</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>Check new event after</con:sourceStep><con:sourcePath>count(//link)</con:sourcePath><con:targetType>counter_after</con:targetType><con:targetStep>#TestCase#</con:targetStep></con:transfers></con:config></con:testStep><con:testStep type="groovy" name="Check counter"><con:settings/><con:config><script>def before = testRunner.testCase.getPropertyValue("counter_before");
+def after  = testRunner.testCase.getPropertyValue("counter_after");  
+return after > before;</script></con:config></con:testStep><con:properties><con:property><con:name>counter_befor</con:name><con:value>0</con:value></con:property><con:property><con:name>counter_after</con:name><con:value>0</con:value></con:property></con:properties></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/></con:soapui-project>
