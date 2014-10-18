@@ -4,13 +4,13 @@ import fr.unice.polytech.soa1.TeamForce.business.*;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.jws.WebMethod;
 import javax.jws.WebParam;
-import javax.jws.WebResult;
 import javax.jws.WebService;
-import javax.net.ssl.SSLEngineResult.Status;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 @Stateless(name = "TeamForce-Employee-RPC")
 @WebService(targetNamespace = "http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Employee",
@@ -76,6 +76,19 @@ public class EmployeeRPCImpl implements EmployeeRPC {
 		}
 		order.setSteps(steps);
 		return order;
+	}
+	
+	@Override
+	public Order add_event_to_order(String text, String order) throws UnknownOrderFault {
+		List<Event> events = new ArrayList<>(Arrays.asList(
+				new Event(UUID.randomUUID().toString(), text)));
+		Order ordr = dao.findOrderById(order);
+		if (order == null) {
+			throw new UnknownOrderFault(order);
+		}
+		ordr.getEvent().add(events.get(0));
+		return ordr;
+		
 	}
 	
 }

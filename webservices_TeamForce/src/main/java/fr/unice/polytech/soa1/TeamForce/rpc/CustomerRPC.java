@@ -43,12 +43,9 @@ public interface CustomerRPC {
 	
 	@WebMethod(operationName = "create_order")
 	@WebResult(name = "orders")
-	public Order create_order(@WebParam(name="quantity")int quantity,@WebParam(name="amount") String amount, 
+	public Order create_order(@WebParam(name="amount") String amount, 
 			@WebParam(name="products") List<String> products, @WebParam(name="custumer")  String custumerId) throws UnknownCustomerFault;
 
-	@WebMethod(operationName = "add_event_to_order")
-	@WebResult(name = "orders")
-	public Order add_event_to_order(@WebParam(name="text") String text,
-			@WebParam(name="order") String order) throws UnknownOrderFault;
+
 
 }

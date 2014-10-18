@@ -17,7 +17,6 @@ public class Order {
 	 * TO DO
 	private List<Product> products;
 	*/
-	private int quantity;
 	private String amount;
 	private Statut statut;
 	private Steps steps;
@@ -28,9 +27,8 @@ public class Order {
 	
 	public Order() {}
 
-	public Order(String orderid, int quantity, String amount,Custumer custumer) {
+	public Order(String orderid, String amount,Custumer custumer) {
 		this.orderid = orderid;
-		this.quantity = quantity;
 		this.amount = amount;
 		this.custumer = custumer;
 		this.statut = Statut.Approved;
@@ -38,9 +36,8 @@ public class Order {
 		 products = new ArrayList<>();
 		 date_commande = new Date();
 	}
-	public Order(String orderid, int quantity, String amount, List<Product> products, Custumer custumer) {
+	public Order(String orderid, String amount, List<Product> products, Custumer custumer) {
 		this.orderid = orderid;
-		this.quantity = quantity;
 		this.amount = amount;
 		this.custumer = custumer;
 		this.statut = Statut.Processing;
@@ -73,14 +70,6 @@ public class Order {
 	}
 	public void setOrderid(String orderid) {
 		this.orderid = orderid;
-	}
-	
-	@XmlAttribute(name="quantity")
-	public int getQuantity() {
-		return quantity;
-	}
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
 	}
 	
 	@XmlAttribute(name="amount")

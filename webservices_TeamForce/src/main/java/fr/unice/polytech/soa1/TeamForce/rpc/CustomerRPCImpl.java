@@ -2,15 +2,11 @@ package fr.unice.polytech.soa1.TeamForce.rpc;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.jws.WebMethod;
-import javax.jws.WebParam;
-import javax.jws.WebResult;
 import javax.jws.WebService;
 
 import fr.unice.polytech.soa1.TeamForce.business.Addresse;
 import fr.unice.polytech.soa1.TeamForce.business.Custumer;
 import fr.unice.polytech.soa1.TeamForce.business.DataAccessObjectCstmr;
-import fr.unice.polytech.soa1.TeamForce.business.Event;
 import fr.unice.polytech.soa1.TeamForce.business.Order;
 import fr.unice.polytech.soa1.TeamForce.business.Product;
 
@@ -34,7 +30,7 @@ public class CustomerRPCImpl implements CustomerRPC {
 	private DataAccessObjectCstmr dao;
 
 	@Override
-	public Order create_order(int quantity, String amount,
+	public Order create_order(String amount,
 			List<String> products, String custumer) throws UnknownCustomerFault {
 		List<Product> productObjs = new ArrayList<Product>();
 		for (String id : products) {
@@ -46,7 +42,7 @@ public class CustomerRPCImpl implements CustomerRPC {
 			throw new UnknownCustomerFault(custumer);
 		}
 		
-		Order ordre = new Order(UUID.randomUUID().toString(), quantity, amount,
+		Order ordre = new Order(UUID.randomUUID().toString(),  amount,
 				productObjs, cstmr);
 		dao.getordrs().add(ordre);
 		return ordre;
@@ -90,19 +86,6 @@ public class CustomerRPCImpl implements CustomerRPC {
 		cstmr.getAddresses().add(addresses.get(0));
 		cstmr.getAddresses().add(addresses.get(1));
 		return cstmr;
-		
-	}
-	
-	@Override
-	public Order add_event_to_order(String text, String order) throws UnknownOrderFault {
-		List<Event> events = new ArrayList<>(Arrays.asList(
-				new Event(UUID.randomUUID().toString(), text)));
-		Order ordr = dao.findOrderById(order);
-		if (order == null) {
-			throw new UnknownOrderFault(order);
-		}
-		ordr.getEvent().add(events.get(0));
-		return ordr;
 		
 	}
 

@@ -40,6 +40,11 @@ public interface EmployeeRPC {
 	@WebResult(name = "custumers")
 	public Custumer findCustomerbyphone(@WebParam(name="phone") String phone)
 			throws UnknownCustomerFault;
+	
+	@WebMethod(operationName = "add_event_to_order")
+	@WebResult(name = "orders")
+	public Order add_event_to_order(@WebParam(name="text") String text,
+			@WebParam(name="order") String order) throws UnknownOrderFault;
 
 }
 

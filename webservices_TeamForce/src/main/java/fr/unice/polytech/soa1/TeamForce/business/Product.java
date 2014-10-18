@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlType;
 public class Product {
 
 	private String id;
+	private int quantity;
 	private String name;
 	private String price;
 	private Categorie categorie;
@@ -18,12 +19,20 @@ public class Product {
 	
 	public Product() {}
 	
-	public Product(String id, String name, String price, Catalogue catalogue) {
+	public Product(String id, String name, String price, int quantity, Catalogue catalogue) {
 		this.id = id;
 		this.name = name;
 		this.price = price;
+		this.quantity = quantity;
 		this.catalogue = catalogue;
 		this.categorie = Categorie.Bijoux;
+	}
+	
+	public Product(String id, String name, String price, int quantity) {
+		this.id = id;
+		this.name = name;
+		this.price = price;
+		this.quantity = quantity;
 	}
 	
 	public Product(String id, String name, String price) {
@@ -33,7 +42,7 @@ public class Product {
 	}
 	
 	public Product(Product that) { // Copy Constructor
-		this(that.id, that.name, that.price, that.catalogue);
+		this(that.id, that.name, that.price, that.quantity, that.catalogue);
 		this.categorie = that.categorie;
 	}
 
@@ -92,5 +101,13 @@ public class Product {
 	
 	public void setPrice(String price) {
 		this.price = price;
+	}
+	
+	@XmlElement(name="Quantity")
+	public int getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 }
