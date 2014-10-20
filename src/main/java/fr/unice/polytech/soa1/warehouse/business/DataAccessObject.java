@@ -464,6 +464,15 @@ public class DataAccessObject {
 		}
 		return null;
 	}
+	
+	public Product getProductById(String id){
+		for (Box box : getBoxes()) {
+			if(box.getContent().getId().equals(id)){
+				return box.getContent();
+			}
+		}
+		return null;
+	}
 
 	public Warehouse getWarehouseById(String id){
 		for (Warehouse ware : getWarehouses()) {
