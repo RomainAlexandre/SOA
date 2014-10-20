@@ -1,6 +1,6 @@
-package fr.unice.polytech.soa1.teamforce.rpc;
+package fr.unice.polytech.soa1.TeamForce.rpc;
 
-import fr.unice.polytech.soa1.teamforce.business.*;
+import fr.unice.polytech.soa1.TeamForce.business.*;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -13,10 +13,10 @@ import java.util.List;
 import java.util.UUID;
 
 @Stateless(name = "TeamForce-Employee-RPC")
-@WebService(targetNamespace = "http://informatique.polytech.unice.fr/soa1/teamforce/rpc/Employee",
+@WebService(targetNamespace = "http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Employee",
 		portName = "TeamForceRPCEmployeePort",
 		serviceName = "TeamForceRPCEmployeeService",
-		endpointInterface = "fr.unice.polytech.soa1.teamforce.rpc.EmployeeRPC")
+		endpointInterface = "fr.unice.polytech.soa1.TeamForce.rpc.EmployeeRPC")
 public class EmployeeRPCImpl implements EmployeeRPC {
 	
 	// Employees can consult information about customers (for example to answer

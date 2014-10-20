@@ -1,7 +1,8 @@
-package fr.unice.polytech.soa1.teamforce.business;
+package fr.unice.polytech.soa1.TeamForce.business;
 
 import javax.ejb.Singleton;
 
+import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

@@ -1,4 +1,4 @@
-package fr.unice.polytech.soa1.teamforce.business;
+package fr.unice.polytech.soa1.TeamForce.business;
 
 
 import javax.xml.bind.annotation.*;

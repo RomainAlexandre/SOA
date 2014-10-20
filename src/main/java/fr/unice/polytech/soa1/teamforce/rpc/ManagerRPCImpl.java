@@ -1,20 +1,20 @@
-package fr.unice.polytech.soa1.teamforce.rpc;
+package fr.unice.polytech.soa1.TeamForce.rpc;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
 
-import fr.unice.polytech.soa1.teamforce.business.*;
+import fr.unice.polytech.soa1.TeamForce.business.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 @Stateless(name = "TeamForce-Manager-RPC")
-@WebService(targetNamespace = "http://informatique.polytech.unice.fr/soa1/teamforce/rpc/Manager",
+@WebService(targetNamespace = "http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Manager",
 		portName = "TeamForceRPCManagerPort",
 		serviceName = "TeamForceRPCManagerService",
-		endpointInterface = "fr.unice.polytech.soa1.teamforce.rpc.ManagerRPC")
+		endpointInterface = "fr.unice.polytech.soa1.TeamForce.rpc.ManagerRPC")
 
 public class ManagerRPCImpl implements ManagerRPC{
 	//Managers can create new catalogue, and assign product to categories.

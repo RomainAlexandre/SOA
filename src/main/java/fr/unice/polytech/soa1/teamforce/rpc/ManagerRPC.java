@@ -1,4 +1,4 @@
-package fr.unice.polytech.soa1.teamforce.rpc;
+package fr.unice.polytech.soa1.TeamForce.rpc;
 
 import java.util.List;
 
@@ -7,9 +7,9 @@ import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
 
-import fr.unice.polytech.soa1.teamforce.business.*;
+import fr.unice.polytech.soa1.TeamForce.business.*;
 
-@WebService(targetNamespace = "http://informatique.polytech.unice.fr/soa1/teamforce/rpc/Manager")
+@WebService(targetNamespace = "http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Manager")
 public interface ManagerRPC {
 	
 	@WebMethod(operationName = "create_product")

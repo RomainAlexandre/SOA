@@ -1,15 +1,15 @@
-package fr.unice.polytech.soa1.teamforce.rpc;
+package fr.unice.polytech.soa1.TeamForce.rpc;
 
 import java.util.List;
 
-import fr.unice.polytech.soa1.teamforce.business.*;
+import fr.unice.polytech.soa1.TeamForce.business.*;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
 
-@WebService(targetNamespace = "http://informatique.polytech.unice.fr/soa1/teamforce/rpc/Customer")
+@WebService(targetNamespace = "http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer")
 public interface CustomerRPC {
 	
 	@WebMethod(operationName = "create_account")

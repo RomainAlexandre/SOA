@@ -1,15 +1,14 @@
-package fr.unice.polytech.soa1.teamforce.rpc;
+package fr.unice.polytech.soa1.TeamForce.rpc;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
 
-import fr.unice.polytech.soa1.teamforce.business.Addresse;
-import fr.unice.polytech.soa1.teamforce.business.Custumer;
-import fr.unice.polytech.soa1.teamforce.business.DataAccessObjectCstmr;
-import fr.unice.polytech.soa1.teamforce.business.Event;
-import fr.unice.polytech.soa1.teamforce.business.Order;
-import fr.unice.polytech.soa1.teamforce.business.Product;
+import fr.unice.polytech.soa1.TeamForce.business.Addresse;
+import fr.unice.polytech.soa1.TeamForce.business.Custumer;
+import fr.unice.polytech.soa1.TeamForce.business.DataAccessObjectCstmr;
+import fr.unice.polytech.soa1.TeamForce.business.Order;
+import fr.unice.polytech.soa1.TeamForce.business.Product;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,10 +17,10 @@ import java.util.UUID;
 
 
 @Stateless(name = "TeamForce-Customer-RPC")
-@WebService(targetNamespace = "http://informatique.polytech.unice.fr/soa1/teamforce/rpc/Customer",
+@WebService(targetNamespace = "http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer",
 		portName = "TeamForceRPCCustomerPort",
 		serviceName = "TeamForceRPCCustomerService",
-		endpointInterface = "fr.unice.polytech.soa1.teamforce.rpc.CustomerRPC")
+		endpointInterface = "fr.unice.polytech.soa1.TeamForce.rpc.CustomerRPC")
 public class CustomerRPCImpl implements CustomerRPC {
 	
 	//Customers can create and manage orders through the CRM, and receive
