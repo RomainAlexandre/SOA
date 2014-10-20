@@ -181,8 +181,8 @@ public class DataAccessObjectCstmr {
 		Catalogue cat1 = new Catalogue("1", "Ete 2014");
 		Catalogue cat2 = new Catalogue("2", "Printemps 2015");	
 		
-		Order o1 = new Order("1", 5, "152€", c1);
-		Order o2 = new Order("2", 12, "1542€", c2);
+		Order o1 = new Order("1", "152€", c1);
+		Order o2 = new Order("2", "1542€", c2);
 		
 		o1.getEvent().add(events.get(0));
 		o1.getEvent().add(events.get(1));
@@ -192,17 +192,17 @@ public class DataAccessObjectCstmr {
 		
 		
 		List<Product> products1 = new ArrayList<>(Arrays.asList(
-				new Product("1", "samsung", "600", cat1),
-				new Product("2", "chaine", "100", cat1),
-				new Product("3", "swatch", "70", cat1)));
+				new Product("1", "samsung", "600", 1, cat1),
+				new Product("2", "chaine", "100", 1, cat1),
+				new Product("3", "swatch", "70", 1, cat1)));
 		
 		List<Product> products2 = new ArrayList<>(Arrays.asList(
-				new Product("4", "une montre", "150", cat1),
-				new Product("5", "un tournevis", "20", cat1)));
+				new Product("4", "une montre", "150", 1, cat1),
+				new Product("5", "un tournevis", "20", 1, cat1)));
 		
 		List<Product> products3 = new ArrayList<>(Arrays.asList(
-				new Product("6", "Mauliere 2015", "150"),
-				new Product("7", "New Livre 2015", "20")));
+				new Product("6", "Mauliere 2015", "150", 1),
+				new Product("7", "New Livre 2015", "20", 1)));
 		
 		products.addAll(products1);
 		products.addAll(products2);
