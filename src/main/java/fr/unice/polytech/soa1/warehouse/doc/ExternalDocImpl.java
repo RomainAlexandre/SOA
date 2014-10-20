@@ -31,10 +31,10 @@ public class ExternalDocImpl implements ExternalDoc {
 
 		switch(input.getType()) {
 		case PICK:
-			e = new Event(id, KindAction.PICKUP, input.getHour(), input.getMin(), input.getQuantity(), input.getProduct());
+			e = new Event(id, KindAction.PICKUP, input.getHour(), input.getMin(), input.getQuantity(), dao.getProductById(input.getProduct().getId()));
 			break;
 		case DELIVERY:
-			e = new Event(id, KindAction.DELIVERY, input.getHour(), input.getMin(), input.getQuantity(), input.getProduct());
+			e = new Event(id, KindAction.DELIVERY, input.getHour(), input.getMin(), input.getQuantity(), dao.getProductById(input.getProduct().getId()));
 			break;
 		default : 
 			throw new ArgumentException();
@@ -59,6 +59,9 @@ public class ExternalDocImpl implements ExternalDoc {
 			throw new ArgumentException();
 		}
 		if (input.getProduct() == null){
+			throw new ArgumentException();
+		}
+		if (dao.getProductById(input.getProduct().getId()) == null){
 			throw new ArgumentException();
 		}
 		if (input.getType() == null){
