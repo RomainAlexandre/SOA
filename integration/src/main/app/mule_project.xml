@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
 	xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.5.1"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
-http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd"></mule>
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
+    <flow name="MisterDiscount_WS" doc:name="MisterDiscount_WS">
+        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8081" doc:name="http://localhost:8081/MisterDiscount" path="MisterDiscount/"/>
+        <cxf:jaxws-service doc:name="MisterDiscount"  serviceClass="fr.polytech.unice.soa1.mister.discount.services.IMisterDiscount"/>
+        <set-variable doc:name="operation?" value="#[flowVars.cxf_operation.localPart]" variableName="operation"/>
+        <choice doc:name="Choice">
+            <when expression="#[operation == &quot;createOrder&quot;]">
+                <logger level="INFO" doc:name="createOrder" message="Create Order branch"/>
+            </when>
+            <otherwise>
+                <logger level="INFO" doc:name="Unknown operation" message="Unknown operation"/>
+            </otherwise>
+        </choice>
+    </flow>
+</mule>
