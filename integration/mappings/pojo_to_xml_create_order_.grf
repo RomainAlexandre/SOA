@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><Graph __version="3.5.0" author="Romain" created="Mon Nov 03 13:16:25 CET 2014" description="Pojo To Xml&lt;create_order&gt;" guiVersion="3.4.4.P" id="1415026791545" licenseCode="Unlicensed" licenseType="Unknown" modified="Mon Nov 03 13:16:25 CET 2014" modifiedBy="Romain" name="Pojo_To_Xml_create_order_" revision="1.0" showComponentDetails="false">
+<Global>
+<Metadata __filteredMetadata="false" __index="0" __referenceCounter="1" __schemaType="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer}create_order" __sourcePath="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer=ns0}/ns0:create_order" _dataStructure="OBJECT" _id="__id" _type="Output" id="033bbd27-1a58-4bac-8a11-5d7188970662">
+<Record fieldDelimiter="," name="create_order" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="0" __schemaType="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer}create_order" __sourcePath="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer=ns0}/ns0:create_order/amount" containerType="SINGLE" label="amount" name="amount" type="string"/>
+<Field __index="1" __schemaType="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer}create_order" __sourcePath="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer=ns0}/ns0:create_order/products" containerType="list" label="products" name="products" type="string"/>
+<Field __index="2" __schemaType="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer}create_order" __sourcePath="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer=ns0}/ns0:create_order/custumer" containerType="SINGLE" label="custumer" name="custumer" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="0" __referenceCounter="1" __sourcePath="{}/object" _dataStructure="OBJECT" _id="__id" _type="Input" id="4e1af8ce-47ec-4ee4-9cbd-1a2f72a06b3f">
+<Record fieldDelimiter="," name="CreateOrderInput" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="0" __sourcePath="{}/object/name" containerType="SINGLE" label="name" name="name" type="string"/>
+<Field __index="1" __sourcePath="{}/object/productsId" containerType="list" label="productsId" name="productsId" type="string"/>
+</Record>
+</Metadata>
+<Dictionary>
+<Entry id="DictionaryEntry0" input="true" name="inputPayload" output="false" type="object"/>
+<Entry id="DictionaryEntry1" input="false" name="outputPayload" output="true" type="object"/>
+</Dictionary>
+</Global>
+<Phase number="0">
+<Node enabled="enabled" fileURL="dict:inputPayload" guiName="Pojo READER" guiX="20" guiY="20" id="BEAN_READER0" type="BEAN_READER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Context outPort="0" sequenceField="__id" xpath=".">
+  <Mapping cloverField="name" trim="true" xpath="name"/>
+  <Mapping cloverField="productsId" trim="true" xpath="productsId"/>
+</Context>
+]]></attr>
+<attr name="_data_format"><![CDATA[JAVA]]></attr>
+<attr name="schema"><![CDATA[<?xml version="1.0" encoding="UTF-8"?><schema-object>
+  <typed-object-ref type-ref="fr.polytech.unice.soa1.mister.discount.business.CreateOrderInput"/>
+  <typed-object type="fr.polytech.unice.soa1.mister.discount.business.CreateOrderInput">
+    <typed-object-ref name="name" type-ref="java.lang.String"/>
+    <schema-collection name="productsId" type="java.util.List">
+      <typed-object-ref type-ref="java.lang.String"/>
+    </schema-collection>
+  </typed-object>
+  <typed-object type="java.lang.String"/>
+</schema-object>
+]]></attr>
+</Node>
+<Node cacheInMemory="true" charset="UTF-8" enabled="enabled" fileURL="dict:outputPayload" guiName="XML WRITER" guiX="900" guiY="20" id="EXT_XML_WRITER0" type="EXT_XML_WRITER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<clover:element clover:name="ns0:create_order" xmlns:clover="http://www.cloveretl.com/ns/xmlmapping" xmlns:ns0="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer" clover:inPort="0">
+  <amount>$0.amount</amount>
+  <products>$0.products</products>
+  <custumer>$0.custumer</custumer>
+</clover:element>]]></attr>
+<attr name="_data_format"><![CDATA[XML]]></attr>
+<attr name="__metadata"><![CDATA[true]]></attr>
+</Node>
+<Node enabled="enabled" guiName="Foreach 'object' -&gt; 'ns0:create_order'" guiX="460" guiY="20" id="FOREACH_OBJECT_NS0_CREATE_ORDER" transformClass="com.mulesoft.datamapper.transform.MelRecordTransform" type="REFORMAT">
+<attr name="melScript"><![CDATA[//MEL
+//START -> DO NOT REMOVE
+output.__id = input.__id;
+//END -> DO NOT REMOVE
+output.products = input.productsId;
+output.custumer = input.name;
+output.amount = input.name;]]></attr>
+</Node>
+<Edge debugMode="true" fromNode="BEAN_READER0:0" guiBendpoints="" id="Edge0" inPort="Port 0 (in)" metadata="4e1af8ce-47ec-4ee4-9cbd-1a2f72a06b3f" outPort="Port 0 (out)" toNode="FOREACH_OBJECT_NS0_CREATE_ORDER:0"/>
+<Edge debugMode="true" fromNode="FOREACH_OBJECT_NS0_CREATE_ORDER:0" guiBendpoints="" id="Edge1" inPort="Port 0 (in)" metadata="033bbd27-1a58-4bac-8a11-5d7188970662" outPort="Port 0 (out)" toNode="EXT_XML_WRITER0:0"/>
+</Phase>
+</Graph>

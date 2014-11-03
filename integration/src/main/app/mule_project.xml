@@ -1,24 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+<mule xmlns:ws="http://www.mulesoft.org/schema/mule/ws" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:data-mapper="http://www.mulesoft.org/schema/mule/ee/data-mapper" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
 	xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.5.1"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
-http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd
+http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schema/mule/ee/data-mapper/current/mule-data-mapper.xsd
+http://www.mulesoft.org/schema/mule/ws http://www.mulesoft.org/schema/mule/ws/current/mule-ws.xsd">
+    <ws:consumer-config name="TeamForce-WS" wsdlLocation="http://localhost:8080/webservices/TeamForce-Customer-RPC?wsdl" service="TeamForceRPCCustomerService" port="TeamForceRPCCustomerPort" serviceAddress="http://localhost:8080/webservices/TeamForce-Customer-RPC" doc:name="Web Service Consumer"/>
+    <data-mapper:config name="Pojo_To_Xml_create_order_" transformationGraphPath="pojo_to_xml_create_order_.grf" doc:name="Pojo_To_Xml_create_order_"/>
+    <data-mapper:config name="Xml_create_orderResponse__To_Pojo" transformationGraphPath="xml_create_orderresponse__to_pojo.grf" doc:name="Xml_create_orderResponse__To_Pojo"/>
     <flow name="MisterDiscount_WS" doc:name="MisterDiscount_WS">
-        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8081" doc:name="http://localhost:8081/MisterDiscount" path="MisterDiscount/"/>
+        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8081" doc:name="http://localhost:8081/MisterDiscount" path="MisterDiscount"/>
         <cxf:jaxws-service doc:name="MisterDiscount"  serviceClass="fr.polytech.unice.soa1.mister.discount.services.IMisterDiscount"/>
         <set-variable doc:name="operation?" value="#[flowVars.cxf_operation.localPart]" variableName="operation"/>
         <choice doc:name="Choice">
             <when expression="#[operation == &quot;createOrder&quot;]">
                 <logger level="INFO" doc:name="createOrder" message="Create Order branch"/>
+                <vm:outbound-endpoint exchange-pattern="request-response" path="/misterdiscount/createorder" doc:name="/misterdiscount/createorder"/>
             </when>
             <otherwise>
                 <logger level="INFO" doc:name="Unknown operation" message="Unknown operation"/>
             </otherwise>
         </choice>
     </flow>
+    <flow name="createOrder" doc:name="createOrder">
+        <vm:inbound-endpoint exchange-pattern="request-response" path="/misterdiscount/createorder" doc:name="/misterdiscount/createorder"/>
+        <flow-ref name="TeamForce-CreateOrder" doc:name="TeamForce-CreateOrder "/>
+        <flow-ref name="WareHouse-CreateOrder" doc:name="WareHouse-CreateOrder"/>
+        <flow-ref name="FedPs-CreateOrder" doc:name="FedPs-CreateOrder"/>
+    </flow>
+    <sub-flow name="TeamForce-CreateOrder" doc:name="TeamForce-CreateOrder">
+        <logger message="TeamForce - Logger" level="INFO" doc:name="TeamForce - Logger"/>
+        <data-mapper:transform doc:name="Pojo To Xml&lt;create_order&gt;" config-ref="Pojo_To_Xml_create_order_"/>
+        <ws:consumer config-ref="TeamForce-WS" operation="create_order" doc:name="TeamForce::createOrder"/>
+        <data-mapper:transform config-ref="Xml_create_orderResponse__To_Pojo" doc:name="Xml&lt;create_orderResponse&gt; To Pojo"/>
+    </sub-flow>
+    <sub-flow name="WareHouse-CreateOrder" doc:name="WareHouse-CreateOrder">
+        <logger message="WareHouse - Logger" level="INFO" doc:name="WareHouse - Logger"/>
+    </sub-flow>
+    <sub-flow name="FedPs-CreateOrder" doc:name="FedPs-CreateOrder">
+        <logger message="FedPs - Logger" level="INFO" doc:name="FedPs - Logger"/>
+    </sub-flow>
 </mule>
