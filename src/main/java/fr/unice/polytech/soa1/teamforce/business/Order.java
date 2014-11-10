@@ -80,7 +80,7 @@ public class Order {
 		this.amount = amount;
 	}
 	
-	@XmlElementWrapper(name = "prducts")
+	@XmlElementWrapper(name = "products")
 	@XmlElement(name = "product")
 	public List<Product> getProducts() {
 		return products;

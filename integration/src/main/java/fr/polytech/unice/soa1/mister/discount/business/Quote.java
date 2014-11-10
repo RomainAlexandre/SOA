@@ -7,28 +7,28 @@ import javax.xml.bind.annotation.XmlType;
 
 @XmlType
 @XmlRootElement(name = "quote")
-public class Order {
+public class Quote {
     private String quoteId;
     private double cost;
     private String eta;
 
-    public Order() {
+    public Quote() {
     }
 
-    public Order(String quoteId, double cost, String eta) {
+    public Quote(String quoteId, double cost, String eta) {
         this.quoteId = quoteId;
         this.cost = cost;
         this.eta = eta;
     }
 
-    public Order(Order that) {
+    public Quote(Quote that) {
         this(that.quoteId, that.cost, that.eta);
     }
 
     @Override
     public boolean equals(Object obj) {
-        if(obj instanceof Order){
-            Order q = (Order) obj;
+        if(obj instanceof Quote){
+            Quote q = (Quote) obj;
             return this.getQuoteId().equals(q.getQuoteId());
         }
         return false;

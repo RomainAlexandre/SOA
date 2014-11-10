@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><Graph __version="3.5.0" author="Romain" created="Mon Nov 10 13:40:21 CET 2014" description="Pojo To Xml&lt;get_all_orders&gt;" guiVersion="3.4.4.P" id="1415634440335" licenseCode="Unlicensed" licenseType="Unknown" modified="Mon Nov 10 13:40:21 CET 2014" modifiedBy="Romain" name="Pojo_To_Xml_get_all_orders_" revision="1.0" showComponentDetails="false">
+<Global>
+<Metadata __index="0" __referenceCounter="1" __sourcePath="{}/object" _dataStructure="OBJECT" _id="__id" _type="Input" id="600055b7-df74-4242-8208-0bc21d8a14b3">
+<Record fieldDelimiter="," name="ConsultOrderInput" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="0" __sourcePath="{}/object/customerID" containerType="SINGLE" label="customerID" name="customerID" type="string"/>
+<Field __index="1" __sourcePath="{}/object/orderRefd" containerType="SINGLE" label="orderRefd" name="orderRefd" type="string"/>
+</Record>
+</Metadata>
+<Metadata __filteredMetadata="false" __index="0" __referenceCounter="1" __schemaType="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Employee}get_all_orders" __sourcePath="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Employee=ns0}/ns0:get_all_orders" _dataStructure="OBJECT" _id="__id" _type="Output" id="e1ad14de-a75e-42c6-84b6-acd76532138f">
+<Record fieldDelimiter="," name="get_all_orders" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="0" __schemaType="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Employee}get_all_orders" __sourcePath="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Employee=ns0}/ns0:get_all_orders/id" containerType="SINGLE" label="id" name="id" type="string"/>
+</Record>
+</Metadata>
+<Dictionary>
+<Entry id="DictionaryEntry0" input="true" name="inputPayload" output="false" type="object"/>
+<Entry id="DictionaryEntry1" input="false" name="outputPayload" output="true" type="object"/>
+</Dictionary>
+</Global>
+<Phase number="0">
+<Node enabled="enabled" fileURL="dict:inputPayload" guiName="Pojo READER" guiX="20" guiY="20" id="BEAN_READER0" type="BEAN_READER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Context outPort="0" sequenceField="__id" xpath=".">
+  <Mapping cloverField="customerID" trim="true" xpath="customerID"/>
+  <Mapping cloverField="orderRefd" trim="true" xpath="orderRefd"/>
+</Context>
+]]></attr>
+<attr name="_data_format"><![CDATA[JAVA]]></attr>
+<attr name="schema"><![CDATA[<?xml version="1.0" encoding="UTF-8"?><schema-object>
+  <typed-object-ref type-ref="fr.polytech.unice.soa1.mister.discount.business.ConsultOrderInput"/>
+  <typed-object type="fr.polytech.unice.soa1.mister.discount.business.ConsultOrderInput">
+    <typed-object-ref name="customerID" type-ref="java.lang.String"/>
+    <typed-object-ref name="orderRefd" type-ref="java.lang.String"/>
+  </typed-object>
+  <typed-object type="java.lang.String"/>
+</schema-object>
+]]></attr>
+</Node>
+<Node cacheInMemory="true" charset="UTF-8" enabled="enabled" fileURL="dict:outputPayload" guiName="XML WRITER" guiX="900" guiY="20" id="EXT_XML_WRITER0" type="EXT_XML_WRITER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<clover:element clover:name="ns0:get_all_orders" xmlns:clover="http://www.cloveretl.com/ns/xmlmapping" xmlns:ns0="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Employee" clover:inPort="0">
+  <id>$0.id</id>
+</clover:element>]]></attr>
+<attr name="_data_format"><![CDATA[XML]]></attr>
+<attr name="__metadata"><![CDATA[true]]></attr>
+</Node>
+<Node enabled="enabled" guiName="Foreach 'object' -&gt; 'ns0:get_all_orders'" guiX="460" guiY="20" id="FOREACH_OBJECT_NS0_GET_ALL_ORDERS" transformClass="com.mulesoft.datamapper.transform.MelRecordTransform" type="REFORMAT">
+<attr name="melScript"><![CDATA[//MEL
+//START -> DO NOT REMOVE
+output.__id = input.__id;
+//END -> DO NOT REMOVE
+output.id = input.customerID;]]></attr>
+</Node>
+<Edge debugMode="true" fromNode="BEAN_READER0:0" guiBendpoints="" id="Edge0" inPort="Port 0 (in)" metadata="600055b7-df74-4242-8208-0bc21d8a14b3" outPort="Port 0 (out)" toNode="FOREACH_OBJECT_NS0_GET_ALL_ORDERS:0"/>
+<Edge debugMode="true" fromNode="FOREACH_OBJECT_NS0_GET_ALL_ORDERS:0" guiBendpoints="" id="Edge1" inPort="Port 0 (in)" metadata="e1ad14de-a75e-42c6-84b6-acd76532138f" outPort="Port 0 (out)" toNode="EXT_XML_WRITER0:0"/>
+</Phase>
+</Graph>

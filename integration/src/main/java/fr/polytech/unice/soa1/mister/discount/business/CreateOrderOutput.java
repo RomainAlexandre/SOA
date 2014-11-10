@@ -1,6 +1,10 @@
 package fr.polytech.unice.soa1.mister.discount.business;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlType(name = "createOrderOutput")
@@ -8,14 +12,17 @@ public class CreateOrderOutput {
 	private String customer;
 	private String amount;
 	private String orderId;
+	private List<Product> products;
 
 	public CreateOrderOutput() {
+		this.products = new ArrayList<Product>();
 	}
 
 	public CreateOrderOutput(String customer, String amount, String orderId) {
 		this.customer =customer;
 		this.amount =amount;
 		this.orderId = orderId;
+		this.products = new ArrayList<Product>();
 	}
 
 	@XmlElement(name = "customerName", required = true)
@@ -44,4 +51,15 @@ public class CreateOrderOutput {
 	public void setOrderId(String orderId) {
 		this.orderId = orderId;
 	}
+
+	@XmlElementWrapper(name = "products")
+	@XmlElement(name = "product", required = true)
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
+
 }
