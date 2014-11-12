@@ -46,8 +46,6 @@ public class CustomerRPCImpl implements CustomerRPC {
                 productObjs, cstmr);
         dao.getordrs().add(ordre);
 
-        System.out.println(productObjs.size());
-
         return ordre;
 
     }

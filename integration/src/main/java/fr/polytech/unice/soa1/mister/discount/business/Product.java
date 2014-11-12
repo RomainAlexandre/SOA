@@ -10,6 +10,8 @@ import javax.xml.bind.annotation.XmlType;
 public class Product {
     private String productId;
     private int quantity;
+    private String name;
+    private int price;
 
     public Product() {
     }
@@ -44,6 +46,24 @@ public class Product {
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+	
+	@XmlElement(name = "name", required = true)
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@XmlElement(name = "price", required = true)
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
 	}
 
 }

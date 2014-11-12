@@ -2,9 +2,11 @@
 <con:soapui-project activeEnvironment="Default" name="MisterDiscount" resourceRoot="" soapui-version="5.0.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="MisterDiscountServiceSoapBinding" type="wsdl" bindingName="{http://informatique.polytech.unice.fr/soa1/MisterDiscount}MisterDiscountServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8081/MisterDiscount?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8081/MisterDiscount?wsdl"><con:part><con:url>http://localhost:8081/MisterDiscount?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="MisterDiscountService" targetNamespace="http://informatique.polytech.unice.fr/soa1/MisterDiscount" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://informatique.polytech.unice.fr/soa1/MisterDiscount" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
   <wsdl:types>
     <xs:schema elementFormDefault="unqualified" targetNamespace="http://informatique.polytech.unice.fr/soa1/MisterDiscount" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="consultingOrder" type="tns:consultingOrder"/>
+      <xs:element name="consultingOrderResponse" type="tns:consultingOrderResponse"/>
       <xs:element name="createOrder" type="tns:createOrder"/>
-      <xs:element name="createOrderInput" type="tns:createOrderInput"/>
       <xs:element name="createOrderResponse" type="tns:createOrderResponse"/>
+      <xs:element name="product" type="tns:product"/>
       <xs:complexType name="createOrder">
         <xs:sequence>
           <xs:element minOccurs="0" name="arg0" type="tns:createOrderInput"/>
@@ -12,13 +14,55 @@
       </xs:complexType>
       <xs:complexType name="createOrderInput">
         <xs:sequence>
+          <xs:element name="city_name" type="xs:string"/>
+          <xs:element name="country_id" type="xs:string"/>
           <xs:element name="name" type="xs:string"/>
           <xs:element maxOccurs="unbounded" name="productsId" type="xs:string"/>
+          <xs:element name="street_name" type="xs:string"/>
+          <xs:element name="zip_code" type="xs:int"/>
         </xs:sequence>
       </xs:complexType>
       <xs:complexType name="createOrderResponse">
         <xs:sequence>
-          <xs:element minOccurs="0" name="order" type="tns:createOrderInput"/>
+          <xs:element minOccurs="0" name="order" type="tns:Order"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Order">
+        <xs:sequence>
+          <xs:element name="amount" type="xs:string"/>
+          <xs:element name="city_name" type="xs:string"/>
+          <xs:element name="country_id" type="xs:string"/>
+          <xs:element name="customerName" type="xs:string"/>
+          <xs:element name="eta" type="xs:string"/>
+          <xs:element name="orderId" type="xs:string"/>
+          <xs:element minOccurs="0" name="products">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" name="product" type="tns:product"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="quoteId" type="xs:string"/>
+          <xs:element name="street_name" type="xs:string"/>
+          <xs:element name="zip_code" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="product">
+        <xs:sequence>
+          <xs:element name="name" type="xs:string"/>
+          <xs:element name="price" type="xs:int"/>
+          <xs:element name="product_id" type="xs:string"/>
+          <xs:element name="quantity" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="consultingOrder">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="consultingOrderResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="quoteId" type="xs:string"/>
         </xs:sequence>
       </xs:complexType>
     </xs:schema>
@@ -26,13 +70,23 @@
   <wsdl:message name="createOrder">
     <wsdl:part element="tns:createOrder" name="parameters"></wsdl:part>
   </wsdl:message>
+  <wsdl:message name="consultingOrder">
+    <wsdl:part element="tns:consultingOrder" name="parameters"></wsdl:part>
+  </wsdl:message>
   <wsdl:message name="createOrderResponse">
     <wsdl:part element="tns:createOrderResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="consultingOrderResponse">
+    <wsdl:part element="tns:consultingOrderResponse" name="parameters"></wsdl:part>
   </wsdl:message>
   <wsdl:portType name="MisterDiscount">
     <wsdl:operation name="createOrder">
       <wsdl:input message="tns:createOrder" name="createOrder"></wsdl:input>
       <wsdl:output message="tns:createOrderResponse" name="createOrderResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultingOrder">
+      <wsdl:input message="tns:consultingOrder" name="consultingOrder"></wsdl:input>
+      <wsdl:output message="tns:consultingOrderResponse" name="consultingOrderResponse"></wsdl:output>
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="MisterDiscountServiceSoapBinding" type="tns:MisterDiscount">
@@ -43,6 +97,15 @@
         <soap:body use="literal"/>
       </wsdl:input>
       <wsdl:output name="createOrderResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultingOrder">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="consultingOrder">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="consultingOrderResponse">
         <soap:body use="literal"/>
       </wsdl:output>
     </wsdl:operation>
@@ -58,12 +121,22 @@
       <mis:createOrder>
          <!--Optional:-->
          <arg0>
+            <city_name>Antibes</city_name>
+            <country_id>FR</country_id>
             <name>C1</name>
             <!--1 or more repetitions:-->
-            <productsId>1</productsId>
-            <productsId>2</productsId>
-            <productsId>3</productsId>
+            <productsId>W3P3NV5OZ24BD1K</productsId>
+            <street_name>235 boulevard</street_name>
+            <zip_code>66000</zip_code>
          </arg0>
       </mis:createOrder>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/MisterDiscount/MisterDiscount/createOrder"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/></con:soapui-project>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/MisterDiscount/MisterDiscount/createOrder"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="consultingOrder" bindingOperationName="consultingOrder" type="Request-Response" outputName="consultingOrderResponse" inputName="consultingOrder" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8081/MisterDiscount</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mis="http://informatique.polytech.unice.fr/soa1/MisterDiscount">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mis:consultingOrder>
+         <!--Optional:-->
+         <arg0>130ba0d5-2389-460e-a896-f01709bfe004</arg0>
+      </mis:consultingOrder>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/MisterDiscount/MisterDiscount/consultingOrder"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/></con:soapui-project>

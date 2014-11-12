@@ -193,17 +193,17 @@ public class DataAccessObjectCstmr {
 		
 		
 		List<Product> products1 = new ArrayList<>(Arrays.asList(
-				new Product("1", "samsung", "600", 1, cat1),
-				new Product("2", "chaine", "100", 1, cat1),
-				new Product("3", "swatch", "70", 1, cat1)));
+				new Product("W3P3NV5OZ24BD1K", "samsung", "600", 1, cat1),
+				new Product("D7I1ZY8PZ28HZ5G", "chaine", "100", 1, cat1),
+				new Product("V8X6ID5OY52GU8A", "swatch", "70", 1, cat1)));
 		
 		List<Product> products2 = new ArrayList<>(Arrays.asList(
-				new Product("4", "une montre", "150", 1, cat1),
-				new Product("5", "un tournevis", "20", 1, cat1)));
+				new Product("Z3T3RB4JK56TV1R", "une montre", "150", 1, cat1),
+				new Product("F9T7FN4TG33WC5F", "un tournevis", "20", 1, cat1)));
 		
 		List<Product> products3 = new ArrayList<>(Arrays.asList(
-				new Product("6", "Mauliere 2015", "150", 1),
-				new Product("7", "New Livre 2015", "20", 1)));
+				new Product("A4N5TM4IR82VN7V", "Mauliere 2015", "150", 1),
+				new Product("M6Q9HR9ZQ92PU5H", "New Livre 2015", "20", 1)));
 		
 		products.addAll(products1);
 		products.addAll(products2);

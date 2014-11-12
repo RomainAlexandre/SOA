@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?><Graph __version="3.5.0" author="Romain" created="Mon Nov 03 13:16:25 CET 2014" description="Pojo To Xml&lt;create_order&gt;" guiVersion="3.4.4.P" id="1415026791545" licenseCode="Unlicensed" licenseType="Unknown" modified="Mon Nov 03 13:16:25 CET 2014" modifiedBy="Romain" name="Pojo_To_Xml_create_order_" revision="1.0" showComponentDetails="false">
+<?xml version="1.0" encoding="UTF-8"?><Graph __version="3.5.0" author="Romain" created="Wed Nov 12 17:05:53 CET 2014" description="Pojo To Xml&lt;create_order&gt;" guiVersion="3.4.4.P" id="1415816479698" licenseCode="Unlicensed" licenseType="Unknown" modified="Wed Nov 12 17:05:53 CET 2014" modifiedBy="Romain" name="Pojo_To_Xml_create_order__1" revision="1.0" showComponentDetails="false">
 <Global>
-<Metadata __filteredMetadata="false" __index="0" __referenceCounter="1" __schemaType="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer}create_order" __sourcePath="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer=ns0}/ns0:create_order" _dataStructure="OBJECT" _id="__id" _type="Output" id="033bbd27-1a58-4bac-8a11-5d7188970662">
+<Metadata __filteredMetadata="false" __index="0" __referenceCounter="1" __schemaType="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer}create_order" __sourcePath="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer=ns0}/ns0:create_order" _dataStructure="OBJECT" _id="__id" _type="Output" id="214eeb14-2a69-4cb3-8e26-1003841d750f">
 <Record fieldDelimiter="," name="create_order" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
 <Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
 <Field __index="0" __schemaType="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer}create_order" __sourcePath="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer=ns0}/ns0:create_order/amount" containerType="SINGLE" label="amount" name="amount" type="string"/>
@@ -8,11 +8,15 @@
 <Field __index="2" __schemaType="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer}create_order" __sourcePath="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer=ns0}/ns0:create_order/custumer" containerType="SINGLE" label="custumer" name="custumer" type="string"/>
 </Record>
 </Metadata>
-<Metadata __index="0" __referenceCounter="1" __sourcePath="{}/object" _dataStructure="OBJECT" _id="__id" _type="Input" id="4e1af8ce-47ec-4ee4-9cbd-1a2f72a06b3f">
+<Metadata __index="0" __referenceCounter="1" __sourcePath="{}/object" _dataStructure="OBJECT" _id="__id" _type="Input" id="fceaebd9-1b57-46e7-917f-81826309266a">
 <Record fieldDelimiter="," name="CreateOrderInput" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
 <Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
-<Field __index="0" __sourcePath="{}/object/name" containerType="SINGLE" label="name" name="name" type="string"/>
-<Field __index="1" __sourcePath="{}/object/productsId" containerType="list" label="productsId" name="productsId" type="string"/>
+<Field __index="0" __sourcePath="{}/object/cityName" containerType="SINGLE" label="cityName" name="cityName" type="string"/>
+<Field __index="1" __sourcePath="{}/object/countryId" containerType="SINGLE" label="countryId" name="countryId" type="string"/>
+<Field __index="2" __sourcePath="{}/object/name" containerType="SINGLE" label="name" name="name" type="string"/>
+<Field __index="3" __sourcePath="{}/object/productsId" containerType="list" label="productsId" name="productsId" type="string"/>
+<Field __index="4" __sourcePath="{}/object/streetName" containerType="SINGLE" label="streetName" name="streetName" type="string"/>
+<Field __index="5" __sourcePath="{}/object/zipCode" containerType="SINGLE" label="zipCode" name="zipCode" type="integer"/>
 </Record>
 </Metadata>
 <Dictionary>
@@ -24,20 +28,29 @@
 <Node enabled="enabled" fileURL="dict:inputPayload" guiName="Pojo READER" guiX="20" guiY="20" id="BEAN_READER0" type="BEAN_READER">
 <attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Context outPort="0" sequenceField="__id" xpath=".">
+  <Mapping cloverField="cityName" trim="true" xpath="cityName"/>
+  <Mapping cloverField="countryId" trim="true" xpath="countryId"/>
   <Mapping cloverField="name" trim="true" xpath="name"/>
   <Mapping cloverField="productsId" trim="true" xpath="productsId"/>
+  <Mapping cloverField="streetName" trim="true" xpath="streetName"/>
+  <Mapping cloverField="zipCode" trim="true" xpath="zipCode"/>
 </Context>
 ]]></attr>
 <attr name="_data_format"><![CDATA[JAVA]]></attr>
 <attr name="schema"><![CDATA[<?xml version="1.0" encoding="UTF-8"?><schema-object>
   <typed-object-ref type-ref="fr.polytech.unice.soa1.mister.discount.business.CreateOrderInput"/>
   <typed-object type="fr.polytech.unice.soa1.mister.discount.business.CreateOrderInput">
+    <typed-object-ref name="cityName" type-ref="java.lang.String"/>
+    <typed-object-ref name="countryId" type-ref="java.lang.String"/>
     <typed-object-ref name="name" type-ref="java.lang.String"/>
     <schema-collection name="productsId" type="java.util.List">
       <typed-object-ref type-ref="java.lang.String"/>
     </schema-collection>
+    <typed-object-ref name="streetName" type-ref="java.lang.String"/>
+    <typed-object-ref name="zipCode" type-ref="int"/>
   </typed-object>
   <typed-object type="java.lang.String"/>
+  <typed-object type="int"/>
 </schema-object>
 ]]></attr>
 </Node>
@@ -60,7 +73,7 @@ output.products = input.productsId;
 output.custumer = input.name;
 output.amount = input.name;]]></attr>
 </Node>
-<Edge debugMode="true" fromNode="BEAN_READER0:0" guiBendpoints="" id="Edge0" inPort="Port 0 (in)" metadata="4e1af8ce-47ec-4ee4-9cbd-1a2f72a06b3f" outPort="Port 0 (out)" toNode="FOREACH_OBJECT_NS0_CREATE_ORDER:0"/>
-<Edge debugMode="true" fromNode="FOREACH_OBJECT_NS0_CREATE_ORDER:0" guiBendpoints="" id="Edge1" inPort="Port 0 (in)" metadata="033bbd27-1a58-4bac-8a11-5d7188970662" outPort="Port 0 (out)" toNode="EXT_XML_WRITER0:0"/>
+<Edge debugMode="true" fromNode="BEAN_READER0:0" guiBendpoints="" id="Edge0" inPort="Port 0 (in)" metadata="fceaebd9-1b57-46e7-917f-81826309266a" outPort="Port 0 (out)" toNode="FOREACH_OBJECT_NS0_CREATE_ORDER:0"/>
+<Edge debugMode="true" fromNode="FOREACH_OBJECT_NS0_CREATE_ORDER:0" guiBendpoints="" id="Edge1" inPort="Port 0 (in)" metadata="214eeb14-2a69-4cb3-8e26-1003841d750f" outPort="Port 0 (out)" toNode="EXT_XML_WRITER0:0"/>
 </Phase>
 </Graph>

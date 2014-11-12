@@ -15,48 +15,125 @@ http://www.mulesoft.org/schema/mule/batch http://www.mulesoft.org/schema/mule/ba
 http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd
 http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd">
     <ws:consumer-config name="TeamForce-WS-Customer" wsdlLocation="http://localhost:8080/webservices/TeamForce-Customer-RPC?wsdl" service="TeamForceRPCCustomerService" port="TeamForceRPCCustomerPort" serviceAddress="http://localhost:8080/webservices/TeamForce-Customer-RPC" doc:name="Web Service Consumer"/>
-    <data-mapper:config name="Pojo_To_Xml_create_order_" transformationGraphPath="pojo_to_xml_create_order_.grf" doc:name="Pojo_To_Xml_create_order_"/>
-    <data-mapper:config name="Xml_create_orderResponse__To_Pojo" transformationGraphPath="xml_create_orderresponse__to_pojo.grf" doc:name="Xml_create_orderResponse__To_Pojo"/>
-    <ws:consumer-config name="Web_Service_Consumer" wsdlLocation="http://localhost:8080/webservices/TeamForce-Employee-RPC?wsdl" service="TeamForceRPCEmployeeService" port="TeamForceRPCEmployeePort" serviceAddress="http://localhost:8080/webservices/TeamForce-Employee-RPC" doc:name="Web Service Consumer"/>
+    <ws:consumer-config name="TeamForce-WS-Employee" wsdlLocation="http://localhost:8080/webservices/TeamForce-Employee-RPC?wsdl" service="TeamForceRPCEmployeeService" port="TeamForceRPCEmployeePort" serviceAddress="http://localhost:8080/webservices/TeamForce-Employee-RPC" doc:name="Web Service Consumer"/>
     <data-mapper:config name="Pojo_To_Xml_get_all_orders_" transformationGraphPath="pojo_to_xml_get_all_orders_.grf" doc:name="Pojo_To_Xml_get_all_orders_"/>
+    <ws:consumer-config name="WareHouse-WS-ExternalDoc" wsdlLocation="http://localhost:8080/webservices/WarehouseExternalDOC?wsdl" service="WarehouseExternalService" port="WarehouseExternalPort" serviceAddress="http://localhost:8080/webservices/WarehouseExternalDOC" doc:name="Web Service Consumer"/>
+    <data-mapper:config name="Pojo_To_Xml_execute_" transformationGraphPath="pojo_to_xml_execute_.grf" doc:name="Pojo_To_Xml_execute_"/>
+    <ws:consumer-config name="FedPs-WS-CustomerPrivate" wsdlLocation="http://localhost:8080/webservices/FedPSCustomerPrivate?wsdl" service="FedPSCustomerPrivateService" port="FedPSCustomerPrivatePort" serviceAddress="http://localhost:8080/webservices/FedPSCustomerPrivate" doc:name="Web Service Consumer"/>
+    <data-mapper:config name="Xml_create_quoteResponse__To_Pojo" transformationGraphPath="xml_create_quoteresponse__to_pojo.grf" doc:name="Xml_create_quoteResponse__To_Pojo"/>
+    <ws:consumer-config name="Payment-WS-PublicRetailer" wsdlLocation="http://localhost:8080/webservices/Payment-Public-DOC?wsdl" service="PaymentDOCPublicService" port="PaymentDOCPublicPort" serviceAddress="http://localhost:8080/webservices/Payment-Public-DOC" doc:name="Web Service Consumer"/>
+    <data-mapper:config name="Xml_create_orderResponse__To_Pojo" transformationGraphPath="xml_create_orderresponse__to_pojo.grf" doc:name="Xml_create_orderResponse__To_Pojo"/>
+    <data-mapper:config name="Pojo_To_Xml_create_order_" transformationGraphPath="pojo_to_xml_create_order_.grf" doc:name="Pojo_To_Xml_create_order_"/>
+    <data-mapper:config name="Pojo_To_Xml_create_quote_" transformationGraphPath="pojo_to_xml_create_quote_.grf" doc:name="Pojo_To_Xml_create_quote_"/>
     <flow name="MisterDiscount_WS" doc:name="MisterDiscount_WS">
-        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8081" doc:name="http://localhost:8081/MisterDiscount" path="MisterDiscount"/>
-        <cxf:jaxws-service doc:name="MisterDiscount"  serviceClass="fr.polytech.unice.soa1.mister.discount.services.IMisterDiscount"/>
-        <set-variable doc:name="operation?" value="#[flowVars.cxf_operation.localPart]" variableName="operation"/>
+        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8081" path="MisterDiscount" doc:name="http://localhost:8081/MisterDiscount"/>
+        <cxf:jaxws-service serviceClass="fr.polytech.unice.soa1.mister.discount.services.IMisterDiscount" doc:name="MisterDiscount"/>
+        <set-variable variableName="operation" value="#[flowVars.cxf_operation.localPart]" doc:name="operation?"/>
         <choice doc:name="Choice">
             <when expression="#[operation == &quot;createOrder&quot;]">
-                <logger level="INFO" doc:name="createOrder" message="Create Order operation"/>
-                <vm:outbound-endpoint exchange-pattern="request-response" path="/misterdiscount/createorder" doc:name="/misterdiscount/createorder"/>
+                <logger message="Create Order operation" level="INFO" doc:name="createOrder"/>
+                <flow-ref name="CreateOrder" doc:name="Create Order"/>
             </when>
             <when expression="#[operation == &quot;consultingOrder&quot;]">
                 <logger message="consultingOrder operation" level="INFO" doc:name="consultingOrder"/>
+                <vm:outbound-endpoint exchange-pattern="request-response" path="/orderId/consultdb" doc:name="/orderId/consultdb"/>
             </when>
             <when expression="#[operation == registerPrintCatalog]">
                 <logger message="registerPrintCatalog operation" level="INFO" doc:name="registerPrintCatalog"/>
             </when>
             <otherwise>
-                <logger level="INFO" doc:name="Unknown operation" message="Unknown operation"/>
+                <logger message="Unknown operation" level="INFO" doc:name="Unknown operation"/>
             </otherwise>
         </choice>
+        <logger message="The end" level="INFO" doc:name="Logger"/>
     </flow>
-    <flow name="createOrder" doc:name="createOrder">
-        <vm:inbound-endpoint exchange-pattern="request-response" path="/misterdiscount/createorder" doc:name="/misterdiscount/createorder"/>
-        <flow-ref name="TeamForce-CreateOrder" doc:name="TeamForce-CreateOrder "/>
-        <flow-ref name="WareHouse-CreateOrder" doc:name="WareHouse-CreateOrder"/>
-        <flow-ref name="FedPs-CreateOrder" doc:name="FedPs-CreateOrder"/>
-    </flow>
-    <sub-flow name="TeamForce-CreateOrder" doc:name="TeamForce-CreateOrder">
+    <sub-flow name="CreateOrder" doc:name="CreateOrder">
+        <flow-ref name="SF-TeamForce-CreateOrder" doc:name="TeamForce-CreateOrder"/>
+        <vm:outbound-endpoint exchange-pattern="one-way" path="/misterdiscount/wh/pickproduct" doc:name="/misterdiscount/wh/pickproduct"/>
+        <flow-ref name="SF-FP-CreateQuote" doc:name="FedPs-CreateQuote"/>
+        <vm:outbound-endpoint exchange-pattern="one-way" path="/misterdiscount/payment/process" doc:name="/misterdiscount/payment/process"/>
+        <vm:outbound-endpoint exchange-pattern="one-way" path="/orderId/storeindb" doc:name="/orderId/storeindb"/>
+        <scripting:component doc:name="Groovy">
+            <scripting:script engine="Groovy"><![CDATA[import fr.polytech.unice.soa1.mister.discount.business.Order
+import fr.polytech.unice.soa1.mister.discount.business.CreateOrderOutput
+
+import java.lang.*
+
+def order = message.payload;
+def output = new CreateOrderOutput(order.getOrderId(), order.getAmount(), order.getEta());
+
+message.payload=output;]]></scripting:script>
+        </scripting:component>
+    </sub-flow>
+    <sub-flow name="SF-TeamForce-CreateOrder" doc:name="SF-TeamForce-CreateOrder">
         <logger message="TeamForce - Logger" level="INFO" doc:name="TeamForce - Logger"/>
-        <data-mapper:transform doc:name="Pojo To Xml&lt;create_order&gt;" config-ref="Pojo_To_Xml_create_order_"/>
+        <set-variable variableName="createOrderInput" value="#[message.payload]" doc:name="store createOrderInput"/>
+        <vm:outbound-endpoint exchange-pattern="request-response" path="/misterdiscount/tf/createOrder" doc:name="/misterdiscount/tf/createOrder"/>
+        <scripting:component doc:name="Groovy">
+            <scripting:script engine="Groovy"><![CDATA[import fr.polytech.unice.soa1.mister.discount.business.Order
+import fr.polytech.unice.soa1.mister.discount.business.CreateOrderInput
+
+import java.lang.*
+
+def orderTeamForce = message.payload;
+def orderInput = message.getInvocationProperty("createOrderInput");
+
+orderTeamForce.setCountryId(orderInput.getCountryId());
+orderTeamForce.setCityName(orderInput.getCityName());
+orderTeamForce.setStreetName(orderInput.getStreetName());
+orderTeamForce.setZipCode(orderInput.getZipCode());
+
+message.payload=orderTeamForce;]]></scripting:script>
+        </scripting:component>
+    </sub-flow>
+    <sub-flow name="SF-FP-CreateQuote" doc:name="SF-FP-CreateQuote">
+        <logger message="FedPs - Logger" level="INFO" doc:name="FedPs - Logger"/>
+        <set-variable variableName="orderTeamForce" value="#[message.payload]" doc:name="store orderTeamForce"/>
+        <vm:outbound-endpoint exchange-pattern="request-response" path="/misterdiscount/fp/createquote" doc:name="/misterdiscount/fp/createquote"/>
+        <scripting:component doc:name="Groovy">
+            <scripting:script engine="Groovy"><![CDATA[import fr.polytech.unice.soa1.mister.discount.business.Order
+import fr.polytech.unice.soa1.mister.discount.business.CreateOrderInput
+
+import java.lang.*
+
+def quote = message.payload;
+def order = message.getInvocationProperty("orderTeamForce");
+
+order.setAmount(String.valueOf(Double.valueOf(order.getAmount()) + Double.valueOf(quote.getAmount())));
+order.setQuoteId(quote.getQuoteId());
+order.setEta(quote.getEta());
+
+message.payload=order;]]></scripting:script>
+        </scripting:component>
+    </sub-flow>
+    <flow name="VM-TeamForce-CreateOrder" doc:name="VM-TeamForce-CreateOrder">
+        <vm:inbound-endpoint exchange-pattern="request-response" path="/misterdiscount/tf/createOrder" doc:name="/misterdiscount/tf/createOrder"/>
+        <data-mapper:transform config-ref="Pojo_To_Xml_create_order_" doc:name="Pojo To Xml&lt;create_order&gt;"/>
         <ws:consumer config-ref="TeamForce-WS-Customer" operation="create_order" doc:name="TeamForce::createOrder"/>
         <data-mapper:transform config-ref="Xml_create_orderResponse__To_Pojo" doc:name="Xml&lt;create_orderResponse&gt; To Pojo"/>
-    </sub-flow>
-    <sub-flow name="WareHouse-CreateOrder" doc:name="WareHouse-CreateOrder">
-        <logger message="WareHouse - Logger" level="INFO" doc:name="WareHouse - Logger"/>
-    </sub-flow>
-    <sub-flow name="FedPs-CreateOrder" doc:name="FedPs-CreateOrder">
-        <logger message="FedPs - Logger" level="INFO" doc:name="FedPs - Logger"/>
-    </sub-flow>
+    </flow>
+    <flow name="VM-WH-PickProduct" doc:name="VM-WH-PickProduct">
+        <vm:inbound-endpoint exchange-pattern="one-way" path="/misterdiscount/wh/pickproduct" doc:name="/misterdiscount/wh/pickproduct"/>
+        <set-payload value="#[payload.products]" doc:name="Set Payload"/>
+        <collection-splitter doc:name="Collection Splitter"/>
+        <data-mapper:transform config-ref="Pojo_To_Xml_execute_" doc:name="Pojo To Xml&lt;execute&gt;">
+            <data-mapper:input-arguments>
+                <data-mapper:input-argument key="type">'PICK'</data-mapper:input-argument>
+            </data-mapper:input-arguments>
+        </data-mapper:transform>
+        <ws:consumer config-ref="WareHouse-WS-ExternalDoc" operation="execute" doc:name="Web Service Consumer"/>
+    </flow>
+    <flow name="VM-FP-CreateQuote" doc:name="VM-FP-CreateQuote">
+        <vm:inbound-endpoint exchange-pattern="request-response" path="/misterdiscount/fp/createquote" doc:name="/misterdiscount/fp/createquote"/>
+        <data-mapper:transform config-ref="Pojo_To_Xml_create_quote_" doc:name="Pojo To Xml&lt;create_quote&gt;"/>
+        <ws:consumer config-ref="FedPs-WS-CustomerPrivate" operation="create_quote" doc:name="Web Service Consumer"/>
+        <data-mapper:transform config-ref="Xml_create_quoteResponse__To_Pojo" doc:name="Xml&lt;create_quoteResponse&gt; To Pojo"/>
+    </flow>
+    <flow name="VM-Payment-ProcessPayment" doc:name="VM-Payment-ProcessPayment">
+        <vm:inbound-endpoint exchange-pattern="one-way" path="/misterdiscount/payment/process" doc:name="/misterdiscount/payment/process"/>
+        <logger message="Process Payment" level="INFO" doc:name="Process Payment"/>
+        <logger message="Send a mail" level="INFO" doc:name="Send a mail"/>
+    </flow>
     <flow name="init-database" doc:name="init-database">
         <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="9090" path="admin/db/init" doc:name="localhost:9090/admin/db/init"/>
         <scripting:component doc:name="init-script">
@@ -65,35 +142,36 @@ import java.sql.*
 
 System.out.println("Initializing database");
 def sql = Sql.newInstance("jdbc:derby:memory:glue;create=true", new Properties());
-sql.execute("CREATE TABLE orders (orderId varchar(256), orderIdTf varchar(256), orderIdWh varchar(256), orderIdFp varchar(256))");
+sql.execute("CREATE TABLE orders (orderIdTf varchar(256), orderIdFp varchar(256))");
 System.out.println("Database initialized");
 
 return "initialized";]]></scripting:script>
         </scripting:component>
     </flow>
     <flow name="store-in-db" doc:name="store-in-db">
-        <vm:inbound-endpoint exchange-pattern="one-way" path="/taxsystem/storeindb" doc:name="/order/storeindb"/>
+        <vm:inbound-endpoint exchange-pattern="one-way" path="/orderId/storeindb" doc:name="/orderId/storeindb"/>
         <scripting:component doc:name="insert-into">
             <scripting:script engine="Groovy"><![CDATA[import groovy.sql.*
 import java.sql.*
 
 def sql = Sql.newInstance("jdbc:derby:memory:glue", new Properties());
-sql.execute("insert into results (orderId, orderIdTf, orderIdWh, orderIdFp) values ('" + payload.lastName + "', "+payload.taxAmount+")");
+sql.execute("insert into orders (orderIdTf, orderIdFp) values ('" + payload.orderId + "', '"+payload.quoteId+"')");
 
-System.out.println("Info stored for " + payload.lastName);]]></scripting:script>
+System.out.println("Info stored for " + payload.orderId);]]></scripting:script>
         </scripting:component>
     </flow>
     <flow name="get-from-db" doc:name="get-from-db">
-        <vm:inbound-endpoint exchange-pattern="request-response" path="/taxsystem/consultdb" doc:name="/order/consultdb"/>
+        <vm:inbound-endpoint exchange-pattern="request-response" path="/orderId/consultdb" doc:name="/orderId/consultdb"/>
         <scripting:component doc:name="select-from">
             <scripting:script engine="Groovy"><![CDATA[import groovy.sql.*
 import java.sql.*
+import java.lang.*
 
 def sql = Sql.newInstance("jdbc:derby:memory:glue", new Properties());
-def query = "select amount from results where name = '"+ message.payload+"'";
+def query = "select orderIdFp from orders where orderIdTf = '"+ message.payload+"'";
 def data = sql.rows(query);
 
-return (float) data[0]['AMOUNT'];]]></scripting:script>
+return (String) data[0]['orderIdFp'];]]></scripting:script>
         </scripting:component>
     </flow>
 </mule>

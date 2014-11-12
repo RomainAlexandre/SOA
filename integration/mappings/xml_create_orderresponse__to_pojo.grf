@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?><Graph __version="3.5.0" author="Romain" created="Mon Nov 03 13:16:25 CET 2014" description="Xml&lt;create_orderResponse&gt; To Pojo" guiVersion="3.4.4.P" id="1415031565084" licenseCode="Unlicensed" licenseType="Unknown" modified="Mon Nov 03 13:16:25 CET 2014" modifiedBy="Romain" name="Xml_create_orderResponse__To_Pojo" preview-file="C:/Users/Romain/Desktop/test.xml" revision="1.0" showComponentDetails="false">
+<?xml version="1.0" encoding="UTF-8"?><Graph __version="3.5.0" author="Romain" created="Wed Nov 12 17:05:53 CET 2014" description="Xml&lt;create_orderResponse&gt; To Pojo" guiVersion="3.4.4.P" id="1415816525896" licenseCode="Unlicensed" licenseType="Unknown" modified="Wed Nov 12 17:05:53 CET 2014" modifiedBy="Romain" name="Xml_create_orderResponse__To_Pojo_1" revision="1.0" showComponentDetails="false">
 <Global>
-<Metadata __filteredMetadata="false" __index="0" __referenceCounter="1" __schemaType="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer}create_orderResponse" __sourcePath="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer=ns0}/ns0:create_orderResponse" _dataStructure="OBJECT" _id="__id" _type="Input" id="cf9e81f6-0c62-432c-be88-13b3ed91e7db">
+<Metadata __filteredMetadata="false" __index="0" __referenceCounter="1" __schemaType="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer}create_orderResponse" __sourcePath="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer=ns0}/ns0:create_orderResponse" _dataStructure="OBJECT" _id="__id" _type="Input" id="a1db5ec4-062d-4c8b-b1ef-4095feefc91b">
 <Record fieldDelimiter="," name="create_orderResponse" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
 <Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
 <Field __index="0" __schemaType="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer}order" __sourcePath="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer=ns0}/ns0:create_orderResponse/orders/custumer" containerType="SINGLE" label="custumer" name="custumer" type="string"/>
@@ -11,16 +11,7 @@
 <Field __index="15" __schemaType="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer}order" __sourcePath="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer=ns0}/ns0:create_orderResponse/orders/@orderid" containerType="SINGLE" label="orderid" name="orderid" type="string"/>
 </Record>
 </Metadata>
-<Metadata __index="0" __referenceCounter="1" __sourcePath="{}/object" _dataStructure="OBJECT" _id="__id" _type="Output" id="ef676e87-243b-4a86-87fa-9e7af7264463">
-<Record fieldDelimiter="," name="CreateOrderOutput" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
-<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
-<Field __index="0" __sourcePath="{}/object/amount" containerType="SINGLE" label="amount" name="amount" type="string"/>
-<Field __index="1" __sourcePath="{}/object/customer" containerType="SINGLE" label="customer" name="customer" type="string"/>
-<Field __index="2" __sourcePath="{}/object/orderId" containerType="SINGLE" label="orderId" name="orderId" type="string"/>
-<Field __index="5" __sourcePath="{}/object/test" containerType="SINGLE" label="test" name="test" type="string"/>
-</Record>
-</Metadata>
-<Metadata __index="2" __referenceCounter="0" __schemaType="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer}event" __sourcePath="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer=ns0}/ns0:create_orderResponse/orders/events/events" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="cf9e81f6-0c62-432c-be88-13b3ed91e7db" _parent_id="__parent_id" _type="Input" id="d1c2b9d5-aa83-47d9-a30a-bbb92f3205d5">
+<Metadata __index="2" __referenceCounter="0" __schemaType="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer}event" __sourcePath="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer=ns0}/ns0:create_orderResponse/orders/events/events" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="a1db5ec4-062d-4c8b-b1ef-4095feefc91b" _parent_id="__parent_id" _type="Input" id="78a47157-a5a7-4d8d-b2e7-012d494d2f56">
 <Record fieldDelimiter="," name="events" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
 <Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
 <Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
@@ -29,25 +20,41 @@
 <Field __index="4" __schemaType="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer}event" __sourcePath="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer=ns0}/ns0:create_orderResponse/orders/events/events/@text" containerType="SINGLE" label="text" name="text" type="string"/>
 </Record>
 </Metadata>
-<Metadata __index="5" __referenceCounter="1" __schemaType="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer}product" __sourcePath="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer=ns0}/ns0:create_orderResponse/orders/prducts/product" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="cf9e81f6-0c62-432c-be88-13b3ed91e7db" _parent_id="__parent_id" _type="Input" id="58881b76-0453-4f75-ab30-ee009c58c312">
+<Metadata __index="0" __referenceCounter="1" __sourcePath="{}/object" _dataStructure="OBJECT" _id="__id" _type="Output" id="e0893c04-c266-41a2-a70e-74326baa1a44">
+<Record fieldDelimiter="," name="Order" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="0" __sourcePath="{}/object/amount" containerType="SINGLE" label="amount" name="amount" type="string"/>
+<Field __index="1" __sourcePath="{}/object/cityName" containerType="SINGLE" label="cityName" name="cityName" type="string"/>
+<Field __index="2" __sourcePath="{}/object/countryId" containerType="SINGLE" label="countryId" name="countryId" type="string"/>
+<Field __index="3" __sourcePath="{}/object/customer" containerType="SINGLE" label="customer" name="customer" type="string"/>
+<Field __index="4" __sourcePath="{}/object/eta" containerType="SINGLE" label="eta" name="eta" type="string"/>
+<Field __index="5" __sourcePath="{}/object/orderId" containerType="SINGLE" label="orderId" name="orderId" type="string"/>
+<Field __index="10" __sourcePath="{}/object/quoteId" containerType="SINGLE" label="quoteId" name="quoteId" type="string"/>
+<Field __index="11" __sourcePath="{}/object/streetName" containerType="SINGLE" label="streetName" name="streetName" type="string"/>
+<Field __index="12" __sourcePath="{}/object/zipCode" containerType="SINGLE" label="zipCode" name="zipCode" type="integer"/>
+</Record>
+</Metadata>
+<Metadata __index="5" __referenceCounter="1" __schemaType="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer}product" __sourcePath="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer=ns0}/ns0:create_orderResponse/orders/products/product" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="a1db5ec4-062d-4c8b-b1ef-4095feefc91b" _parent_id="__parent_id" _type="Input" id="d71ef885-aeec-48c8-bd1f-fb3c6950d705">
 <Record fieldDelimiter="," name="product" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
 <Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
 <Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
-<Field __index="5" __schemaType="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer}product" __sourcePath="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer=ns0}/ns0:create_orderResponse/orders/prducts/product/catalogue" containerType="SINGLE" label="catalogue" name="catalogue" type="string"/>
-<Field __index="6" __schemaType="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer}product" __sourcePath="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer=ns0}/ns0:create_orderResponse/orders/prducts/product/categorie" containerType="SINGLE" label="categorie" name="categorie" type="string"/>
-<Field __index="7" __schemaType="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer}product" __sourcePath="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer=ns0}/ns0:create_orderResponse/orders/prducts/product/order" containerType="SINGLE" label="order" name="order" type="string"/>
-<Field __index="8" __schemaType="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer}product" __sourcePath="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer=ns0}/ns0:create_orderResponse/orders/prducts/product/Price" containerType="SINGLE" label="Price" name="Price" type="string"/>
-<Field __index="9" __schemaType="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer}product" __sourcePath="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer=ns0}/ns0:create_orderResponse/orders/prducts/product/Quantity" containerType="SINGLE" label="Quantity" name="Quantity" type="integer"/>
-<Field __index="10" __schemaType="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer}product" __sourcePath="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer=ns0}/ns0:create_orderResponse/orders/prducts/product/@id" containerType="SINGLE" label="id" name="id" type="string"/>
-<Field __index="11" __schemaType="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer}product" __sourcePath="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer=ns0}/ns0:create_orderResponse/orders/prducts/product/@name" containerType="SINGLE" label="name" name="name" type="string"/>
+<Field __index="5" __schemaType="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer}product" __sourcePath="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer=ns0}/ns0:create_orderResponse/orders/products/product/catalogue" containerType="SINGLE" label="catalogue" name="catalogue" type="string"/>
+<Field __index="6" __schemaType="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer}product" __sourcePath="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer=ns0}/ns0:create_orderResponse/orders/products/product/categorie" containerType="SINGLE" label="categorie" name="categorie" type="string"/>
+<Field __index="7" __schemaType="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer}product" __sourcePath="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer=ns0}/ns0:create_orderResponse/orders/products/product/order" containerType="SINGLE" label="order" name="order" type="string"/>
+<Field __index="8" __schemaType="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer}product" __sourcePath="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer=ns0}/ns0:create_orderResponse/orders/products/product/Price" containerType="SINGLE" label="Price" name="Price" type="string"/>
+<Field __index="9" __schemaType="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer}product" __sourcePath="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer=ns0}/ns0:create_orderResponse/orders/products/product/Quantity" containerType="SINGLE" label="Quantity" name="Quantity" type="integer"/>
+<Field __index="10" __schemaType="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer}product" __sourcePath="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer=ns0}/ns0:create_orderResponse/orders/products/product/@id" containerType="SINGLE" label="id" name="id" type="string"/>
+<Field __index="11" __schemaType="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer}product" __sourcePath="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer=ns0}/ns0:create_orderResponse/orders/products/product/@name" containerType="SINGLE" label="name" name="name" type="string"/>
 </Record>
 </Metadata>
-<Metadata __index="3" __referenceCounter="1" __sourcePath="{}/object/products" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="ef676e87-243b-4a86-87fa-9e7af7264463" _parent_id="__parent_id" _type="Output" id="4256beb2-f214-4f45-bd19-9f2360c1d14a">
+<Metadata __index="6" __referenceCounter="1" __sourcePath="{}/object/products" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="e0893c04-c266-41a2-a70e-74326baa1a44" _parent_id="__parent_id" _type="Output" id="2e27d24a-1580-40df-9a14-1a70309ce04a">
 <Record fieldDelimiter="," name="products" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
-<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
 <Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
-<Field __index="3" __sourcePath="{}/object/products/productId" containerType="SINGLE" label="productId" name="productId" type="string"/>
-<Field __index="4" __sourcePath="{}/object/products/quantity" containerType="SINGLE" label="quantity" name="quantity" type="integer"/>
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="6" __sourcePath="{}/object/products/name" containerType="SINGLE" label="name" name="name" type="string"/>
+<Field __index="7" __sourcePath="{}/object/products/price" containerType="SINGLE" label="price" name="price" type="integer"/>
+<Field __index="8" __sourcePath="{}/object/products/productId" containerType="SINGLE" label="productId" name="productId" type="string"/>
+<Field __index="9" __sourcePath="{}/object/products/quantity" containerType="SINGLE" label="quantity" name="quantity" type="integer"/>
 </Record>
 </Metadata>
 <Dictionary>
@@ -58,40 +65,54 @@
 <Phase number="0">
 <Node cacheInMemory="true" enabled="enabled" fileURL="dict:outputPayload" guiName="Pojo WRITER" guiX="900" guiY="20" id="BEAN_WRITER0" type="BEAN_WRITER">
 <attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
-<object xmlns:clover="http://www.cloveretl.com/ns/xmlmapping" clover:inPort="1">
-  <amount>$1.amount</amount>
-  <customer>$1.customer</customer>
-  <orderId>$1.orderId</orderId>
+<object xmlns:clover="http://www.cloveretl.com/ns/xmlmapping" clover:inPort="0">
+  <amount>$0.amount</amount>
+  <cityName>$0.cityName</cityName>
+  <countryId>$0.countryId</countryId>
+  <customer>$0.customer</customer>
+  <eta>$0.eta</eta>
+  <orderId>$0.orderId</orderId>
   <clover:collection clover:name="products">
-    <item clover:inPort="0" clover:key="__parent_id" clover:parentKey="__id">
-      <productId>$0.productId</productId>
-      <quantity>$0.quantity</quantity>
+    <item clover:inPort="1" clover:key="__parent_id" clover:parentKey="__id">
+      <name>$1.name</name>
+      <price>$1.price</price>
+      <productId>$1.productId</productId>
+      <quantity>$1.quantity</quantity>
     </item>
   </clover:collection>
-  <test>$1.test</test>
+  <quoteId>$0.quoteId</quoteId>
+  <streetName>$0.streetName</streetName>
+  <zipCode>$0.zipCode</zipCode>
 </object>]]></attr>
 <attr name="_data_format"><![CDATA[JAVA]]></attr>
 <attr name="schema"><![CDATA[<?xml version="1.0" encoding="UTF-8"?><schema-object>
-  <typed-object-ref type-ref="fr.polytech.unice.soa1.mister.discount.business.CreateOrderOutput"/>
+  <typed-object-ref type-ref="fr.polytech.unice.soa1.mister.discount.business.Order"/>
   <typed-object type="fr.polytech.unice.soa1.mister.discount.business.Product">
+    <typed-object-ref name="name" type-ref="java.lang.String"/>
+    <typed-object-ref name="price" type-ref="int"/>
     <typed-object-ref name="productId" type-ref="java.lang.String"/>
     <typed-object-ref name="quantity" type-ref="int"/>
   </typed-object>
-  <typed-object type="fr.polytech.unice.soa1.mister.discount.business.CreateOrderOutput">
+  <typed-object type="fr.polytech.unice.soa1.mister.discount.business.Order">
     <typed-object-ref name="amount" type-ref="java.lang.String"/>
+    <typed-object-ref name="cityName" type-ref="java.lang.String"/>
+    <typed-object-ref name="countryId" type-ref="java.lang.String"/>
     <typed-object-ref name="customer" type-ref="java.lang.String"/>
+    <typed-object-ref name="eta" type-ref="java.lang.String"/>
     <typed-object-ref name="orderId" type-ref="java.lang.String"/>
     <schema-collection name="products" type="java.util.List">
       <typed-object-ref type-ref="fr.polytech.unice.soa1.mister.discount.business.Product"/>
     </schema-collection>
-    <typed-object-ref name="test" type-ref="java.lang.String"/>
+    <typed-object-ref name="quoteId" type-ref="java.lang.String"/>
+    <typed-object-ref name="streetName" type-ref="java.lang.String"/>
+    <typed-object-ref name="zipCode" type-ref="int"/>
   </typed-object>
   <typed-object type="java.lang.String"/>
   <typed-object type="int"/>
 </schema-object>
 ]]></attr>
 </Node>
-<Node enabled="enabled" guiName="Foreach 'ns0:create_orderResponse' -&gt; 'object'" guiX="460" guiY="120" id="FOREACH_NS0_CREATE_ORDER_RESPONSE_OBJECT" transformClass="com.mulesoft.datamapper.transform.MelRecordTransform" type="REFORMAT">
+<Node enabled="enabled" guiName="Foreach 'ns0:create_orderResponse' -&gt; 'object'" guiX="460" guiY="20" id="FOREACH_NS0_CREATE_ORDER_RESPONSE_OBJECT" transformClass="com.mulesoft.datamapper.transform.MelRecordTransform" type="REFORMAT">
 <attr name="melScript"><![CDATA[//MEL
 //START -> DO NOT REMOVE
 output.__id = input.__id;
@@ -106,20 +127,21 @@ output.customer = input.custumer;]]></attr>
 output.__id = input.__id;
 output.__parent_id = input.__parent_id;
 //END -> DO NOT REMOVE
+output.price = str2integer(input.Price);
 output.quantity = input.Quantity;
+output.name = input.name;
 output.productId = input.id;]]></attr>
 </Node>
-<Node enabled="enabled" guiName="Duplicate product" guiX="240" guiY="20" id="SIMPLE_COPY0" type="SIMPLE_COPY"/>
 <Node charset="UTF-8" enabled="enabled" fileURL="dict:inputPayload" guiName="XML READER" guiX="20" guiY="20" id="XML_READER0" type="XML_READER">
 <attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Context namespacePaths="ns0=&quot;http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer&quot;" outPort="1" sequenceField="__id" xpath="/ns0:create_orderResponse">
+<Context namespacePaths="ns0=&quot;http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Customer&quot;" outPort="0" sequenceField="__id" xpath="/ns0:create_orderResponse">
   <Mapping cloverField="custumer" trim="true" xpath="orders/custumer"/>
   <Mapping cloverField="date_commande" trim="true" xpath="orders/date_commande"/>
   <Mapping cloverField="order_statut" trim="true" xpath="orders/order_statut"/>
   <Mapping cloverField="order_steps" trim="true" xpath="orders/order_steps"/>
   <Mapping cloverField="amount" trim="true" xpath="orders/@amount"/>
   <Mapping cloverField="orderid" trim="true" xpath="orders/@orderid"/>
-  <Context generatedKey="__parent_id" outPort="0" parentKey="__id" sequenceField="__id" xpath="orders/prducts/product">
+  <Context generatedKey="__parent_id" outPort="1" parentKey="__id" sequenceField="__id" xpath="orders/products/product">
     <Mapping cloverField="catalogue" trim="true" xpath="catalogue"/>
     <Mapping cloverField="categorie" trim="true" xpath="categorie"/>
     <Mapping cloverField="order" trim="true" xpath="order"/>
@@ -133,10 +155,9 @@ output.productId = input.id;]]></attr>
 <attr name="_data_format"><![CDATA[XML]]></attr>
 <attr name="__metadata"><![CDATA[true]]></attr>
 </Node>
-<Edge debugMode="true" fromNode="FOREACH_NS0_CREATE_ORDER_RESPONSE_OBJECT:0" guiBendpoints="" id="Edge1" inPort="Port 1 (in)" metadata="ef676e87-243b-4a86-87fa-9e7af7264463" outPort="Port 0 (out)" toNode="BEAN_WRITER0:1"/>
-<Edge debugMode="true" fromNode="FOREACH_PRODUCT_PRODUCTS:0" guiBendpoints="" id="Edge3" inPort="Port 0 (in)" metadata="4256beb2-f214-4f45-bd19-9f2360c1d14a" outPort="Port 0 (out)" toNode="BEAN_WRITER0:0"/>
-<Edge debugMode="true" fromNode="SIMPLE_COPY0:0" guiBendpoints="" id="Edge2" inPort="Port 0 (in)" metadata="58881b76-0453-4f75-ab30-ee009c58c312" outPort="Port 0 (out)" toNode="FOREACH_PRODUCT_PRODUCTS:0"/>
-<Edge debugMode="true" fromNode="XML_READER0:0" guiBendpoints="" id="Edge4" inPort="Port 0 (in)" metadata="58881b76-0453-4f75-ab30-ee009c58c312" outPort="Port 0 (out)" toNode="SIMPLE_COPY0:0"/>
-<Edge debugMode="true" fromNode="XML_READER0:1" guiBendpoints="" id="Edge0" inPort="Port 0 (in)" metadata="cf9e81f6-0c62-432c-be88-13b3ed91e7db" outPort="Port 1 (out)" toNode="FOREACH_NS0_CREATE_ORDER_RESPONSE_OBJECT:0"/>
+<Edge debugMode="true" fromNode="FOREACH_NS0_CREATE_ORDER_RESPONSE_OBJECT:0" guiBendpoints="" id="Edge1" inPort="Port 0 (in)" metadata="e0893c04-c266-41a2-a70e-74326baa1a44" outPort="Port 0 (out)" toNode="BEAN_WRITER0:0"/>
+<Edge debugMode="true" fromNode="FOREACH_PRODUCT_PRODUCTS:0" guiBendpoints="" id="Edge3" inPort="Port 1 (in)" metadata="2e27d24a-1580-40df-9a14-1a70309ce04a" outPort="Port 0 (out)" toNode="BEAN_WRITER0:1"/>
+<Edge debugMode="true" fromNode="XML_READER0:0" guiBendpoints="" id="Edge0" inPort="Port 0 (in)" metadata="a1db5ec4-062d-4c8b-b1ef-4095feefc91b" outPort="Port 0 (out)" toNode="FOREACH_NS0_CREATE_ORDER_RESPONSE_OBJECT:0"/>
+<Edge debugMode="true" fromNode="XML_READER0:1" guiBendpoints="" id="Edge2" inPort="Port 0 (in)" metadata="d71ef885-aeec-48c8-bd1f-fb3c6950d705" outPort="Port 1 (out)" toNode="FOREACH_PRODUCT_PRODUCTS:0"/>
 </Phase>
 </Graph>

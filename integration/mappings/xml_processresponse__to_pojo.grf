@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><Graph __version="3.5.0" author="Romain" created="Wed Nov 12 17:05:53 CET 2014" description="Xml&lt;processResponse&gt; To Pojo" guiVersion="3.4.4.P" id="1415812660147" licenseCode="Unlicensed" licenseType="Unknown" modified="Wed Nov 12 17:05:53 CET 2014" modifiedBy="Romain" name="Xml_processResponse__To_Pojo" preview-file="C:/Users/Romain/Desktop/test3.xml" revision="1.0" showComponentDetails="false">
+<Global>
+<Metadata __index="0" __referenceCounter="1" __sourcePath="{http://informatique.polytech.unice.fr/soa1/payment/doc/public=ns0}/ns0:processResponse/result/data" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="6cd02a74-f515-4fa7-bea1-37c894c0a001" _parent_id="__parent_id" _type="Input" id="156191e7-2339-4b8d-aefb-967decb9a194">
+<Record fieldDelimiter="," name="data" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __sourcePath="{http://informatique.polytech.unice.fr/soa1/payment/doc/public=ns0}/ns0:processResponse/result/data/information/@contents" containerType="SINGLE" label="contents" name="contents" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="0" __referenceCounter="2" __sourcePath="{}/list" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _type="Output" id="daf54e83-0994-4f00-8488-304a3f50cb5b">
+<Record fieldDelimiter="," name="list" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="0" __sourcePath="{}/list/text()" containerType="SINGLE" label="text()" name="text" type="string"/>
+</Record>
+</Metadata>
+<Metadata __filteredMetadata="false" __index="0" __referenceCounter="1" __schemaType="{http://informatique.polytech.unice.fr/soa1/payment/doc/public}processResponse" __sourcePath="{http://informatique.polytech.unice.fr/soa1/payment/doc/public=ns0}/ns0:processResponse" _dataStructure="OBJECT" _id="__id" _type="Input" id="6cd02a74-f515-4fa7-bea1-37c894c0a001">
+<Record fieldDelimiter="," name="processResponse" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+</Record>
+</Metadata>
+<Dictionary>
+<Entry id="DictionaryEntry0" input="true" name="inputPayload" output="false" type="object"/>
+<Entry id="DictionaryEntry1" input="false" name="outputPayload" output="true" type="object"/>
+</Dictionary>
+</Global>
+<Phase number="0">
+<Node cacheInMemory="true" enabled="enabled" fileURL="dict:outputPayload" guiName="Pojo WRITER" guiX="900" guiY="20" id="BEAN_WRITER0" type="BEAN_WRITER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<clover:collection clover:name="list" xmlns:clover="http://www.cloveretl.com/ns/xmlmapping">
+  <item clover:inPort="0">$0.text</item>
+  <item clover:inPort="1">$1.text</item>
+</clover:collection>]]></attr>
+<attr name="_data_format"><![CDATA[JAVA]]></attr>
+<attr name="schema"><![CDATA[<?xml version="1.0" encoding="UTF-8"?><schema-object>
+  <schema-collection>
+    <typed-object-ref type-ref="java.lang.String"/>
+  </schema-collection>
+  <typed-object type="java.lang.String"/>
+</schema-object>
+]]></attr>
+</Node>
+<Node enabled="enabled" guiName="Foreach 'data' -&gt; 'list'" guiX="460" guiY="120" id="FOREACH_DATA_LIST" transformClass="com.mulesoft.datamapper.transform.MelRecordTransform" type="REFORMAT">
+<attr name="melScript"><![CDATA[//MEL
+//START -> DO NOT REMOVE
+output.__id = input.__id;
+//END -> DO NOT REMOVE
+output.text = input.contents;]]></attr>
+</Node>
+<Node enabled="enabled" guiName="Foreach 'ns0:processResponse' -&gt; 'list'" guiX="460" guiY="20" id="FOREACH_NS0_PROCESS_RESPONSE_LIST" transformClass="com.mulesoft.datamapper.transform.MelRecordTransform" type="REFORMAT">
+<attr name="melScript"><![CDATA[//MEL
+//START -> DO NOT REMOVE
+output.__id = input.__id;
+//END -> DO NOT REMOVE
+]]></attr>
+</Node>
+<Node charset="UTF-8" enabled="enabled" fileURL="dict:inputPayload" guiName="XML READER" guiX="20" guiY="20" id="XML_READER0" type="XML_READER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Context namespacePaths="ns0=&quot;http://informatique.polytech.unice.fr/soa1/payment/doc/public&quot;" outPort="0" sequenceField="__id" xpath="/ns0:processResponse">
+  <Context generatedKey="__parent_id" outPort="1" parentKey="__id" sequenceField="__id" xpath="result/data">
+    <Mapping cloverField="contents" trim="true" xpath="information/@contents"/>
+  </Context>
+</Context>
+]]></attr>
+<attr name="_data_format"><![CDATA[XML]]></attr>
+<attr name="__metadata"><![CDATA[true]]></attr>
+</Node>
+<Edge debugMode="true" fromNode="FOREACH_DATA_LIST:0" guiBendpoints="" id="Edge3" inPort="Port 1 (in)" metadata="daf54e83-0994-4f00-8488-304a3f50cb5b" outPort="Port 0 (out)" toNode="BEAN_WRITER0:1"/>
+<Edge debugMode="true" fromNode="FOREACH_NS0_PROCESS_RESPONSE_LIST:0" guiBendpoints="" id="Edge1" inPort="Port 0 (in)" metadata="daf54e83-0994-4f00-8488-304a3f50cb5b" outPort="Port 0 (out)" toNode="BEAN_WRITER0:0"/>
+<Edge debugMode="true" fromNode="XML_READER0:0" guiBendpoints="" id="Edge0" inPort="Port 0 (in)" metadata="6cd02a74-f515-4fa7-bea1-37c894c0a001" outPort="Port 0 (out)" toNode="FOREACH_NS0_PROCESS_RESPONSE_LIST:0"/>
+<Edge debugMode="true" fromNode="XML_READER0:1" guiBendpoints="" id="Edge2" inPort="Port 0 (in)" metadata="156191e7-2339-4b8d-aefb-967decb9a194" outPort="Port 1 (out)" toNode="FOREACH_DATA_LIST:0"/>
+</Phase>
+</Graph>
