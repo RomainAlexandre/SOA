@@ -24,7 +24,6 @@ public interface ManagerRPC {
 	@WebResult(name = "product_to_categorie")
 	public String assign_product_to_categorie(@WebParam(name="products") List<String> products,
 			@WebParam(name="categorie") Categorie categorie);
-	
 
 	@WebMethod(operationName = "assign_product_to_catalogue")
 	@WebResult(name = "product_to_catalogue")

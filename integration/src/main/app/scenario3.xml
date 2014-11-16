@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ws="http://www.mulesoft.org/schema/mule/ws" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.5.1"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ws http://www.mulesoft.org/schema/mule/ws/current/mule-ws.xsd
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
+    <ws:consumer-config name="TeamForce-WS-Manager" wsdlLocation="http://localhost:8080/webservices/TeamForce-Manager-RPC?wsdl" service="TeamForceRPCManagerService" port="TeamForceRPCManagerPort" serviceAddress="http://localhost:8080/webservices/TeamForce-Manager-RPC" doc:name="Web Service Consumer"/>
+    <flow name="registerUserCatalog" doc:name="registerUserCatalog">
+        <vm:inbound-endpoint exchange-pattern="request-response" path="/misterdiscount/registerUserCatalog" doc:name="/misterdiscount/registerUserCatalog"/>
+        <logger message="Creation of a new catalog to print" level="INFO" doc:name="newCatalog"/>
+        <ws:consumer config-ref="TeamForce-WS-Manager" operation="create_catalogue" doc:name="Web Service Consumer"/>
+        <logger message="Catalog printed" level="INFO" doc:name="PrintCatalog"/>
+    </flow>
+</mule>

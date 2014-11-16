@@ -26,6 +26,8 @@ http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/fil
     <data-mapper:config name="Xml_create_orderResponse__To_Pojo" transformationGraphPath="xml_create_orderresponse__to_pojo.grf" doc:name="Xml_create_orderResponse__To_Pojo"/>
     <data-mapper:config name="Pojo_To_Xml_create_order_" transformationGraphPath="pojo_to_xml_create_order_.grf" doc:name="Pojo_To_Xml_create_order_"/>
     <data-mapper:config name="Pojo_To_Xml_create_quote_" transformationGraphPath="pojo_to_xml_create_quote_.grf" doc:name="Pojo_To_Xml_create_quote_"/>
+
+
     <data-mapper:config name="Pojo_To_Xml_process_payment_" transformationGraphPath="pojo_to_xml_process_payment_.grf" doc:name="Pojo_To_Xml_process_payment_"/>
     <data-mapper:config name="Xml_process_paymentResponse__To_Pojo" transformationGraphPath="xml_process_paymentresponse__to_pojo.grf" doc:name="Xml_process_paymentResponse__To_Pojo"/>
     <flow name="CreateOrder" doc:name="CreateOrder">

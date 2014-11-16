@@ -7,7 +7,6 @@ import javax.jws.WebService;
 
 import fr.polytech.unice.soa1.mister.discount.business.CreateOrderInput;
 import fr.polytech.unice.soa1.mister.discount.business.CreateOrderOutput;
-import fr.polytech.unice.soa1.mister.discount.business.InternalOrder;
 
 
 @WebService(name = "MisterDiscount", targetNamespace = "http://informatique.polytech.unice.fr/soa1/MisterDiscount", portName = "MisterDiscountPort", serviceName = "MisterDiscountService")
