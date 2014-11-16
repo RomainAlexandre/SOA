@@ -1,12 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:soapui-project activeEnvironment="Default" name="MisterDiscount" resourceRoot="" soapui-version="5.0.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="MisterDiscountServiceSoapBinding" type="wsdl" bindingName="{http://informatique.polytech.unice.fr/soa1/MisterDiscount}MisterDiscountServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8081/MisterDiscount?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8081/MisterDiscount?wsdl"><con:part><con:url>http://localhost:8081/MisterDiscount?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="MisterDiscountService" targetNamespace="http://informatique.polytech.unice.fr/soa1/MisterDiscount" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://informatique.polytech.unice.fr/soa1/MisterDiscount" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
+<con:soapui-project activeEnvironment="Default" name="MisterDiscount" resourceRoot="" soapui-version="5.0.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.actions.iface.tools.soapui.TestRunnerAction@values-local"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="Environment" value="Default"/>
+  <con:entry key="Global Properties" value=""/>
+  <con:entry key="TestSuite" value="TestSuite 1"/>
+  <con:entry key="Password" value=""/>
+  <con:entry key="TestRunner Path" value=""/>
+  <con:entry key="Tool Args" value=""/>
+  <con:entry key="Ignore Errors" value="false"/>
+  <con:entry key="Host:Port" value=""/>
+  <con:entry key="user-settings.xml Password" value=""/>
+  <con:entry key="WSS Password Type" value=""/>
+  <con:entry key="Save Project" value="false"/>
+  <con:entry key="Enable UI" value="false"/>
+  <con:entry key="System Properties" value=""/>
+  <con:entry key="Domain" value=""/>
+  <con:entry key="Coverage Report" value="false"/>
+  <con:entry key="Export JUnit Results" value="false"/>
+  <con:entry key="Open Report" value="false"/>
+  <con:entry key="Project Properties" value=""/>
+  <con:entry key="Export All" value="false"/>
+  <con:entry key="Project Password" value=""/>
+  <con:entry key="Report Format(s)" value=""/>
+  <con:entry key="TestCase" value="TestCase 1"/>
+  <con:entry key="Print Report" value="false"/>
+  <con:entry key="Username" value=""/>
+  <con:entry key="Root Folder" value=""/>
+  <con:entry key="Save After" value="false"/>
+  <con:entry key="Add Settings" value="false"/>
+  <con:entry key="Endpoint" value=""/>
+  <con:entry key="Select Report Type" value=""/>
+</xml-fragment>]]></con:setting></con:settings><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="MisterDiscountServiceSoapBinding" type="wsdl" bindingName="{http://informatique.polytech.unice.fr/soa1/MisterDiscount}MisterDiscountServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8081/MisterDiscount?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8081/MisterDiscount?wsdl"><con:part><con:url>http://localhost:8081/MisterDiscount?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="MisterDiscountService" targetNamespace="http://informatique.polytech.unice.fr/soa1/MisterDiscount" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://informatique.polytech.unice.fr/soa1/MisterDiscount" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http">
   <wsdl:types>
     <xs:schema elementFormDefault="unqualified" targetNamespace="http://informatique.polytech.unice.fr/soa1/MisterDiscount" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:element name="consultingOrder" type="tns:consultingOrder"/>
       <xs:element name="consultingOrderResponse" type="tns:consultingOrderResponse"/>
       <xs:element name="createOrder" type="tns:createOrder"/>
       <xs:element name="createOrderResponse" type="tns:createOrderResponse"/>
-      <xs:element name="product" type="tns:product"/>
       <xs:complexType name="createOrder">
         <xs:sequence>
           <xs:element minOccurs="0" name="arg0" type="tns:createOrderInput"/>
@@ -24,35 +53,14 @@
       </xs:complexType>
       <xs:complexType name="createOrderResponse">
         <xs:sequence>
-          <xs:element minOccurs="0" name="order" type="tns:Order"/>
+          <xs:element minOccurs="0" name="receipt" type="tns:createOrderOutput"/>
         </xs:sequence>
       </xs:complexType>
-      <xs:complexType name="Order">
+      <xs:complexType name="createOrderOutput">
         <xs:sequence>
-          <xs:element name="amount" type="xs:string"/>
-          <xs:element name="city_name" type="xs:string"/>
-          <xs:element name="country_id" type="xs:string"/>
-          <xs:element name="customerName" type="xs:string"/>
-          <xs:element name="eta" type="xs:string"/>
           <xs:element name="orderId" type="xs:string"/>
-          <xs:element minOccurs="0" name="products">
-            <xs:complexType>
-              <xs:sequence>
-                <xs:element maxOccurs="unbounded" name="product" type="tns:product"/>
-              </xs:sequence>
-            </xs:complexType>
-          </xs:element>
-          <xs:element name="quoteId" type="xs:string"/>
-          <xs:element name="street_name" type="xs:string"/>
-          <xs:element name="zip_code" type="xs:int"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:complexType name="product">
-        <xs:sequence>
-          <xs:element name="name" type="xs:string"/>
-          <xs:element name="price" type="xs:int"/>
-          <xs:element name="product_id" type="xs:string"/>
-          <xs:element name="quantity" type="xs:int"/>
+          <xs:element name="orderId" type="xs:string"/>
+          <xs:element name="orderId" type="xs:string"/>
         </xs:sequence>
       </xs:complexType>
       <xs:complexType name="consultingOrder">
@@ -136,7 +144,23 @@
    <soapenv:Body>
       <mis:consultingOrder>
          <!--Optional:-->
-         <arg0>130ba0d5-2389-460e-a896-f01709bfe004</arg0>
+         <arg0>c7463c2d-4d3b-41be-8a3b-a96e313ff141</arg0>
       </mis:consultingOrder>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/MisterDiscount/MisterDiscount/consultingOrder"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/></con:soapui-project>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/MisterDiscount/MisterDiscount/consultingOrder"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite name="TestSuite 1"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase 1" searchProperties="true"><con:settings/><con:testStep type="httprequest" name="DataBase Creation"><con:settings/><con:config method="GET" xsi:type="con:HttpRequest" name="DataBase Creation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:9090/admin/db/init</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="request" name="addOrder"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>MisterDiscountServiceSoapBinding</con:interface><con:operation>createOrder</con:operation><con:request name="addOrder"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8081/MisterDiscount</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mis="http://informatique.polytech.unice.fr/soa1/MisterDiscount">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mis:createOrder>
+         <!--Optional:-->
+         <arg0>
+            <city_name>Antibes</city_name>
+            <country_id>FR</country_id>
+            <name>C1</name>
+            <!--1 or more repetitions:-->
+            <productsId>W3P3NV5OZ24BD1K</productsId>
+            <street_name>235 boulevard</street_name>
+            <zip_code>66000</zip_code>
+         </arg0>
+      </mis:createOrder>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/></con:soapui-project>

@@ -33,4 +33,8 @@ public interface CustomerPrivateWs {
     @WebMethod(operationName = "order_quote")
     @WebResult(name = "order")
     public Quote orderQuote(@WebParam(name = "quote_id") String quote_id) throws UnknownQuoteFault, BadQuoteFault;
+
+    @WebMethod(operationName = "get_quote")
+    @WebResult(name = "order")
+    public Quote getQuote(@WebParam(name = "quote_id") String quote_id) throws UnknownQuoteFault;
 }

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?><Graph __version="3.5.0" author="Romain" created="Sat Nov 15 09:34:30 CET 2014" description="XML To Pojo" guiVersion="3.4.4.P" id="1416064328407" licenseCode="Unlicensed" licenseType="Unknown" modified="Sat Nov 15 09:34:30 CET 2014" modifiedBy="Romain" name="XML_To_Pojo" revision="1.0" showComponentDetails="false">
+<Global>
+<Metadata __index="0" __referenceCounter="1" __sourcePath="{}/object" _dataStructure="OBJECT" _id="__id" _type="Output" id="907c7ad7-fc39-4265-b135-ef831832bc69">
+<Record fieldDelimiter="," name="CreateOrderInput" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="0" __sourcePath="{}/object/cardNumber" containerType="SINGLE" label="cardNumber" name="cardNumber" type="string"/>
+<Field __index="1" __sourcePath="{}/object/cityName" containerType="SINGLE" label="cityName" name="cityName" type="string"/>
+<Field __index="2" __sourcePath="{}/object/countryId" containerType="SINGLE" label="countryId" name="countryId" type="string"/>
+<Field __index="3" __sourcePath="{}/object/name" containerType="SINGLE" label="name" name="name" type="string"/>
+<Field __index="4" __sourcePath="{}/object/productsId" containerType="list" label="productsId" name="productsId" type="string"/>
+<Field __index="5" __sourcePath="{}/object/streetName" containerType="SINGLE" label="streetName" name="streetName" type="string"/>
+<Field __index="6" __sourcePath="{}/object/zipCode" containerType="SINGLE" label="zipCode" name="zipCode" type="integer"/>
+</Record>
+</Metadata>
+<Metadata __filteredMetadata="false" __index="0" __referenceCounter="1" __sourcePath="{}/orderInput" _dataStructure="OBJECT" _id="__id" _type="Input" id="496164b2-d494-4b52-a12a-7b7535247890">
+<Record fieldDelimiter="," name="orderInput" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="0" __sourcePath="{}/orderInput/name" containerType="SINGLE" label="name" name="name" type="string"/>
+<Field __index="1" __sourcePath="{}/orderInput/cardNumber" containerType="SINGLE" label="cardNumber" name="cardNumber" type="string"/>
+<Field __index="2" __sourcePath="{}/orderInput/city_name" containerType="SINGLE" label="city_name" name="city_name" type="string"/>
+<Field __index="3" __sourcePath="{}/orderInput/country_id" containerType="SINGLE" label="country_id" name="country_id" type="string"/>
+<Field __index="4" __sourcePath="{}/orderInput/street_name" containerType="SINGLE" label="street_name" name="street_name" type="string"/>
+<Field __index="5" __sourcePath="{}/orderInput/zip_code" containerType="SINGLE" label="zip_code" name="zip_code" type="string"/>
+<Field __index="6" __sourcePath="{}/orderInput/productsId" containerType="list" label="productsId" name="productsId" type="string"/>
+</Record>
+</Metadata>
+<Dictionary>
+<Entry id="DictionaryEntry0" input="true" name="inputPayload" output="false" type="object"/>
+<Entry id="DictionaryEntry1" input="false" name="outputPayload" output="true" type="object"/>
+</Dictionary>
+</Global>
+<Phase number="0">
+<Node cacheInMemory="true" enabled="enabled" fileURL="dict:outputPayload" guiName="Pojo WRITER" guiX="900" guiY="20" id="BEAN_WRITER0" type="BEAN_WRITER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<object xmlns:clover="http://www.cloveretl.com/ns/xmlmapping" clover:inPort="0">
+  <cardNumber>$0.cardNumber</cardNumber>
+  <cityName>$0.cityName</cityName>
+  <countryId>$0.countryId</countryId>
+  <name>$0.name</name>
+  <clover:collection clover:name="productsId">$0.productsId</clover:collection>
+  <streetName>$0.streetName</streetName>
+  <zipCode>$0.zipCode</zipCode>
+</object>]]></attr>
+<attr name="_data_format"><![CDATA[JAVA]]></attr>
+<attr name="schema"><![CDATA[<?xml version="1.0" encoding="UTF-8"?><schema-object>
+  <typed-object-ref type-ref="fr.polytech.unice.soa1.mister.discount.business.CreateOrderInput"/>
+  <typed-object type="fr.polytech.unice.soa1.mister.discount.business.CreateOrderInput">
+    <typed-object-ref name="cardNumber" type-ref="java.lang.String"/>
+    <typed-object-ref name="cityName" type-ref="java.lang.String"/>
+    <typed-object-ref name="countryId" type-ref="java.lang.String"/>
+    <typed-object-ref name="name" type-ref="java.lang.String"/>
+    <schema-collection name="productsId" type="java.util.List">
+      <typed-object-ref type-ref="java.lang.String"/>
+    </schema-collection>
+    <typed-object-ref name="streetName" type-ref="java.lang.String"/>
+    <typed-object-ref name="zipCode" type-ref="int"/>
+  </typed-object>
+  <typed-object type="java.lang.String"/>
+  <typed-object type="int"/>
+</schema-object>
+]]></attr>
+</Node>
+<Node enabled="enabled" guiName="Foreach 'orderInput' -&gt; 'object'" guiX="460" guiY="20" id="FOREACH_ORDER_INPUT_OBJECT" transformClass="com.mulesoft.datamapper.transform.MelRecordTransform" type="REFORMAT">
+<attr name="melScript"><![CDATA[//MEL
+//START -> DO NOT REMOVE
+output.__id = input.__id;
+//END -> DO NOT REMOVE
+output.cardNumber = input.cardNumber;
+output.cityName = input.city_name;
+output.countryId = input.country_id;
+output.streetName = input.street_name;
+output.zipCode = str2integer(input.zip_code);
+output.productsId = input.productsId;
+output.name = input.name;]]></attr>
+</Node>
+<Node charset="UTF-8" enabled="enabled" fileURL="dict:inputPayload" guiName="XML READER" guiX="20" guiY="20" id="XML_READER0" type="XML_READER">
+<attr name="xmlSchemaURL"><![CDATA[C:/Users/Romain/Desktop/CreateOrderInput.xsd]]></attr>
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Context outPort="0" sequenceField="__id" xpath="/orderInput">
+  <Mapping cloverField="name" trim="true" xpath="name"/>
+  <Mapping cloverField="cardNumber" trim="true" xpath="cardNumber"/>
+  <Mapping cloverField="city_name" trim="true" xpath="city_name"/>
+  <Mapping cloverField="country_id" trim="true" xpath="country_id"/>
+  <Mapping cloverField="street_name" trim="true" xpath="street_name"/>
+  <Mapping cloverField="zip_code" trim="true" xpath="zip_code"/>
+  <Mapping cloverField="productsId" trim="true" xpath="productsId"/>
+</Context>
+]]></attr>
+<attr name="_data_format"><![CDATA[XML]]></attr>
+<attr name="__rootGlobalElementName"><![CDATA[orderInput]]></attr>
+</Node>
+<Edge debugMode="true" fromNode="FOREACH_ORDER_INPUT_OBJECT:0" guiBendpoints="" id="Edge1" inPort="Port 0 (in)" metadata="907c7ad7-fc39-4265-b135-ef831832bc69" outPort="Port 0 (out)" toNode="BEAN_WRITER0:0"/>
+<Edge debugMode="true" fromNode="XML_READER0:0" guiBendpoints="" id="Edge0" inPort="Port 0 (in)" metadata="496164b2-d494-4b52-a12a-7b7535247890" outPort="Port 0 (out)" toNode="FOREACH_ORDER_INPUT_OBJECT:0"/>
+</Phase>
+</Graph>

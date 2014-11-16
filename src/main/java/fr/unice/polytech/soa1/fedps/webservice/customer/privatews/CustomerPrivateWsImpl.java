@@ -87,4 +87,14 @@ public class CustomerPrivateWsImpl implements CustomerPrivateWs {
             throw new UnknownQuoteFault(quote_id);
         }
     }
+
+    @Override
+    public Quote getQuote(String quote_id) throws UnknownQuoteFault {
+        Quote quote = dao.getQuoteNonOrderedById(quote_id);
+        if (quote != null) {
+            return quote;
+        } else {
+            throw new UnknownQuoteFault(quote_id);
+        }
+    }
 }

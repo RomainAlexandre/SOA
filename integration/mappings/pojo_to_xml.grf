@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?><Graph __version="3.5.0" author="Romain" created="Sat Nov 15 09:34:30 CET 2014" description="Pojo To XML" guiVersion="3.4.4.P" id="1416065855375" licenseCode="Unlicensed" licenseType="Unknown" modified="Sat Nov 15 09:34:30 CET 2014" modifiedBy="Romain" name="Pojo_To_XML" revision="1.0" showComponentDetails="false">
+<Global>
+<Metadata __index="0" __referenceCounter="1" __sourcePath="{}/object" _dataStructure="OBJECT" _id="__id" _type="Input" id="d69bd3b4-851e-4c59-8c97-24a8b8768987">
+<Record fieldDelimiter="," name="CreateOrderOutput" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="0" __sourcePath="{}/object/cost" containerType="SINGLE" label="cost" name="cost" type="string"/>
+<Field __index="1" __sourcePath="{}/object/eta" containerType="SINGLE" label="eta" name="eta" type="string"/>
+<Field __index="2" __sourcePath="{}/object/orderId" containerType="SINGLE" label="orderId" name="orderId" type="string"/>
+<Field __index="3" __sourcePath="{}/object/paymentStatus" containerType="SINGLE" label="paymentStatus" name="paymentStatus" type="string"/>
+</Record>
+</Metadata>
+<Metadata __filteredMetadata="false" __index="0" __referenceCounter="1" __sourcePath="{}/orderOutput" _dataStructure="OBJECT" _id="__id" _type="Output" id="271f0e0d-9b45-477d-be2b-44659ee06fdf">
+<Record fieldDelimiter="," name="orderOutput" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="0" __sourcePath="{}/orderOutput/orderId" containerType="SINGLE" label="orderId" name="orderId" type="string"/>
+<Field __index="1" __sourcePath="{}/orderOutput/eta" containerType="SINGLE" label="eta" name="eta" type="string"/>
+<Field __index="2" __sourcePath="{}/orderOutput/cost" containerType="SINGLE" label="cost" name="cost" type="string"/>
+<Field __index="3" __sourcePath="{}/orderOutput/paymentStatus" containerType="SINGLE" label="paymentStatus" name="paymentStatus" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="4" __referenceCounter="1" __sourcePath="{}/orderOutput/products/product" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="271f0e0d-9b45-477d-be2b-44659ee06fdf" _parent_id="__parent_id" _type="Output" id="c8cd0b45-40b2-4a2e-96ec-a6f3e7d8f3d0">
+<Record fieldDelimiter="," name="product" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="4" __sourcePath="{}/orderOutput/products/product/name" containerType="SINGLE" label="name" name="name" type="string"/>
+<Field __index="5" __sourcePath="{}/orderOutput/products/product/price" containerType="SINGLE" label="price" name="price" type="integer"/>
+<Field __index="6" __sourcePath="{}/orderOutput/products/product/product_id" containerType="SINGLE" label="product_id" name="product_id" type="string"/>
+<Field __index="7" __sourcePath="{}/orderOutput/products/product/quantity" containerType="SINGLE" label="quantity" name="quantity" type="integer"/>
+</Record>
+</Metadata>
+<Metadata __index="4" __referenceCounter="1" __sourcePath="{}/object/products" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="d69bd3b4-851e-4c59-8c97-24a8b8768987" _parent_id="__parent_id" _type="Input" id="ebbc55bf-3f62-4494-a69d-a664e56f3a8f">
+<Record fieldDelimiter="," name="products" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="4" __sourcePath="{}/object/products/name" containerType="SINGLE" label="name" name="name" type="string"/>
+<Field __index="5" __sourcePath="{}/object/products/price" containerType="SINGLE" label="price" name="price" type="integer"/>
+<Field __index="6" __sourcePath="{}/object/products/productId" containerType="SINGLE" label="productId" name="productId" type="string"/>
+<Field __index="7" __sourcePath="{}/object/products/quantity" containerType="SINGLE" label="quantity" name="quantity" type="integer"/>
+</Record>
+</Metadata>
+<Dictionary>
+<Entry id="DictionaryEntry0" input="true" name="inputPayload" output="false" type="object"/>
+<Entry id="DictionaryEntry1" input="false" name="outputPayload" output="true" type="object"/>
+</Dictionary>
+</Global>
+<Phase number="0">
+<Node enabled="enabled" fileURL="dict:inputPayload" guiName="Pojo READER" guiX="20" guiY="20" id="BEAN_READER0" type="BEAN_READER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Context outPort="0" sequenceField="__id" xpath=".">
+  <Mapping cloverField="cost" trim="true" xpath="cost"/>
+  <Mapping cloverField="eta" trim="true" xpath="eta"/>
+  <Mapping cloverField="orderId" trim="true" xpath="orderId"/>
+  <Mapping cloverField="paymentStatus" trim="true" xpath="paymentStatus"/>
+  <Context generatedKey="__parent_id" outPort="1" parentKey="__id" sequenceField="__id" xpath="products">
+    <Mapping cloverField="name" trim="true" xpath="name"/>
+    <Mapping cloverField="price" trim="true" xpath="price"/>
+    <Mapping cloverField="productId" trim="true" xpath="productId"/>
+    <Mapping cloverField="quantity" trim="true" xpath="quantity"/>
+  </Context>
+</Context>
+]]></attr>
+<attr name="_data_format"><![CDATA[JAVA]]></attr>
+<attr name="schema"><![CDATA[<?xml version="1.0" encoding="UTF-8"?><schema-object>
+  <typed-object-ref type-ref="fr.polytech.unice.soa1.mister.discount.business.CreateOrderOutput"/>
+  <typed-object type="fr.polytech.unice.soa1.mister.discount.business.Product">
+    <typed-object-ref name="name" type-ref="java.lang.String"/>
+    <typed-object-ref name="price" type-ref="int"/>
+    <typed-object-ref name="productId" type-ref="java.lang.String"/>
+    <typed-object-ref name="quantity" type-ref="int"/>
+  </typed-object>
+  <typed-object type="fr.polytech.unice.soa1.mister.discount.business.CreateOrderOutput">
+    <typed-object-ref name="cost" type-ref="java.lang.String"/>
+    <typed-object-ref name="eta" type-ref="java.lang.String"/>
+    <typed-object-ref name="orderId" type-ref="java.lang.String"/>
+    <typed-object-ref name="paymentStatus" type-ref="java.lang.String"/>
+    <schema-collection name="products" type="java.util.List">
+      <typed-object-ref type-ref="fr.polytech.unice.soa1.mister.discount.business.Product"/>
+    </schema-collection>
+  </typed-object>
+  <typed-object type="java.lang.String"/>
+  <typed-object type="int"/>
+</schema-object>
+]]></attr>
+</Node>
+<Node cacheInMemory="true" charset="UTF-8" enabled="enabled" fileURL="dict:outputPayload" guiName="XML WRITER" guiX="900" guiY="20" id="EXT_XML_WRITER0" type="EXT_XML_WRITER" xmlSchemaURL="C:/Users/Romain/Desktop/CreateOrderOutput.xsd">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<orderOutput xmlns:clover="http://www.cloveretl.com/ns/xmlmapping" clover:inPort="0">
+  <orderId>$0.orderId</orderId>
+  <eta>$0.eta</eta>
+  <cost>$0.cost</cost>
+  <paymentStatus>$0.paymentStatus</paymentStatus>
+  <products>
+    <product clover:inPort="1" clover:key="__parent_id" clover:parentKey="__id">
+      <name>$1.name</name>
+      <price>$1.price</price>
+      <clover:element clover:name="product_id">$1.product_id</clover:element>
+      <quantity>$1.quantity</quantity>
+    </product>
+  </products>
+</orderOutput>]]></attr>
+<attr name="_data_format"><![CDATA[XML]]></attr>
+<attr name="__rootGlobalElementName"><![CDATA[orderOutput]]></attr>
+</Node>
+<Node enabled="enabled" guiName="Foreach 'object' -&gt; 'orderOutput'" guiX="460" guiY="20" id="FOREACH_OBJECT_ORDER_OUTPUT" transformClass="com.mulesoft.datamapper.transform.MelRecordTransform" type="REFORMAT">
+<attr name="melScript"><![CDATA[//MEL
+//START -> DO NOT REMOVE
+output.__id = input.__id;
+//END -> DO NOT REMOVE
+output.cost = input.cost;
+output.eta = input.eta;
+output.orderId = input.orderId;
+output.paymentStatus = input.paymentStatus;
+]]></attr>
+</Node>
+<Node enabled="enabled" guiName="Foreach 'products' -&gt; 'product'" guiX="460" guiY="120" id="FOREACH_PRODUCTS_PRODUCT" transformClass="com.mulesoft.datamapper.transform.MelRecordTransform" type="REFORMAT">
+<attr name="melScript"><![CDATA[//MEL
+//START -> DO NOT REMOVE
+output.__id = input.__id;
+output.__parent_id = input.__parent_id;
+//END -> DO NOT REMOVE
+output.name = input.name;
+output.price = input.price;
+output.quantity = input.quantity;
+output.product_id = input.productId;]]></attr>
+</Node>
+<Edge debugMode="true" fromNode="BEAN_READER0:0" guiBendpoints="" id="Edge0" inPort="Port 0 (in)" metadata="d69bd3b4-851e-4c59-8c97-24a8b8768987" outPort="Port 0 (out)" toNode="FOREACH_OBJECT_ORDER_OUTPUT:0"/>
+<Edge debugMode="true" fromNode="BEAN_READER0:1" guiBendpoints="" id="Edge2" inPort="Port 0 (in)" metadata="ebbc55bf-3f62-4494-a69d-a664e56f3a8f" outPort="Port 1 (out)" toNode="FOREACH_PRODUCTS_PRODUCT:0"/>
+<Edge debugMode="true" fromNode="FOREACH_OBJECT_ORDER_OUTPUT:0" guiBendpoints="" id="Edge1" inPort="Port 0 (in)" metadata="271f0e0d-9b45-477d-be2b-44659ee06fdf" outPort="Port 0 (out)" toNode="EXT_XML_WRITER0:0"/>
+<Edge debugMode="true" fromNode="FOREACH_PRODUCTS_PRODUCT:0" guiBendpoints="" id="Edge3" inPort="Port 1 (in)" metadata="c8cd0b45-40b2-4a2e-96ec-a6f3e7d8f3d0" outPort="Port 0 (out)" toNode="EXT_XML_WRITER0:1"/>
+</Phase>
+</Graph>

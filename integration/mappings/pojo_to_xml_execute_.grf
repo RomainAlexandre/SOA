@@ -16,8 +16,10 @@
 <Metadata __index="0" __referenceCounter="1" __sourcePath="{}/object" _dataStructure="OBJECT" _id="__id" _type="Input" id="92d5e0f0-6872-4dfe-825c-7515b3bd788b">
 <Record fieldDelimiter="," name="Product" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
 <Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
-<Field __index="0" __sourcePath="{}/object/productId" containerType="SINGLE" label="productId" name="productId" type="string"/>
-<Field __index="1" __sourcePath="{}/object/quantity" containerType="SINGLE" label="quantity" name="quantity" type="integer"/>
+<Field __index="0" __sourcePath="{}/object/name" containerType="SINGLE" label="name" name="name" type="string"/>
+<Field __index="1" __sourcePath="{}/object/price" containerType="SINGLE" label="price" name="price" type="integer"/>
+<Field __index="2" __sourcePath="{}/object/productId" containerType="SINGLE" label="productId" name="productId" type="string"/>
+<Field __index="3" __sourcePath="{}/object/quantity" containerType="SINGLE" label="quantity" name="quantity" type="integer"/>
 </Record>
 </Metadata>
 <Dictionary>
@@ -29,6 +31,8 @@
 <Node enabled="enabled" fileURL="dict:inputPayload" guiName="Pojo READER" guiX="20" guiY="20" id="BEAN_READER0" type="BEAN_READER">
 <attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Context outPort="0" sequenceField="__id" xpath=".">
+  <Mapping cloverField="name" trim="true" xpath="name"/>
+  <Mapping cloverField="price" trim="true" xpath="price"/>
   <Mapping cloverField="productId" trim="true" xpath="productId"/>
   <Mapping cloverField="quantity" trim="true" xpath="quantity"/>
 </Context>
@@ -37,6 +41,8 @@
 <attr name="schema"><![CDATA[<?xml version="1.0" encoding="UTF-8"?><schema-object>
   <typed-object-ref type-ref="fr.polytech.unice.soa1.mister.discount.business.Product"/>
   <typed-object type="fr.polytech.unice.soa1.mister.discount.business.Product">
+    <typed-object-ref name="name" type-ref="java.lang.String"/>
+    <typed-object-ref name="price" type-ref="int"/>
     <typed-object-ref name="productId" type-ref="java.lang.String"/>
     <typed-object-ref name="quantity" type-ref="int"/>
   </typed-object>

@@ -8,24 +8,32 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlType(name = "Order")
-public class Order {
+public class InternalOrder {
+	// OrderIds
 	private String orderId;
 	private String quoteId;
+	
+	// Receipt
 	private String eta;
 	private String amount;
 	private List<Product> products;
+	private String paymentStatus;
+	
+	// Customer information
 	private String customer;
 	private String streetName;
 	private int zipCode;
 	private String cityName;
 	private String countryId;
+	private String cardNumber;
 
-	public Order() {
+	
+	public InternalOrder() {
 		this.products = new ArrayList<Product>();
 	}
 
-	public Order(String customer, String amount, String orderId,
-			String streetName, int zipCode, String cityName, String countryId) {
+	public InternalOrder(String customer, String amount, String orderId,
+			String streetName, int zipCode, String cityName, String countryId, String cardNumber) {
 		this.customer = customer;
 		this.amount = amount;
 		this.orderId = orderId;
@@ -34,6 +42,7 @@ public class Order {
 		this.zipCode = zipCode;
 		this.cityName = cityName;
 		this.countryId = countryId;
+		this.cardNumber = cardNumber;
 	}
 
 	@XmlElement(name = "customerName", required = true)
@@ -125,6 +134,24 @@ public class Order {
 
 	public void setCountryId(String countryId) {
 		this.countryId = countryId;
+	}
+	
+	@XmlElement(name = "cardNumber", required = true)
+	public String getCardNumber() {
+		return cardNumber;
+	}
+
+	public void setCardNumber(String cardNumber) {
+		this.cardNumber = cardNumber;
+	}
+	
+	@XmlElement(name = "paymentStatus", required = true)
+	public String getPaymentStatus() {
+		return paymentStatus;
+	}
+
+	public void setPaymentStatus(String paymentStatus) {
+		this.paymentStatus = paymentStatus;
 	}
 
 }

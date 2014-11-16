@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.5.1"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd">
+    <flow name="init-database" doc:name="init-database">
+        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="9090" path="admin/db/init" doc:name="localhost:9090/admin/db/init"/>
+        <scripting:component doc:name="init-script">
+            <scripting:script engine="Groovy"><![CDATA[import groovy.sql.*
+import java.sql.*
+
+System.out.println("Initializing database");
+def sql = Sql.newInstance("jdbc:derby:memory:glue;create=true", new Properties());
+sql.execute("CREATE TABLE orders (orderIdTf varchar(256), orderIdFp varchar(256))");
+System.out.println("Database initialized");
+
+return "initialized";]]></scripting:script>
+        </scripting:component>
+        <catch-exception-strategy doc:name="Catch Exception Strategy:::">
+            <set-payload value="Database already initialized" doc:name="Set Payload"/>
+        </catch-exception-strategy>
+    </flow>
+    <flow name="store-in-db" doc:name="store-in-db">
+        <vm:inbound-endpoint exchange-pattern="one-way" path="/orderId/storeindb" doc:name="/orderId/storeindb"/>
+        <scripting:component doc:name="insert-into">
+            <scripting:script engine="Groovy"><![CDATA[import groovy.sql.*
+import java.sql.*
+
+def sql = Sql.newInstance("jdbc:derby:memory:glue", new Properties());
+sql.execute("insert into orders (orderIdTf, orderIdFp) values ('" + payload.orderId + "', '"+payload.quoteId+"')");
+
+System.out.println("Info stored for " + payload.orderId);]]></scripting:script>
+        </scripting:component>
+    </flow>
+    <flow name="get-from-db" doc:name="get-from-db">
+        <vm:inbound-endpoint exchange-pattern="request-response" path="/orderId/consultdb" doc:name="/orderId/consultdb"/>
+        <scripting:component doc:name="select-from">
+            <scripting:script engine="Groovy"><![CDATA[import groovy.sql.*
+import java.sql.*
+import java.lang.*
+
+def sql = Sql.newInstance("jdbc:derby:memory:glue", new Properties());
+def query = "select orderIdFp from orders where orderIdTf = '"+ message.payload+"'";
+def data = sql.rows(query);
+
+return (String) data[0]['orderIdFp'];]]></scripting:script>
+        </scripting:component>
+    </flow>
+</mule>

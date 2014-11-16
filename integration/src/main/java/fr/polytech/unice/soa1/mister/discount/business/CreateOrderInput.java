@@ -7,24 +7,26 @@ import javax.xml.bind.annotation.XmlType;
 
 @XmlType(name = "createOrderInput")
 public class CreateOrderInput {
-	private String name;
 	private List<String> productsId;
+	private String name;
 	private String streetName;
 	private int zipCode;
 	private String cityName;
 	private String countryId;
+	private String cardNumber;
 
 	public CreateOrderInput() {
 	}
 
 	public CreateOrderInput(String name, List<String> productsId,
-			String streetName, int zipCode, String cityName, String countryId) {
+			String streetName, int zipCode, String cityName, String countryId, String cardNumber) {
 		this.name = name;
 		this.productsId = productsId;
 		this.streetName = streetName;
 		this.zipCode = zipCode;
 		this.cityName = cityName;
 		this.countryId = countryId;
+		this.cardNumber = cardNumber;
 	}
 
 	@XmlElement(name = "name", required = true)
@@ -79,6 +81,15 @@ public class CreateOrderInput {
 
 	public void setCountryId(String countryId) {
 		this.countryId = countryId;
+	}
+
+	@XmlElement(name = "cardNumber", required = true)
+	public String getCardNumber() {
+		return cardNumber;
+	}
+
+	public void setCardNumber(String cardNumber) {
+		this.cardNumber = cardNumber;
 	}
 	
 
