@@ -6,14 +6,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "consultOrderInput")
 public class ConsultOrderInput {
 	private String name;
-	private String orderID;
+	private String orderId;
 	
 	public ConsultOrderInput() {
 	}
 
 	public ConsultOrderInput(String name, String orderID) {
 		this.name = name;
-		this.orderID = orderID;
+		this.orderId = orderID;
 	}
 	
 	@XmlElement(name = "name", required = true)
@@ -25,12 +25,12 @@ public class ConsultOrderInput {
 		this.name = name;
 	}
 
-	@XmlElement(name = "orderID", required = true)
-	public String getOrderID() {
-		return orderID;
+	@XmlElement(name = "orderId", required = true)
+	public String getOrderId() {
+		return orderId;
 	}
 
-	public void set0rderID(String orderID) {
-		this.orderID = orderID;
+	public void setOrderId(String orderId) {
+		this.orderId = orderId;
 	}
 }

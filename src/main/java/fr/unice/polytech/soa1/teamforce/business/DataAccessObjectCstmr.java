@@ -190,8 +190,6 @@ public class DataAccessObjectCstmr {
 		
 		//Order o3 = new Order("3", 7, "17455€", null, c2);
 		
-		
-		
 		List<Product> products1 = new ArrayList<>(Arrays.asList(
 				new Product("W3P3NV5OZ24BD1K", "samsung", "600", 1, cat1),
 				new Product("D7I1ZY8PZ28HZ5G", "chaine", "100", 1, cat1),

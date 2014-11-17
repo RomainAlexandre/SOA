@@ -5,6 +5,8 @@ import javax.jws.WebMethod;
 import javax.jws.WebResult;
 import javax.jws.WebService;
 
+import fr.polytech.unice.soa1.mister.discount.business.ConsultOrderInput;
+import fr.polytech.unice.soa1.mister.discount.business.ConsultOrderOutput;
 import fr.polytech.unice.soa1.mister.discount.business.CreateOrderInput;
 import fr.polytech.unice.soa1.mister.discount.business.CreateOrderOutput;
 
@@ -17,7 +19,7 @@ public interface IMisterDiscount {
 	public CreateOrderOutput createOrder(CreateOrderInput input);
 	
 	@WebMethod(operationName = "consultingOrder")
-	@WebResult(name = "quoteId")
-	public String consultingOrder(String orderId);
+	@WebResult(name = "order")
+	public ConsultOrderOutput consultingOrder(ConsultOrderInput input);
 
 }

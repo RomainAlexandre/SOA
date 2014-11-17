@@ -17,7 +17,7 @@ http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mul
 http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd">
     <ws:consumer-config name="TeamForce-WS-Customer" wsdlLocation="http://localhost:8080/webservices/TeamForce-Customer-RPC?wsdl" service="TeamForceRPCCustomerService" port="TeamForceRPCCustomerPort" serviceAddress="http://localhost:8080/webservices/TeamForce-Customer-RPC" doc:name="Web Service Consumer"/>
     <ws:consumer-config name="TeamForce-WS-Employee" wsdlLocation="http://localhost:8080/webservices/TeamForce-Employee-RPC?wsdl" service="TeamForceRPCEmployeeService" port="TeamForceRPCEmployeePort" serviceAddress="http://localhost:8080/webservices/TeamForce-Employee-RPC" doc:name="Web Service Consumer"/>
-    <data-mapper:config name="Pojo_To_Xml_get_all_orders_" transformationGraphPath="pojo_to_xml_get_all_orders_.grf" doc:name="Pojo_To_Xml_get_all_orders_"/>
+
     <ws:consumer-config name="WareHouse-WS-ExternalDoc" wsdlLocation="http://localhost:8080/webservices/WarehouseExternalDOC?wsdl" service="WarehouseExternalService" port="WarehouseExternalPort" serviceAddress="http://localhost:8080/webservices/WarehouseExternalDOC" doc:name="Web Service Consumer"/>
     <data-mapper:config name="Pojo_To_Xml_execute_" transformationGraphPath="pojo_to_xml_execute_.grf" doc:name="Pojo_To_Xml_execute_"/>
     <ws:consumer-config name="FedPs-WS-CustomerPrivate" wsdlLocation="http://localhost:8080/webservices/FedPSCustomerPrivate?wsdl" service="FedPSCustomerPrivateService" port="FedPSCustomerPrivatePort" serviceAddress="http://localhost:8080/webservices/FedPSCustomerPrivate" doc:name="Web Service Consumer"/>

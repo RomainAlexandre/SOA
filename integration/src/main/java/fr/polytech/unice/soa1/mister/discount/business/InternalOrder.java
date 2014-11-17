@@ -17,6 +17,7 @@ public class InternalOrder {
 	private String eta;
 	private String amount;
 	private List<Product> products;
+	private String shippingStatus;
 	private String paymentStatus;
 	
 	// Customer information
@@ -32,11 +33,12 @@ public class InternalOrder {
 		this.products = new ArrayList<Product>();
 	}
 
-	public InternalOrder(String customer, String amount, String orderId,
+	public InternalOrder(String customer, String amount, String orderId, String quoteId,
 			String streetName, int zipCode, String cityName, String countryId, String cardNumber) {
 		this.customer = customer;
 		this.amount = amount;
 		this.orderId = orderId;
+		this.quoteId = quoteId;
 		this.products = new ArrayList<Product>();
 		this.streetName = streetName;
 		this.zipCode = zipCode;
@@ -153,5 +155,13 @@ public class InternalOrder {
 	public void setPaymentStatus(String paymentStatus) {
 		this.paymentStatus = paymentStatus;
 	}
+	
+	@XmlElement(name = "shippingStatus", required = true)
+	public String getShippingStatus() {
+		return shippingStatus;
+	}
 
+	public void setShippingStatus(String shippingStatus) {
+		this.shippingStatus = shippingStatus;
+	}
 }

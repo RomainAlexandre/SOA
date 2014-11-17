@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:ws="http://www.mulesoft.org/schema/mule/ws" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:data-mapper="http://www.mulesoft.org/schema/mule/ee/data-mapper" xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+<mule xmlns:batch="http://www.mulesoft.org/schema/mule/batch" xmlns:ws="http://www.mulesoft.org/schema/mule/ws" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:data-mapper="http://www.mulesoft.org/schema/mule/ee/data-mapper" xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
 	xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.5.1"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
@@ -9,13 +9,88 @@ http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/cu
 http://www.mulesoft.org/schema/mule/ws http://www.mulesoft.org/schema/mule/ws/current/mule-ws.xsd
 http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schema/mule/ee/data-mapper/current/mule-data-mapper.xsd
 http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd
-http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/batch http://www.mulesoft.org/schema/mule/batch/current/mule-batch.xsd">
+    <data-mapper:config name="Pojo_To_Xml_get_all_orders_" transformationGraphPath="pojo_to_xml_get_all_orders_.grf" doc:name="Pojo_To_Xml_get_all_orders_"/>
+    <data-mapper:config name="Xml_get_all_ordersResponse__To_Pojo" transformationGraphPath="xml_get_all_ordersresponse__to_pojo.grf" doc:name="Xml_get_all_ordersResponse__To_Pojo"/>
+    <data-mapper:config name="Pojo_To_Xml_get_quote_" transformationGraphPath="pojo_to_xml_get_quote_.grf" doc:name="Pojo_To_Xml_get_quote_"/>
+    <data-mapper:config name="Xml_get_quoteResponse__To_Pojo" transformationGraphPath="xml_get_quoteresponse__to_pojo.grf" doc:name="Xml_get_quoteResponse__To_Pojo"/>
     <flow name="consultOrder" doc:name="consultOrder">
         <vm:inbound-endpoint exchange-pattern="request-response" path="/misterdiscount/consultOrder" doc:name="/misterdiscount/consultOrder"/>
         <flow-ref name="SF-TF-retrieveOrder" doc:name="TF-RetrieveOrder"/>
-        <vm:outbound-endpoint exchange-pattern="request-response" path="/orderId/consultdb" doc:name="/orderId/consultdb"/>
+        <flow-ref name="SF-Database-retrieveQuoteId" doc:name="Database-RetrieveQuoteId"/>
+        <flow-ref name="SF-FP-getQuote" doc:name="FP-getQuote"/>
     </flow>
     <sub-flow name="SF-TF-retrieveOrder" doc:name="SF-TF-retrieveOrder">
         <logger level="INFO" doc:name="Logger"/>
+        <set-variable doc:name="store consultOrderInput" value="#[message.payload]" variableName="consultOrderInput"/>
+        <data-mapper:transform doc:name="Pojo To Xml&lt;get_all_orders&gt;" config-ref="Pojo_To_Xml_get_all_orders_"/>
+        <ws:consumer config-ref="TeamForce-WS-Employee" operation="get_all_orders" doc:name="Web Service Consumer"/>
+        <data-mapper:transform doc:name="Xml&lt;get_all_ordersResponse&gt; To Pojo" config-ref="Xml_get_all_ordersResponse__To_Pojo"/>
+        <scripting:component doc:name="retrieve order by id">
+            <scripting:script engine="Groovy"><![CDATA[import fr.polytech.unice.soa1.mister.discount.business.InternalOrder
+import fr.polytech.unice.soa1.mister.discount.business.ConsultOrderInput
+
+import java.lang.*
+
+def listOfOrderTeamForce = message.payload;
+def input = message.getInvocationProperty("consultOrderInput");
+
+def orderId = input.getOrderId();
+
+def order;
+
+for(o in listOfOrderTeamForce){
+	if(o.getOrderId().equals(orderId)){
+		order = new InternalOrder(o.getCustomer(), o.getAmount(), o.getOrderId(), null,
+			null, 0, null, null, null);
+		order.setProducts(o.getProducts());
+		System.out.println("OrderId : " + order.orderId);
+		break;
+	}
+}
+
+System.out.println("Order : " + order);
+message.payload = order;
+]]></scripting:script>
+        </scripting:component>
+    </sub-flow>
+    <sub-flow name="SF-Database-retrieveQuoteId" doc:name="SF-Database-retrieveQuoteId">
+        <set-variable variableName="order" value="#[message.payload]" doc:name="store order"/>
+        <set-payload value="#[message.payload.orderId]" doc:name="Set Payload"/>
+        <vm:outbound-endpoint exchange-pattern="request-response" path="/orderId/consultdb" doc:name="/orderId/consultdb"/>
+        <scripting:component doc:name="merge order with quoteId">
+            <scripting:script engine="Groovy"><![CDATA[import fr.polytech.unice.soa1.mister.discount.business.InternalOrder
+import fr.polytech.unice.soa1.mister.discount.business.ConsultOrderInput
+
+import java.lang.*
+
+def quoteId = message.payload;
+def order = message.getInvocationProperty("order");
+
+order.setQuoteId(quoteId);
+
+message.payload=order;
+]]></scripting:script>
+        </scripting:component>
+    </sub-flow>
+    <sub-flow name="SF-FP-getQuote" doc:name="SF-FP-getQuote">
+        <set-variable variableName="order" value="#[message.payload]" doc:name="store order"/>
+        <data-mapper:transform config-ref="Pojo_To_Xml_get_quote_" doc:name="Pojo To Xml&lt;get_quote&gt;"/>
+        <ws:consumer config-ref="FedPs-WS-CustomerPrivate" operation="get_quote" doc:name="Web Service Consumer"/>
+        <data-mapper:transform config-ref="Xml_get_quoteResponse__To_Pojo" doc:name="Xml&lt;get_quoteResponse&gt; To Pojo"/>
+        <scripting:component doc:name="create Output">
+            <scripting:script engine="Groovy"><![CDATA[import fr.polytech.unice.soa1.mister.discount.business.InternalOrder
+import fr.polytech.unice.soa1.mister.discount.business.ConsultOrderOutput
+
+import java.lang.*
+
+def quote = message.payload;
+def order = message.getInvocationProperty("order");
+def output = new ConsultOrderOutput(order.getOrderId(), String.valueOf(Double.valueOf(order.getAmount()) + Double.valueOf(quote.getAmount())), quote.getEta(), quote.getShippingStatus(), quote.getQuoteId());
+output.setProducts(order.getProducts());
+
+message.payload=output;]]></scripting:script>
+        </scripting:component>
     </sub-flow>
 </mule>

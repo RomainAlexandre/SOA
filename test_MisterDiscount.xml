@@ -10,7 +10,7 @@
   <con:entry key="Host:Port" value=""/>
   <con:entry key="user-settings.xml Password" value=""/>
   <con:entry key="WSS Password Type" value=""/>
-  <con:entry key="Save Project" value="false"/>
+  <con:entry key="Save Project" value="true"/>
   <con:entry key="Enable UI" value="false"/>
   <con:entry key="System Properties" value=""/>
   <con:entry key="Domain" value=""/>
@@ -22,7 +22,7 @@
   <con:entry key="Project Password" value=""/>
   <con:entry key="Report Format(s)" value=""/>
   <con:entry key="TestCase" value="TestCase 1"/>
-  <con:entry key="Print Report" value="false"/>
+  <con:entry key="Print Report" value="true"/>
   <con:entry key="Username" value=""/>
   <con:entry key="Root Folder" value=""/>
   <con:entry key="Save After" value="false"/>
@@ -36,6 +36,7 @@
       <xs:element name="consultingOrderResponse" type="tns:consultingOrderResponse"/>
       <xs:element name="createOrder" type="tns:createOrder"/>
       <xs:element name="createOrderResponse" type="tns:createOrderResponse"/>
+      <xs:element name="product" type="tns:product"/>
       <xs:complexType name="createOrder">
         <xs:sequence>
           <xs:element minOccurs="0" name="arg0" type="tns:createOrderInput"/>
@@ -43,6 +44,7 @@
       </xs:complexType>
       <xs:complexType name="createOrderInput">
         <xs:sequence>
+          <xs:element name="cardNumber" type="xs:string"/>
           <xs:element name="city_name" type="xs:string"/>
           <xs:element name="country_id" type="xs:string"/>
           <xs:element name="name" type="xs:string"/>
@@ -58,19 +60,63 @@
       </xs:complexType>
       <xs:complexType name="createOrderOutput">
         <xs:sequence>
+          <xs:element name="cost" type="xs:string"/>
+          <xs:element name="eta" type="xs:string"/>
           <xs:element name="orderId" type="xs:string"/>
-          <xs:element name="orderId" type="xs:string"/>
-          <xs:element name="orderId" type="xs:string"/>
+          <xs:element name="paymentStatus" type="xs:string"/>
+          <xs:element minOccurs="0" name="products">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" name="product" type="tns:product"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="product">
+        <xs:sequence>
+          <xs:element name="name" type="xs:string"/>
+          <xs:element name="price" type="xs:int"/>
+          <xs:element name="product_id" type="xs:string"/>
+          <xs:element name="quantity" type="xs:int"/>
         </xs:sequence>
       </xs:complexType>
       <xs:complexType name="consultingOrder">
         <xs:sequence>
-          <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+          <xs:element minOccurs="0" name="arg0" type="tns:consultOrderInput"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="consultOrderInput">
+        <xs:sequence>
+          <xs:element name="name" type="xs:string"/>
+          <xs:element name="orderId" type="xs:string"/>
         </xs:sequence>
       </xs:complexType>
       <xs:complexType name="consultingOrderResponse">
         <xs:sequence>
-          <xs:element minOccurs="0" name="quoteId" type="xs:string"/>
+          <xs:element minOccurs="0" name="quoteId" type="tns:Order"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="Order">
+        <xs:sequence>
+          <xs:element name="amount" type="xs:string"/>
+          <xs:element name="cardNumber" type="xs:string"/>
+          <xs:element name="city_name" type="xs:string"/>
+          <xs:element name="country_id" type="xs:string"/>
+          <xs:element name="customerName" type="xs:string"/>
+          <xs:element name="eta" type="xs:string"/>
+          <xs:element name="orderId" type="xs:string"/>
+          <xs:element name="paymentStatus" type="xs:string"/>
+          <xs:element minOccurs="0" name="products">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" name="product" type="tns:product"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="quoteId" type="xs:string"/>
+          <xs:element name="street_name" type="xs:string"/>
+          <xs:element name="zip_code" type="xs:int"/>
         </xs:sequence>
       </xs:complexType>
     </xs:schema>
@@ -129,6 +175,7 @@
       <mis:createOrder>
          <!--Optional:-->
          <arg0>
+            <cardNumber>4998630379838865</cardNumber>
             <city_name>Antibes</city_name>
             <country_id>FR</country_id>
             <name>C1</name>
@@ -144,7 +191,10 @@
    <soapenv:Body>
       <mis:consultingOrder>
          <!--Optional:-->
-         <arg0>c7463c2d-4d3b-41be-8a3b-a96e313ff141</arg0>
+         <arg0>
+            <name>C1</name>
+            <orderId>5eb8e3f2-e27c-4f02-8d2d-7d0e8c06aba9</orderId>
+         </arg0>
       </mis:consultingOrder>
    </soapenv:Body>
 </soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/MisterDiscount/MisterDiscount/consultingOrder"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite name="TestSuite 1"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase 1" searchProperties="true"><con:settings/><con:testStep type="httprequest" name="DataBase Creation"><con:settings/><con:config method="GET" xsi:type="con:HttpRequest" name="DataBase Creation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:9090/admin/db/init</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:config></con:testStep><con:testStep type="request" name="addOrder"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>MisterDiscountServiceSoapBinding</con:interface><con:operation>createOrder</con:operation><con:request name="addOrder"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8081/MisterDiscount</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mis="http://informatique.polytech.unice.fr/soa1/MisterDiscount">
@@ -163,4 +213,15 @@
          </arg0>
       </mis:createOrder>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/></con:soapui-project>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="transfer" name="save orderId"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" useXQuery="false" entitize="false" transferChildNodes="false"><con:name>save orderId</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>addOrder</con:sourceStep><con:sourcePath>declare namespace ns2="http://informatique.polytech.unice.fr/soa1/MisterDiscount";
+string(//ns2:createOrderResponse/receipt/orderId)</con:sourcePath><con:targetType>orderId</con:targetType><con:targetStep>#TestCase#</con:targetStep></con:transfers></con:config></con:testStep><con:testStep type="request" name="consultOrder"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>MisterDiscountServiceSoapBinding</con:interface><con:operation>consultingOrder</con:operation><con:request name="consultOrder"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8081/MisterDiscount</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:mis="http://informatique.polytech.unice.fr/soa1/MisterDiscount">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <mis:consultingOrder><!--Optional:-->
+         <arg0>
+            <name>C1</name>
+            <orderId>${#TestCase#orderId}</orderId>
+         </arg0>
+      </mis:consultingOrder>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" name="SOAP Response"/><con:assertion type="SOAP Fault Assertion" name="Not SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties><con:property><con:name>orderId</con:name><con:value>7dd3dac5-3ddd-4954-9686-a3fafab904df</con:value></con:property></con:properties></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/></con:soapui-project>

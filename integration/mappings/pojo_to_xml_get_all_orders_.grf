@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?><Graph __version="3.5.0" author="Romain" created="Mon Nov 10 13:40:21 CET 2014" description="Pojo To Xml&lt;get_all_orders&gt;" guiVersion="3.4.4.P" id="1415634440335" licenseCode="Unlicensed" licenseType="Unknown" modified="Mon Nov 10 13:40:21 CET 2014" modifiedBy="Romain" name="Pojo_To_Xml_get_all_orders_" revision="1.0" showComponentDetails="false">
+<?xml version="1.0" encoding="UTF-8"?><Graph __version="3.5.0" author="Romain" created="Sat Nov 15 09:34:30 CET 2014" description="Pojo To Xml&lt;get_all_orders&gt;" guiVersion="3.4.4.P" id="1416159767920" licenseCode="Unlicensed" licenseType="Unknown" modified="Sat Nov 15 09:34:30 CET 2014" modifiedBy="Romain" name="Pojo_To_Xml_get_all_orders_" revision="1.0" showComponentDetails="false">
 <Global>
-<Metadata __index="0" __referenceCounter="1" __sourcePath="{}/object" _dataStructure="OBJECT" _id="__id" _type="Input" id="600055b7-df74-4242-8208-0bc21d8a14b3">
+<Metadata __index="0" __referenceCounter="1" __sourcePath="{}/object" _dataStructure="OBJECT" _id="__id" _type="Input" id="5e662b6f-1b09-4b88-aa32-1e5180472f5f">
 <Record fieldDelimiter="," name="ConsultOrderInput" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
 <Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
-<Field __index="0" __sourcePath="{}/object/customerID" containerType="SINGLE" label="customerID" name="customerID" type="string"/>
-<Field __index="1" __sourcePath="{}/object/orderRefd" containerType="SINGLE" label="orderRefd" name="orderRefd" type="string"/>
+<Field __index="0" __sourcePath="{}/object/name" containerType="SINGLE" label="name" name="name" type="string"/>
+<Field __index="1" __sourcePath="{}/object/orderID" containerType="SINGLE" label="orderID" name="orderID" type="string"/>
 </Record>
 </Metadata>
-<Metadata __filteredMetadata="false" __index="0" __referenceCounter="1" __schemaType="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Employee}get_all_orders" __sourcePath="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Employee=ns0}/ns0:get_all_orders" _dataStructure="OBJECT" _id="__id" _type="Output" id="e1ad14de-a75e-42c6-84b6-acd76532138f">
+<Metadata __filteredMetadata="false" __index="0" __referenceCounter="1" __schemaType="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Employee}get_all_orders" __sourcePath="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Employee=ns0}/ns0:get_all_orders" _dataStructure="OBJECT" _id="__id" _type="Output" id="03424a53-b1cc-4ce3-bbea-43d815dfa7d0">
 <Record fieldDelimiter="," name="get_all_orders" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
 <Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
 <Field __index="0" __schemaType="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Employee}get_all_orders" __sourcePath="{http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Employee=ns0}/ns0:get_all_orders/id" containerType="SINGLE" label="id" name="id" type="string"/>
@@ -22,16 +22,16 @@
 <Node enabled="enabled" fileURL="dict:inputPayload" guiName="Pojo READER" guiX="20" guiY="20" id="BEAN_READER0" type="BEAN_READER">
 <attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Context outPort="0" sequenceField="__id" xpath=".">
-  <Mapping cloverField="customerID" trim="true" xpath="customerID"/>
-  <Mapping cloverField="orderRefd" trim="true" xpath="orderRefd"/>
+  <Mapping cloverField="name" trim="true" xpath="name"/>
+  <Mapping cloverField="orderID" trim="true" xpath="orderID"/>
 </Context>
 ]]></attr>
 <attr name="_data_format"><![CDATA[JAVA]]></attr>
 <attr name="schema"><![CDATA[<?xml version="1.0" encoding="UTF-8"?><schema-object>
   <typed-object-ref type-ref="fr.polytech.unice.soa1.mister.discount.business.ConsultOrderInput"/>
   <typed-object type="fr.polytech.unice.soa1.mister.discount.business.ConsultOrderInput">
-    <typed-object-ref name="customerID" type-ref="java.lang.String"/>
-    <typed-object-ref name="orderRefd" type-ref="java.lang.String"/>
+    <typed-object-ref name="name" type-ref="java.lang.String"/>
+    <typed-object-ref name="orderID" type-ref="java.lang.String"/>
   </typed-object>
   <typed-object type="java.lang.String"/>
 </schema-object>
@@ -50,9 +50,9 @@
 //START -> DO NOT REMOVE
 output.__id = input.__id;
 //END -> DO NOT REMOVE
-output.id = input.customerID;]]></attr>
+output.id = input.name;]]></attr>
 </Node>
-<Edge debugMode="true" fromNode="BEAN_READER0:0" guiBendpoints="" id="Edge0" inPort="Port 0 (in)" metadata="600055b7-df74-4242-8208-0bc21d8a14b3" outPort="Port 0 (out)" toNode="FOREACH_OBJECT_NS0_GET_ALL_ORDERS:0"/>
-<Edge debugMode="true" fromNode="FOREACH_OBJECT_NS0_GET_ALL_ORDERS:0" guiBendpoints="" id="Edge1" inPort="Port 0 (in)" metadata="e1ad14de-a75e-42c6-84b6-acd76532138f" outPort="Port 0 (out)" toNode="EXT_XML_WRITER0:0"/>
+<Edge debugMode="true" fromNode="BEAN_READER0:0" guiBendpoints="" id="Edge0" inPort="Port 0 (in)" metadata="5e662b6f-1b09-4b88-aa32-1e5180472f5f" outPort="Port 0 (out)" toNode="FOREACH_OBJECT_NS0_GET_ALL_ORDERS:0"/>
+<Edge debugMode="true" fromNode="FOREACH_OBJECT_NS0_GET_ALL_ORDERS:0" guiBendpoints="" id="Edge1" inPort="Port 0 (in)" metadata="03424a53-b1cc-4ce3-bbea-43d815dfa7d0" outPort="Port 0 (out)" toNode="EXT_XML_WRITER0:0"/>
 </Phase>
 </Graph>
