@@ -88,7 +88,7 @@
       </xs:complexType>
       <xs:complexType name="product">
         <xs:sequence>
-          <xs:element minOccurs="0" name="catalogue" type="xs:IDREF"/>
+          <xs:element minOccurs="0" name="catalog" type="xs:IDREF"/>
           <xs:element minOccurs="0" name="categorie" type="tns:categorie"/>
           <xs:element minOccurs="0" name="order" type="xs:IDREF"/>
           <xs:element minOccurs="0" name="Price" type="xs:string"/>
@@ -97,7 +97,7 @@
         <xs:attribute name="id" type="xs:ID"/>
         <xs:attribute name="name" type="xs:string"/>
       </xs:complexType>
-      <xs:complexType name="catalogue">
+      <xs:complexType name="catalog">
         <xs:sequence/>
         <xs:attribute name="id" type="xs:ID"/>
         <xs:attribute name="name" type="xs:string"/>
@@ -426,7 +426,7 @@
       </xs:complexType>
       <xs:complexType name="product">
         <xs:sequence>
-          <xs:element minOccurs="0" name="catalogue" type="xs:IDREF"/>
+          <xs:element minOccurs="0" name="catalog" type="xs:IDREF"/>
           <xs:element minOccurs="0" name="categorie" type="tns:categorie"/>
           <xs:element minOccurs="0" name="order" type="xs:IDREF"/>
           <xs:element minOccurs="0" name="Price" type="xs:string"/>
@@ -435,7 +435,7 @@
         <xs:attribute name="id" type="xs:ID"/>
         <xs:attribute name="name" type="xs:string"/>
       </xs:complexType>
-      <xs:complexType name="catalogue">
+      <xs:complexType name="catalog">
         <xs:sequence/>
         <xs:attribute name="id" type="xs:ID"/>
         <xs:attribute name="name" type="xs:string"/>
@@ -790,10 +790,10 @@
       <xs:complexType name="assign_product_to_catalogue">
         <xs:sequence>
           <xs:element maxOccurs="unbounded" minOccurs="0" name="products" type="xs:string"/>
-          <xs:element minOccurs="0" name="catalogue" type="tns:catalogue"/>
+          <xs:element minOccurs="0" name="catalog" type="tns:catalog"/>
         </xs:sequence>
       </xs:complexType>
-      <xs:complexType name="catalogue">
+      <xs:complexType name="catalog">
         <xs:sequence/>
         <xs:attribute name="id" type="xs:ID"/>
         <xs:attribute name="name" type="xs:string"/>
@@ -821,7 +821,7 @@
       </xs:complexType>
       <xs:complexType name="create_catalogueResponse">
         <xs:sequence>
-          <xs:element minOccurs="0" name="catalogue" type="tns:catalogue"/>
+          <xs:element minOccurs="0" name="catalog" type="tns:catalog"/>
         </xs:sequence>
       </xs:complexType>
       <xs:simpleType name="categorie">
@@ -927,7 +927,7 @@
          <!--Zero or more repetitions:-->
          <products>${#id_product}</products>
          <!--Optional:-->
-         <catalogue id="${#id_catalogue}" name="${#name_catalogue}"/>
+         <catalog id="${#id_catalogue}" name="${#name_catalogue}"/>
       </man:assign_product_to_catalogue>
    </soapenv:Body>
 </soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Manager/ManagerRPC/assign_product_to_catalogue"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="" name="assign_product_to_categorie" bindingOperationName="assign_product_to_categorie" type="Request-Response" outputName="assign_product_to_categorieResponse" inputName="assign_product_to_categorie" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/TeamForce-Manager-RPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:man="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Manager">
@@ -1044,8 +1044,8 @@ string(//ns2:create_productResponse/product)</con:sourcePath><con:targetType>id_
       </man:create_catalogue>
    </soapenv:Body>
 </soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" name="SOAP Response"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Manager/ManagerRPC/create_catalogue"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="transfer" name="Transfer_Catalogue"><con:settings/><con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true" ignoreEmpty="false" transferToAll="false" useXQuery="false" entitize="false" transferChildNodes="false"><con:name>id_catalogue</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>create_catalogue - Request 1</con:sourceStep><con:sourcePath>declare namespace ns2="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Manager";
-string(//ns2:create_catalogueResponse/catalogue/@id)</con:sourcePath><con:targetType>id_catalogue</con:targetType><con:targetStep>id_catalogue</con:targetStep></con:transfers><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true"><con:name>name_catalogue</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>create_catalogue - Request 1</con:sourceStep><con:sourcePath>declare namespace ns2="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Manager";
-string(//ns2:create_catalogueResponse/catalogue/@name)</con:sourcePath><con:targetType>name_catalogue</con:targetType><con:targetStep>name_catalogue</con:targetStep></con:transfers></con:config></con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Scenario 4" searchProperties="true" id="6b952bd7-a459-4f5c-b99a-a1bab58b5173"><con:settings/><con:testStep type="properties" name="id"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>id</con:name><con:value>C1</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="request" name="get_all_orders - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>TeamForceRPCEmployeeServiceSoapBinding</con:interface><con:operation>get_all_orders</con:operation><con:request name="get_all_orders - Request 1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType=""><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/TeamForce-Employee-RPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:emp="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Employee">
+string(//ns2:create_catalogueResponse/catalog/@id)</con:sourcePath><con:targetType>id_catalogue</con:targetType><con:targetStep>id_catalogue</con:targetStep></con:transfers><con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true"><con:name>name_catalogue</con:name><con:sourceType>Response</con:sourceType><con:sourceStep>create_catalogue - Request 1</con:sourceStep><con:sourcePath>declare namespace ns2="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Manager";
+string(//ns2:create_catalogueResponse/catalog/@name)</con:sourcePath><con:targetType>name_catalogue</con:targetType><con:targetStep>name_catalogue</con:targetStep></con:transfers></con:config></con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Scenario 4" searchProperties="true" id="6b952bd7-a459-4f5c-b99a-a1bab58b5173"><con:settings/><con:testStep type="properties" name="id"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>id</con:name><con:value>C1</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="request" name="get_all_orders - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>TeamForceRPCEmployeeServiceSoapBinding</con:interface><con:operation>get_all_orders</con:operation><con:request name="get_all_orders - Request 1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType=""><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/webservices/TeamForce-Employee-RPC</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:emp="http://informatique.polytech.unice.fr/soa1/TeamForce/rpc/Employee">
    <soapenv:Header/>
    <soapenv:Body>
       <emp:get_all_orders>

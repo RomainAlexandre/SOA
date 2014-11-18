@@ -1,26 +1,25 @@
-package fr.unice.polytech.soa1.TeamForce.business;
+package fr.polytech.unice.soa1.mister.discount.business;
 
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@XmlType
-public class Catalogue {
+@XmlType(name = "catalog")
+public class Catalog {
 
 	private String id;
 	private String name;
-	private List<Product> products=new ArrayList<>();
+	private List<Product> products=new ArrayList<Product>();
 
-	public Catalogue() {
+	public Catalog() {
 	}
 
-	public Catalogue(String id, String name) {
+	public Catalog(String id, String name) {
 		this.id = id;
 		this.name = name;
 	}
 
-	@XmlAttribute(name = "id")
-	@XmlID
+	@XmlElement(name = "id")
 	public String getId() {
 		return id;
 	}
@@ -29,7 +28,7 @@ public class Catalogue {
 		this.id = id;
 	}
 	
-	@XmlAttribute(name = "name")
+	@XmlElement(name = "name")
 	public String getName() {
 		return name;
 	}

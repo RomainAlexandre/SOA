@@ -2,7 +2,6 @@ package fr.unice.polytech.soa1.TeamForce.business;
 
 import javax.ejb.Singleton;
 
-import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,6 +15,8 @@ public class DataAccessObjectCstmr {
 	private List<Product> products;
 	
 	private List<Event> events;
+
+    private Catalogue catalog;
 	
 	public List<Product> getProducts() {
 		return products;
@@ -36,6 +37,13 @@ public class DataAccessObjectCstmr {
 	
 	public void setContents(List<Custumer> custumers) { this.contents = custumers; }
 	public void setordrs(List<Order> orders) { this.ordrs = orders; }
+
+    public Catalogue getCatalog() {
+        return catalog;
+    }
+    public void setCatalog(Catalogue catalog) {
+        this.catalog = catalog;
+    }
 
 	public DataAccessObjectCstmr() {contents=new ArrayList<>(); init(); }
 	
@@ -128,10 +136,10 @@ public class DataAccessObjectCstmr {
 	}
 	 *
 	 *
-	 *	public Product(String id, String name, Catalogue catalogue, Order order) {
+	 *	public Product(String id, String name, Catalogue catalog, Order order) {
 		this.id = id;
 		this.name = name;
-		this.catalogue = catalogue;
+		this.catalog = catalog;
 		this.order = order;
 		this.categorie = Categorie.Bijoux;
 	}
@@ -180,8 +188,7 @@ public class DataAccessObjectCstmr {
 
 
 		Catalogue cat1 = new Catalogue("1", "Ete 2014");
-		Catalogue cat2 = new Catalogue("2", "Printemps 2015");	
-		
+
 		Order o1 = new Order("1", "152€", c1);
 		Order o2 = new Order("2", "1542€", c2);
 		
@@ -205,13 +212,19 @@ public class DataAccessObjectCstmr {
 		
 		products.addAll(products1);
 		products.addAll(products2);
-		
-		//cat1.setProducts(products1);
-		//cat2.setProducts(products2);
-		
-		Product p1 = new Product(); 
-		//p1 = cat1.getProducts().get(1);
+
+        List<Product> productsCatalog = new ArrayList<Product>();
+        productsCatalog.addAll(products1);
+        productsCatalog.addAll(products2);
+		cat1.setProducts(productsCatalog);
+
+        this.catalog = cat1;
+
+		Product p1 = new Product();
+		p1 = cat1.getProducts().get(1);
 		o1.getProducts().add(p1);
+
+
 		c1.getOrders().add(o1); 
 		o1.setProducts(products1);
 		o2.setProducts(products2);
@@ -239,7 +252,9 @@ public class DataAccessObjectCstmr {
 		}
 		return null;
 	}
-	
+
+
+
 	/*public Product getProduct(){
 		for (Product c: products3) {
 		

@@ -17,7 +17,8 @@ import java.sql.*
 
 System.out.println("Initializing database");
 def sql = Sql.newInstance("jdbc:derby:memory:glue;create=true", new Properties());
-sql.execute("CREATE TABLE orders (orderIdTf varchar(256), orderIdFp varchar(256))");
+sql.execute("CREATE TABLE orders (orderIdTf varchar(256) PRIMARY KEY, orderIdFp varchar(256))");
+sql.execute("CREATE TABLE registeredUsersCatalog (userName varchar(50) PRIMARY KEY, streetName varchar(256), zipCode varchar(10), cityName varchar(50), countryId varchar(20))");
 System.out.println("Database initialized");
 
 return "initialized";]]></scripting:script>
@@ -26,9 +27,9 @@ return "initialized";]]></scripting:script>
             <set-payload value="Database already initialized" doc:name="Set Payload"/>
         </catch-exception-strategy>
     </flow>
-    <flow name="store-in-db" doc:name="store-in-db">
+    <flow name="store-order-in-db" doc:name="store-order-in-db">
         <vm:inbound-endpoint exchange-pattern="one-way" path="/orderId/storeindb" doc:name="/orderId/storeindb"/>
-        <scripting:component doc:name="insert-into">
+        <scripting:component doc:name="insert-into-order">
             <scripting:script engine="Groovy"><![CDATA[import groovy.sql.*
 import java.sql.*
 
@@ -38,9 +39,9 @@ sql.execute("insert into orders (orderIdTf, orderIdFp) values ('" + payload.orde
 System.out.println("Info stored for " + payload.orderId);]]></scripting:script>
         </scripting:component>
     </flow>
-    <flow name="get-from-db" doc:name="get-from-db">
+    <flow name="get-order-from-db" doc:name="get-order-from-db">
         <vm:inbound-endpoint exchange-pattern="request-response" path="/orderId/consultdb" doc:name="/orderId/consultdb"/>
-        <scripting:component doc:name="select-from">
+        <scripting:component doc:name="select-from-order">
             <scripting:script engine="Groovy"><![CDATA[import groovy.sql.*
 import java.sql.*
 import java.lang.*
@@ -50,6 +51,54 @@ def query = "select orderIdFp from orders where orderIdTf = '"+ message.payload+
 def data = sql.rows(query);
 
 return (String) data[0]['orderIdFp'];]]></scripting:script>
+        </scripting:component>
+    </flow>
+    <flow name="store-userCatalog-in-db" doc:name="store-userCatalog-in-db">
+        <vm:inbound-endpoint exchange-pattern="one-way" path="/userCatalog/storeindb" doc:name="/userCatalog/storeindb"/>
+        <scripting:component doc:name="insert-into-userCatalog">
+            <scripting:script engine="Groovy"><![CDATA[import groovy.sql.*
+import java.sql.*
+
+def sql = Sql.newInstance("jdbc:derby:memory:glue", new Properties());
+sql.execute("insert into registeredUsersCatalog (userName, streetName, zipCode, cityName, countryId) values ('" + payload.userName + "', '"+payload.streetName+"', '"+payload.zipCode+"', '"+payload.cityName+"', '"+payload.countryId+"')");
+
+System.out.println("Info stored for " + payload.userName);]]></scripting:script>
+        </scripting:component>
+    </flow>
+    <flow name="get-userCatalog-from-db" doc:name="get-userCatalog-from-db">
+        <vm:inbound-endpoint exchange-pattern="request-response" path="/userCatalog/consultdb" doc:name="/userCatalog/consultdb"/>
+        <scripting:component doc:name="select-from-userCatalog">
+            <scripting:script engine="Groovy"><![CDATA[import groovy.sql.*
+import java.sql.*
+import java.lang.*
+import fr.polytech.unice.soa1.mister.discount.business.Address
+
+def sql = Sql.newInstance("jdbc:derby:memory:glue", new Properties());
+def query = "select userName, streetName, zipCode, cityName, countryId from registeredUsersCatalog";
+def data = sql.rows(query);
+
+def addresses = new ArrayList<Address>();
+
+for(int i = 0; i<data.size(); i++){
+	def address = new Address(data[i]['userName'], data[i]['streetName'], data[i]['zipCode'], data[i]['cityName'], data[i]['countryId']);
+	addresses.add(address);
+}
+
+return addresses;]]></scripting:script>
+        </scripting:component>
+    </flow>
+    <flow name="get-nb-userCatalog-from-db" doc:name="get-nb-userCatalog-from-db">
+        <vm:inbound-endpoint exchange-pattern="request-response" path="/nbUserCatalog/consultdb" doc:name="/nbUserCatalog/consultdb"/>
+        <scripting:component doc:name="select-count-from-userCatalog">
+            <scripting:script engine="Groovy"><![CDATA[import groovy.sql.*
+import java.sql.*
+import java.lang.*
+
+def sql = Sql.newInstance("jdbc:derby:memory:glue", new Properties());
+def query = "select count(*) as nbRows from registeredUsersCatalog";
+def data = sql.rows(query);
+
+return (String) data[0]['nbRows'];]]></scripting:script>
         </scripting:component>
     </flow>
 </mule>

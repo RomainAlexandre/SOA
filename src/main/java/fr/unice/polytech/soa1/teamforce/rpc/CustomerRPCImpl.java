@@ -90,4 +90,10 @@ public class CustomerRPCImpl implements CustomerRPC {
 
     }
 
+    public Catalogue get_catalog(){
+        Catalogue res = dao.getCatalog();
+
+        return res;
+    }
+
 }
