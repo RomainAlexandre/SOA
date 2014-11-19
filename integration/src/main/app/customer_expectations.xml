@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.5.1"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
+    <flow name="customer_expectations" doc:name="customer_expectations">
+        <vm:inbound-endpoint exchange-pattern="request-response" path="/misterdiscount/customerExp" doc:name="/misterdiscount/customerExp"/>
+        <set-variable variableName="preference" value="" doc:name="preference?"/>
+        <choice doc:name="Choice_pref">
+            <when expression="#[preference == &quot;soon&quot;]">
+                <logger message="Receive as soon as possible" level="INFO" doc:name="soon"/>
+                <logger message="Send the commande to the fastest transporter" level="INFO" doc:name="WS_fedPS_fast"/>
+            </when>
+            <when expression="#[preference == &quot;cheap&quot;]">
+                <logger message="As cheap as possible" level="INFO" doc:name="cheap"/>
+                <logger message="Send the command to the cheapest transporter" level="INFO" doc:name="WS_fedPS_cheap"/>
+            </when>
+            <otherwise>
+                <logger message="The user don't have preference" level="INFO" doc:name="noPreference"/>
+            </otherwise>
+        </choice>
+    </flow>
+</mule>
