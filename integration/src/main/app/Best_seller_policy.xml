@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ws="http://www.mulesoft.org/schema/mule/ws" xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:data-mapper="http://www.mulesoft.org/schema/mule/ee/data-mapper" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.5.1"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd
+http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schema/mule/ee/data-mapper/current/mule-data-mapper.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/ws http://www.mulesoft.org/schema/mule/ws/current/mule-ws.xsd
+http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd">
+    <flow name="catalogue_updateFlow1" doc:name="catalogue_updateFlow1">
+        <vm:inbound-endpoint exchange-pattern="request-response" path="/misterdiscount/createorder" doc:name="/misterdiscount/createorder"/>
+        <session-variable-transformer doc:name="CreateOrderInput"/>
+        <data-mapper:transform doc:name="DataMapper"/>
+        <collection-splitter doc:name="Collection Splitter"/>
+        <scatter-gather doc:name="Scatter-Gather">
+            <processor-chain>
+                <ws:consumer config-ref="" doc:name="GetListProduct (Price) CRM1"/>
+                <variable-transformer doc:name="Val 1 : Product - Price"/>
+            </processor-chain>
+            <processor-chain>
+                <ws:consumer config-ref="" doc:name="GetListProduct (Price) CRM2"/>
+                <variable-transformer doc:name="Val 2 : Product - Price"/>
+            </processor-chain>
+        </scatter-gather>
+        <collection-aggregator failOnTimeout="true" doc:name="Collection Aggregator"/>
+        <scripting:component doc:name="Script : compare Val 1 and Val 2">
+            <scripting:script engine="Groovy"/>
+        </scripting:component>
+        <variable-transformer doc:name="Variable?"/>
+        <choice doc:name="Choice">
+            <when expression="">
+                <ws:consumer config-ref="" doc:name="CRM 1 - CreateOrder -"/>
+            </when>
+            <otherwise>
+                <ws:consumer config-ref="" doc:name="CRM 2 - CreateOrder -"/>
+            </otherwise>
+        </choice>
+    </flow>
+</mule>
