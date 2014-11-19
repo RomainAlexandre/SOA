@@ -11,31 +11,35 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
 http://www.mulesoft.org/schema/mule/ws http://www.mulesoft.org/schema/mule/ws/current/mule-ws.xsd
 http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd">
     <flow name="catalogue_updateFlow1" doc:name="catalogue_updateFlow1">
-        <vm:inbound-endpoint exchange-pattern="request-response" path="/misterdiscount/createorder" doc:name="/misterdiscount/createorder"/>
-        <session-variable-transformer doc:name="CreateOrderInput"/>
-        <data-mapper:transform doc:name="DataMapper"/>
+        <vm:inbound-endpoint exchange-pattern="request-response" path="/misterdiscount/catalogupdate" doc:name="/misterdiscount/catalogupdate"/>
+        <set-session-variable doc:name="CreateOrderInput" value="#[12]" variableName="createOrderInput"/>
+        <logger level="INFO" doc:name="DataMapper"/>
+
         <collection-splitter doc:name="Collection Splitter"/>
         <scatter-gather doc:name="Scatter-Gather">
             <processor-chain>
-                <ws:consumer config-ref="" doc:name="GetListProduct (Price) CRM1"/>
-                <variable-transformer doc:name="Val 1 : Product - Price"/>
+                <logger message="WS - GetListProduct (Price) CRM1" level="INFO" doc:name="WS - GetListProduct (Price) CRM1"/>
+
+                <set-variable doc:name="Val 1 : Product - Price" value="#[12]" variableName="val1"/>
             </processor-chain>
             <processor-chain>
-                <ws:consumer config-ref="" doc:name="GetListProduct (Price) CRM2"/>
-                <variable-transformer doc:name="Val 2 : Product - Price"/>
+                <logger message="WS - GetListProduct (Price) CRM2" level="INFO" doc:name="WS - GetListProduct (Price) CRM2"/>
+
+                <set-variable doc:name="Val 2 : Product - Price" value="#[12]" variableName="val2"/>
             </processor-chain>
         </scatter-gather>
         <collection-aggregator failOnTimeout="true" doc:name="Collection Aggregator"/>
-        <scripting:component doc:name="Script : compare Val 1 and Val 2">
-            <scripting:script engine="Groovy"/>
-        </scripting:component>
-        <variable-transformer doc:name="Variable?"/>
+        <logger message="Script : compare Val 1 and Val 2" level="INFO" doc:name="Script : compare Val 1 and Val 2"/>
+
+        <set-variable doc:name="Variable?" value="#[12]" variableName="variable"/>
         <choice doc:name="Choice">
-            <when expression="">
-                <ws:consumer config-ref="" doc:name="CRM 1 - CreateOrder -"/>
+            <when expression="#[true]">
+                <logger message="WS - CRM 1 - CreateOrder" level="INFO" doc:name="WS - CRM 1 - CreateOrder"/>
+
             </when>
             <otherwise>
-                <ws:consumer config-ref="" doc:name="CRM 2 - CreateOrder -"/>
+                <logger level="INFO" doc:name="WS - CRM 2 - CreateOrder"/>
+
             </otherwise>
         </choice>
     </flow>
