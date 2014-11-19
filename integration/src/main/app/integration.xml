@@ -39,9 +39,17 @@ http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/fil
                 <logger message="consultingOrder operation" level="INFO" doc:name="consultingOrder"/>
                 <vm:outbound-endpoint exchange-pattern="request-response" path="/misterdiscount/consultOrder" doc:name="/misterdiscount/consultOrder"/>
             </when>
-            <when expression="#[operation == registerPrintCatalog]">
-                <logger message="registerPrintCatalog operation" level="INFO" doc:name="registerPrintCatalog"/>
+            <when expression="#[operation == &quot;registerCatalog&quot;]">
+                <logger message="registerCatalog operation" level="INFO" doc:name="registerCatalog"/>
                 <vm:outbound-endpoint exchange-pattern="request-response" path="/misterdiscount/registerUserCatalog" doc:name="/misterdiscount/registerUserCatalog"/>
+            </when>
+            <when expression="#[operation == &quot;startPrinting&quot;]">
+                <logger message="startPrinting operation" level="INFO" doc:name="startPrinting"/>
+                <vm:outbound-endpoint exchange-pattern="request-response" path="/misterdiscount/startprinting" doc:name="/misterdiscount/startprinting"/>
+            </when>
+            <when expression="#[operation == &quot;startDeliveryCatalog&quot;]">
+                <logger message="startDeliveryCatalog operation" level="INFO" doc:name="startDeliveryCatalog"/>
+                <vm:outbound-endpoint exchange-pattern="request-response" path="/misterdiscount/startDeliveryCatalog" doc:name="/misterdiscount/startDeliveryCatalog"/>
             </when>
             <otherwise>
                 <logger message="Unknown operation" level="INFO" doc:name="Unknown operation"/>

@@ -117,14 +117,17 @@ message.payload=orderFedPs;]]></scripting:script>
         <ws:consumer config-ref="TeamForce-WS-Customer" operation="create_order" doc:name="TeamForce::createOrder"/>
         <data-mapper:transform config-ref="Xml_create_orderResponse__To_Pojo" doc:name="Xml&lt;create_orderResponse&gt; To Pojo"/>
     </flow>
-    <flow name="VM-WH-PickProduct" doc:name="VM-WH-PickProduct">
-        <vm:inbound-endpoint exchange-pattern="one-way" path="/misterdiscount/wh/pickproduct" doc:name="/misterdiscount/wh/pickproduct"/>
+    <flow name="VM-WH-PickListOfProduct" doc:name="VM-WH-PickListOfProduct">
+        <vm:inbound-endpoint exchange-pattern="one-way" path="/misterdiscount/wh/picklistofproduct" doc:name="/misterdiscount/wh/picklistofproduct"/>
         <set-payload value="#[payload.products]" doc:name="Set Payload"/>
         <collection-splitter doc:name="Collection Splitter"/>
-        <data-mapper:transform config-ref="Pojo_To_Xml_execute_" doc:name="Pojo To Xml&lt;execute&gt;">
-            <data-mapper:input-arguments>
+        <vm:outbound-endpoint exchange-pattern="one-way" path="/misterdiscount/wh/pickproduct" doc:name="/misterdiscount/wh/pickproduct"/>
 
-            </data-mapper:input-arguments>
+    </flow>
+    <flow name="VM-WH-PickProduct" doc:name="VM-WH-PickProduct">
+        <vm:inbound-endpoint exchange-pattern="one-way" path="/misterdiscount/wh/pickproduct" doc:name="/misterdiscount/wh/pickproduct"/>
+        <data-mapper:transform config-ref="Pojo_To_Xml_execute_" doc:name="Pojo To Xml&lt;execute&gt;">
+            <data-mapper:input-arguments/>
         </data-mapper:transform>
         <ws:consumer config-ref="WareHouse-WS-ExternalDoc" operation="execute" doc:name="Web Service Consumer"/>
     </flow>

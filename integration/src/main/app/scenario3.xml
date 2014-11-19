@@ -1,18 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:ws="http://www.mulesoft.org/schema/mule/ws" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+<mule xmlns:data-mapper="http://www.mulesoft.org/schema/mule/ee/data-mapper" xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns:ws="http://www.mulesoft.org/schema/mule/ws" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
 	xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.5.1"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/ws http://www.mulesoft.org/schema/mule/ws/current/mule-ws.xsd
 http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd
-http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd">
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schema/mule/ee/data-mapper/current/mule-data-mapper.xsd
+http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd">
     <ws:consumer-config name="TeamForce-WS-Manager" wsdlLocation="http://localhost:8080/webservices/TeamForce-Manager-RPC?wsdl" service="TeamForceRPCManagerService" port="TeamForceRPCManagerPort" serviceAddress="http://localhost:8080/webservices/TeamForce-Manager-RPC" doc:name="Web Service Consumer"/>
+    <data-mapper:config name="Pojo_To_Xml_get_catalogue_" transformationGraphPath="pojo_to_xml_get_catalogue_.grf" doc:name="Pojo_To_Xml_get_catalogue_"/>
+    <data-mapper:config name="Xml_get_catalogResponse__To_Pojo" transformationGraphPath="xml_get_catalogresponse__to_pojo.grf" doc:name="Xml_get_catalogResponse__To_Pojo"/>
+    <data-mapper:config name="Catalog_To_XML" transformationGraphPath="catalog_to_xml.grf" doc:name="Catalog_To_XML"/>
+    <data-mapper:config name="Address_To_Xml_create_quote_" transformationGraphPath="pojo_to_xml_create_quote__1.grf" doc:name="Pojo_To_Xml_create_quote_"/>
+    <data-mapper:config name="Xml_create_quoteResponse__To_String" transformationGraphPath="xml_create_quoteresponse__to_pojo_1.grf" doc:name="Xml_create_quoteResponse__To_Pojo"/>
     <flow name="registerUserCatalog" doc:name="registerUserCatalog">
         <vm:inbound-endpoint exchange-pattern="request-response" path="/misterdiscount/registerUserCatalog" doc:name="/misterdiscount/registerUserCatalog"/>
-        <logger message="Creation of a new catalog to print" level="INFO" doc:name="newCatalog"/>
-        <ws:consumer config-ref="TeamForce-WS-Manager" operation="create_catalogue" doc:name="Web Service Consumer"/>
-        <logger message="Catalog printed" level="INFO" doc:name="PrintCatalog"/>
+        <vm:outbound-endpoint exchange-pattern="one-way" path="/userCatalog/storeindb" doc:name="/userCatalog/storeindb"/>
+        <set-payload value="#[true]" doc:name="Set Payload = true"/>
+        <catch-exception-strategy doc:name="Catch Exception Strategy">
+            <set-payload value="#[false]" doc:name="Set Payload =false"/>
+        </catch-exception-strategy>
+    </flow>
+    <flow name="startPrintingCatalogs" doc:name="startPrintingCatalogs">
+        <vm:inbound-endpoint exchange-pattern="request-response" path="/misterdiscount/startprinting" doc:name="/misterdiscount/startprinting"/>
+        <vm:outbound-endpoint exchange-pattern="request-response" path="/nbUserCatalog/consultdb" doc:name="/nbUserCatalog/consultdb"/>
+        <set-variable variableName="nbUserCatalog" value="#[message.payload]" doc:name="store nbUserCatalog"/>
+        <logger message="nbUserCatalog = #[message.payload]" level="INFO" doc:name="nbUserCatalog"/>
+        <flow-ref name="SF-TF-getCatalog" doc:name="TF-getCatalog"/>
+        <set-payload value="#[true]" doc:name="Set Payload = true"/>
+        <catch-exception-strategy doc:name="Catch Exception Strategy">
+            <set-payload value="#[false]" doc:name="Set Payload = false"/>
+        </catch-exception-strategy>
+    </flow>
+    <sub-flow name="SF-TF-getCatalog" doc:name="SF-TF-getCatalog">
+        <data-mapper:transform config-ref="Pojo_To_Xml_get_catalogue_" doc:name="Pojo To Xml&lt;get_catalogue&gt;"/>
+        <ws:consumer config-ref="TeamForce-WS-Customer" operation="get_catalog" doc:name="Web Service Consumer"/>
+        <data-mapper:transform config-ref="Xml_get_catalogResponse__To_Pojo" doc:name="Xml&lt;get_catalogResponse&gt; To Pojo"/>
+        <logger message="Transform Catalog in Google Product Feeds" level="INFO" doc:name="Transform Catalog in Google Product Feeds"/>
+        <data-mapper:transform config-ref="Catalog_To_XML" doc:name="Catalog To XML"/>
+        <logger message="Create PDF with Google Product Feed" level="INFO" doc:name="Create PDF"/>
+        <logger message="Send PDF and print #[flowVars.nbUserCatalog] catalog" level="INFO" doc:name="Send PDF for printing"/>
+    </sub-flow>
+    <flow name="scenario3Flow1" doc:name="scenario3Flow1">
+        <vm:inbound-endpoint exchange-pattern="request-response" path="/misterdiscount/startDeliveryCatalog" doc:name="/misterdiscount/startDeliveryCatalog"/>
+        <set-variable variableName="catalogProductId" value="#[message.payload]" doc:name="store catalogProductId"/>
+        <vm:outbound-endpoint exchange-pattern="request-response" path="/nbUserCatalog/consultdb" doc:name="/nbUserCatalog/consultdb"/>
+        <scripting:component doc:name="Groovy">
+            <scripting:script engine="Groovy"><![CDATA[import fr.polytech.unice.soa1.mister.discount.business.Product
+
+import java.lang.*
+
+def nbUserCatalog = message.payload;
+def catalogProductId = message.getInvocationProperty("catalogProductId");
+
+def product = new Product(catalogProductId, Integer.valueOf(nbUserCatalog));
+
+message.payload = product;]]></scripting:script>
+        </scripting:component>
+        <vm:outbound-endpoint exchange-pattern="one-way" path="/misterdiscount/wh/pickproduct" doc:name="/misterdiscount/wh/pickproduct"/>
+        <vm:outbound-endpoint exchange-pattern="request-response" path="/userCatalog/consultdb" doc:name="/userCatalog/consultdb"/>
+        <collection-splitter doc:name="Collection Splitter"/>
+        <data-mapper:transform config-ref="Address_To_Xml_create_quote_" doc:name="Address To Xml&lt;create_quote&gt;"/>
+        <ws:consumer config-ref="FedPs-WS-CustomerPrivate" operation="create_quote" doc:name="Web Service Consumer"/>
+        <data-mapper:transform config-ref="Xml_create_quoteResponse__To_String" doc:name="Xml&lt;create_quoteResponse&gt; To Pojo"/>
+        <collection-aggregator failOnTimeout="true" doc:name="Collection Aggregator"/>
+        <set-payload value="#[true]" doc:name="Set Payload"/>
+        <catch-exception-strategy doc:name="Catch Exception Strategy">
+            <set-payload value="#[false]" doc:name="Set Payload = false"/>
+        </catch-exception-strategy>
     </flow>
 </mule>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><Graph __version="3.5.0" author="Romain" created="Tue Nov 18 08:40:04 CET 2014" description="Xml&lt;create_quoteResponse&gt; To Pojo" guiVersion="3.4.4.P" id="1416338623091" licenseCode="Unlicensed" licenseType="Unknown" modified="Tue Nov 18 08:40:04 CET 2014" modifiedBy="Romain" name="Xml_create_quoteResponse__To_Pojo" revision="1.0" showComponentDetails="false">
+<Global>
+<Metadata __filteredMetadata="false" __index="0" __referenceCounter="1" __schemaType="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer}create_quoteResponse" __sourcePath="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer=ns0}/ns0:create_quoteResponse" _dataStructure="OBJECT" _id="__id" _type="Input" id="99419295-b2aa-49a4-aa7a-b036dba6da22">
+<Record fieldDelimiter="," name="create_quoteResponse" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="0" __schemaType="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer}quote" __sourcePath="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer=ns0}/ns0:create_quoteResponse/ns0:quote/cost" containerType="SINGLE" label="cost" name="cost" type="number"/>
+<Field __index="1" __schemaType="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer}quote" __sourcePath="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer=ns0}/ns0:create_quoteResponse/ns0:quote/eta" containerType="SINGLE" label="eta" name="eta" type="string"/>
+<Field __index="2" __schemaType="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer}parcel" __sourcePath="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer=ns0}/ns0:create_quoteResponse/ns0:quote/ns0:parcel/depth" containerType="SINGLE" label="depth" name="depth" type="integer"/>
+<Field __index="3" __schemaType="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer}parcel" __sourcePath="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer=ns0}/ns0:create_quoteResponse/ns0:quote/ns0:parcel/height" containerType="SINGLE" label="height" name="height" type="integer"/>
+<Field __index="4" __schemaType="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer}parcel" __sourcePath="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer=ns0}/ns0:create_quoteResponse/ns0:quote/ns0:parcel/parcel_id" containerType="SINGLE" label="parcel_id" name="parcel_id" type="string"/>
+<Field __index="5" __schemaType="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer}parcel" __sourcePath="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer=ns0}/ns0:create_quoteResponse/ns0:quote/ns0:parcel/pickup_date" containerType="SINGLE" label="pickup_date" name="pickup_date" type="string"/>
+<Field __index="6" __schemaType="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer}address" __sourcePath="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer=ns0}/ns0:create_quoteResponse/ns0:quote/ns0:parcel/receiver/city_name" containerType="SINGLE" label="city_name" name="city_name" type="string"/>
+<Field __index="7" __schemaType="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer}address" __sourcePath="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer=ns0}/ns0:create_quoteResponse/ns0:quote/ns0:parcel/receiver/country_id" containerType="SINGLE" label="country_id" name="country_id" type="string"/>
+<Field __index="8" __schemaType="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer}address" __sourcePath="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer=ns0}/ns0:create_quoteResponse/ns0:quote/ns0:parcel/receiver/street_name" containerType="SINGLE" label="street_name" name="street_name" type="string"/>
+<Field __index="9" __schemaType="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer}address" __sourcePath="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer=ns0}/ns0:create_quoteResponse/ns0:quote/ns0:parcel/receiver/zip_code" containerType="SINGLE" label="zip_code" name="zip_code" type="integer"/>
+<Field __index="10" __schemaType="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer}parcel" __sourcePath="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer=ns0}/ns0:create_quoteResponse/ns0:quote/ns0:parcel/sender_name" containerType="SINGLE" label="sender_name" name="sender_name" type="string"/>
+<Field __index="11" __schemaType="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer}address" __sourcePath="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer=ns0}/ns0:create_quoteResponse/ns0:quote/ns0:parcel/sender/city_name" containerType="SINGLE" label="city_name" name="city_name_1" type="string"/>
+<Field __index="12" __schemaType="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer}address" __sourcePath="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer=ns0}/ns0:create_quoteResponse/ns0:quote/ns0:parcel/sender/country_id" containerType="SINGLE" label="country_id" name="country_id_1" type="string"/>
+<Field __index="13" __schemaType="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer}address" __sourcePath="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer=ns0}/ns0:create_quoteResponse/ns0:quote/ns0:parcel/sender/street_name" containerType="SINGLE" label="street_name" name="street_name_1" type="string"/>
+<Field __index="14" __schemaType="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer}address" __sourcePath="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer=ns0}/ns0:create_quoteResponse/ns0:quote/ns0:parcel/sender/zip_code" containerType="SINGLE" label="zip_code" name="zip_code_1" type="integer"/>
+<Field __index="15" __schemaType="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer}parcel" __sourcePath="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer=ns0}/ns0:create_quoteResponse/ns0:quote/ns0:parcel/receiver_name" containerType="SINGLE" label="receiver_name" name="receiver_name" type="string"/>
+<Field __index="16" __schemaType="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer}parcel" __sourcePath="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer=ns0}/ns0:create_quoteResponse/ns0:quote/ns0:parcel/parcel_status" containerType="SINGLE" label="parcel_status" name="parcel_status" type="string"/>
+<Field __index="17" __schemaType="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer}parcel" __sourcePath="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer=ns0}/ns0:create_quoteResponse/ns0:quote/ns0:parcel/weight" containerType="SINGLE" label="weight" name="weight" type="integer"/>
+<Field __index="18" __schemaType="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer}parcel" __sourcePath="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer=ns0}/ns0:create_quoteResponse/ns0:quote/ns0:parcel/width" containerType="SINGLE" label="width" name="width" type="integer"/>
+<Field __index="19" __schemaType="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer}quote" __sourcePath="{http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer=ns0}/ns0:create_quoteResponse/ns0:quote/quote_id" containerType="SINGLE" label="quote_id" name="quote_id" type="string"/>
+</Record>
+</Metadata>
+<Metadata __index="0" __referenceCounter="1" __sourcePath="{}/object" _dataStructure="OBJECT" _id="__id" _type="Output" id="13255c77-d865-45c9-bf44-4cb20053c3eb">
+<Record fieldDelimiter="," name="String" recordDelimiter="\n\\|\r\n\\|\r" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __index="0" __sourcePath="{}/object/text()" containerType="SINGLE" label="text()" name="text" type="string"/>
+</Record>
+</Metadata>
+<Dictionary>
+<Entry id="DictionaryEntry0" input="true" name="inputPayload" output="false" type="object"/>
+<Entry id="DictionaryEntry1" input="false" name="outputPayload" output="true" type="object"/>
+</Dictionary>
+</Global>
+<Phase number="0">
+<Node cacheInMemory="true" enabled="enabled" fileURL="dict:outputPayload" guiName="Pojo WRITER" guiX="900" guiY="20" id="BEAN_WRITER0" type="BEAN_WRITER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<object xmlns:clover="http://www.cloveretl.com/ns/xmlmapping" clover:inPort="0">$0.text</object>]]></attr>
+<attr name="_data_format"><![CDATA[JAVA]]></attr>
+<attr name="schema"><![CDATA[<?xml version="1.0" encoding="UTF-8"?><schema-object>
+  <typed-object-ref type-ref="java.lang.String"/>
+  <typed-object type="java.lang.String"/>
+</schema-object>
+]]></attr>
+</Node>
+<Node enabled="enabled" guiName="Foreach 'ns0:create_quoteResponse' -&gt; 'object'" guiX="460" guiY="20" id="FOREACH_NS0_CREATE_QUOTE_RESPONSE_OBJECT" transformClass="com.mulesoft.datamapper.transform.MelRecordTransform" type="REFORMAT">
+<attr name="melScript"><![CDATA[//MEL
+//START -> DO NOT REMOVE
+output.__id = input.__id;
+//END -> DO NOT REMOVE
+output.text = input.quote_id;]]></attr>
+</Node>
+<Node charset="UTF-8" enabled="enabled" fileURL="dict:inputPayload" guiName="XML READER" guiX="20" guiY="20" id="XML_READER0" type="XML_READER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Context namespacePaths="ns0=&quot;http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer&quot;" outPort="0" sequenceField="__id" xpath="/ns0:create_quoteResponse">
+  <Mapping cloverField="cost" namespacePaths="ns0=&quot;http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer&quot;" trim="true" xpath="ns0:quote/cost"/>
+  <Mapping cloverField="eta" namespacePaths="ns0=&quot;http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer&quot;" trim="true" xpath="ns0:quote/eta"/>
+  <Mapping cloverField="depth" namespacePaths="ns0=&quot;http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer&quot;" trim="true" xpath="ns0:quote/ns0:parcel/depth"/>
+  <Mapping cloverField="height" namespacePaths="ns0=&quot;http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer&quot;" trim="true" xpath="ns0:quote/ns0:parcel/height"/>
+  <Mapping cloverField="parcel_id" namespacePaths="ns0=&quot;http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer&quot;" trim="true" xpath="ns0:quote/ns0:parcel/parcel_id"/>
+  <Mapping cloverField="pickup_date" namespacePaths="ns0=&quot;http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer&quot;" trim="true" xpath="ns0:quote/ns0:parcel/pickup_date"/>
+  <Mapping cloverField="city_name" namespacePaths="ns0=&quot;http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer&quot;" trim="true" xpath="ns0:quote/ns0:parcel/receiver/city_name"/>
+  <Mapping cloverField="country_id" namespacePaths="ns0=&quot;http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer&quot;" trim="true" xpath="ns0:quote/ns0:parcel/receiver/country_id"/>
+  <Mapping cloverField="street_name" namespacePaths="ns0=&quot;http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer&quot;" trim="true" xpath="ns0:quote/ns0:parcel/receiver/street_name"/>
+  <Mapping cloverField="zip_code" namespacePaths="ns0=&quot;http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer&quot;" trim="true" xpath="ns0:quote/ns0:parcel/receiver/zip_code"/>
+  <Mapping cloverField="sender_name" namespacePaths="ns0=&quot;http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer&quot;" trim="true" xpath="ns0:quote/ns0:parcel/sender_name"/>
+  <Mapping cloverField="city_name_1" namespacePaths="ns0=&quot;http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer&quot;" trim="true" xpath="ns0:quote/ns0:parcel/sender/city_name"/>
+  <Mapping cloverField="country_id_1" namespacePaths="ns0=&quot;http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer&quot;" trim="true" xpath="ns0:quote/ns0:parcel/sender/country_id"/>
+  <Mapping cloverField="street_name_1" namespacePaths="ns0=&quot;http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer&quot;" trim="true" xpath="ns0:quote/ns0:parcel/sender/street_name"/>
+  <Mapping cloverField="zip_code_1" namespacePaths="ns0=&quot;http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer&quot;" trim="true" xpath="ns0:quote/ns0:parcel/sender/zip_code"/>
+  <Mapping cloverField="receiver_name" namespacePaths="ns0=&quot;http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer&quot;" trim="true" xpath="ns0:quote/ns0:parcel/receiver_name"/>
+  <Mapping cloverField="parcel_status" namespacePaths="ns0=&quot;http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer&quot;" trim="true" xpath="ns0:quote/ns0:parcel/parcel_status"/>
+  <Mapping cloverField="weight" namespacePaths="ns0=&quot;http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer&quot;" trim="true" xpath="ns0:quote/ns0:parcel/weight"/>
+  <Mapping cloverField="width" namespacePaths="ns0=&quot;http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer&quot;" trim="true" xpath="ns0:quote/ns0:parcel/width"/>
+  <Mapping cloverField="quote_id" namespacePaths="ns0=&quot;http://informatique.polytech.unice.fr/soa1/romain/fedps/private/customer&quot;" trim="true" xpath="ns0:quote/quote_id"/>
+</Context>
+]]></attr>
+<attr name="_data_format"><![CDATA[XML]]></attr>
+<attr name="__metadata"><![CDATA[true]]></attr>
+</Node>
+<Edge debugMode="true" fromNode="FOREACH_NS0_CREATE_QUOTE_RESPONSE_OBJECT:0" guiBendpoints="" id="Edge1" inPort="Port 0 (in)" metadata="13255c77-d865-45c9-bf44-4cb20053c3eb" outPort="Port 0 (out)" toNode="BEAN_WRITER0:0"/>
+<Edge debugMode="true" fromNode="XML_READER0:0" guiBendpoints="" id="Edge0" inPort="Port 0 (in)" metadata="99419295-b2aa-49a4-aa7a-b036dba6da22" outPort="Port 0 (out)" toNode="FOREACH_NS0_CREATE_QUOTE_RESPONSE_OBJECT:0"/>
+</Phase>
+</Graph>
