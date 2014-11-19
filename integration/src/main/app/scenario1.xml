@@ -33,7 +33,7 @@ http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/fil
     <flow name="CreateOrder" doc:name="CreateOrder">
         <vm:inbound-endpoint exchange-pattern="request-response" path="/misterdiscount/createorder" doc:name="/misterdiscount/createorder"/>
         <flow-ref name="SF-TeamForce-CreateOrder" doc:name="TeamForce-CreateOrder"/>
-        <vm:outbound-endpoint exchange-pattern="one-way" path="/misterdiscount/wh/pickproduct" doc:name="/misterdiscount/wh/pickproduct"/>
+        <vm:outbound-endpoint exchange-pattern="one-way" path="/misterdiscount/wh/picklistofproduct" doc:name="/misterdiscount/wh/picklistofproduct"/>
         <flow-ref name="SF-FP-CreateQuote" doc:name="FedPs-CreateQuote"/>
         <flow-ref name="SF-Payment-processPayment" doc:name="Payment-ProcessPayment"/>
         <vm:outbound-endpoint exchange-pattern="one-way" path="/orderId/storeindb" doc:name="/orderId/storeindb"/>

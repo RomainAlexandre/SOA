@@ -44,7 +44,7 @@ http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mul
         <logger message="Create PDF with Google Product Feed" level="INFO" doc:name="Create PDF"/>
         <logger message="Send PDF and print #[flowVars.nbUserCatalog] catalog" level="INFO" doc:name="Send PDF for printing"/>
     </sub-flow>
-    <flow name="scenario3Flow1" doc:name="scenario3Flow1">
+    <flow name="DeliveringCatalog" doc:name="DeliveringCatalog">
         <vm:inbound-endpoint exchange-pattern="request-response" path="/misterdiscount/startDeliveryCatalog" doc:name="/misterdiscount/startDeliveryCatalog"/>
         <set-variable variableName="catalogProductId" value="#[message.payload]" doc:name="store catalogProductId"/>
         <vm:outbound-endpoint exchange-pattern="request-response" path="/nbUserCatalog/consultdb" doc:name="/nbUserCatalog/consultdb"/>

@@ -53,6 +53,12 @@ http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/fil
             </when>
             <otherwise>
                 <logger message="Unknown operation" level="INFO" doc:name="Unknown operation"/>
+                <scripting:component doc:name="throw SoapException">
+                    <scripting:script engine="Groovy"><![CDATA[import fr.polytech.unice.soa1.mister.discount.exception.OperationNotFoundException
+
+def operationName = message.getInvocationProperty("operation");
+throw new OperationNotFoundException(operationName);]]></scripting:script>
+                </scripting:component>
             </otherwise>
         </choice>
     </flow>
